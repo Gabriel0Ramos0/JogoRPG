@@ -76,10 +76,13 @@ public class RPGGame {
             default:
                 JOptionPane.showMessageDialog(null, "Opção inválida. "+ player.getName() +" continua sua jornada.");
         }
+        
+        Eventos eventos = new Eventos();
+        eventos.coletarItensAleatorios(player);
 
         // Simulação de batalha
         JOptionPane.showMessageDialog(null, "Depois de horas caminhando, "+ player.getName() +" encontra uma estrada."
-        		+ "Decidido a seguir por ela, um monstro salta em sua direção!");
+        		+ "\nDecidido a seguir por ela, um monstro salta em sua direção!");
         
         Monstro monstro = new Monstro("Besta", 20, 5, 5);
         boolean vitoria = false;
@@ -145,6 +148,7 @@ public class RPGGame {
         }
         if (monstro.getVida() <= 0 && player.isAlive()) {
             JOptionPane.showMessageDialog(null, player.getName() +" derrotou o monstro e ganhou a batalha!");
+            player.setCoins(player.getCoins() + 12);
             vitoria = true;
             showNextChapterOptions(vitoria, player);
             return;
@@ -216,7 +220,7 @@ public class RPGGame {
             JOptionPane.showMessageDialog(null, "Seguindo pela estrada, "+ player.getName() +" avista uma caverna com um brilho misterioso no seu interior.");
         } else {
             JOptionPane.showMessageDialog(null, "Você corre para longe do monstro, escapando de seu alcance."
-            		+ "Enquanto corria, você sentia que estava sendo observado."
+            		+ "\nEnquanto corria, você sentia que estava sendo observado."
                     + "\nApós correr por horas, "+ player.getName() +" avista uma caverna com um brilho misterioso no seu interior.");
         }
 

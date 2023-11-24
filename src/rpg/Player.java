@@ -9,7 +9,7 @@ class Player {
     private int attack;
     private int defense;
     private List<Item> inventory;
-    private int gold;
+    private int coins;
 
     public Player(String name) {
         this.name = name;
@@ -17,7 +17,23 @@ class Player {
         this.attack = 5;
         this.defense = 10;
         this.inventory = new ArrayList<>();
-        this.gold = 0;
+        this.coins = 25;
+    }
+    
+    public void decrementCoins(int amount) {
+        if (amount >= 0 && coins >= amount) {
+            coins -= amount;
+        } else {
+            System.out.println("Quantidade inválida de moedas ou saldo insuficiente.");
+        }
+    }
+    
+    public void incrementCoins(int amount) {
+        if (amount >= 0) {
+            coins += amount;
+        } else {
+            System.out.println("Quantidade inválida de moedas.");
+        }
     }
     
     public void setHealth(int health) {
@@ -56,8 +72,8 @@ class Player {
         return inventory;
     }
 
-    public int getGold() {
-        return gold;
+    public int getConis() {
+        return coins;
     }
 
     public void takeDamage(int damage) {
@@ -73,7 +89,20 @@ class Player {
         // Implemente a lógica para equipar o item, se necessário
     }
 
-    public void gainGold(int amount) {
-        gold += amount;
-    }
+	public int getCoins() {
+		return coins;
+	}
+
+	public void setCoins(int coins) {
+		this.coins = coins;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setInventory(List<Item> inventory) {
+		this.inventory = inventory;
+	}
+    
 }

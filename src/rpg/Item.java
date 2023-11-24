@@ -1,26 +1,20 @@
 package rpg;
 
-import javax.swing.JOptionPane;
-import java.util.ArrayList;
-import java.util.List;
-
 class Item {
     private String name;
     private int value;
-    private int quantity;  // Adicione esta linha
+    private int quantity;
 
     public Item(String name, int value, int quantity) {
         this.name = name;
         this.value = value;
         this.quantity = quantity;
     }
-
-    // Métodos getter para quantidade
+    
     public int getQuantity() {
         return quantity;
     }
 
-    // Método para decrementar a quantidade
     public void decrementQuantity() {
         if (quantity > 0) {
             quantity--;
