@@ -20,7 +20,7 @@ public class RPGGame {
         showInventory(player);
 
         JOptionPane.showMessageDialog(null, "Prólogo: Você foi teleportado a um mundo desconhecido portando somente seus bens que carregava na hora..."
-                + "\nEnquanto viaja pela floresta tentando descobrir que mundo era aquele, você encontra uma cabana. Nela havia uma silhueta de um homem."
+                + "\nEnquanto caminhava pela floresta tentando descobrir que mundo era aquele, você encontra uma cabana. Nela havia uma silhueta de um homem."
                 + "\nDevido a luz ofuscante do sol, você não consegue identificar se o velho senhor era perigoso");
 
         // Situação de escolha
