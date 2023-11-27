@@ -72,7 +72,7 @@ class Player {
         return inventory;
     }
 
-    public int getConis() {
+    public int getCoins() {
         return coins;
     }
 
@@ -88,10 +88,6 @@ class Player {
     public void equipItem(Item item) {
         // Implemente a lógica para equipar o item, se necessário
     }
-
-	public int getCoins() {
-		return coins;
-	}
 
 	public void setCoins(int coins) {
 		this.coins = coins;

@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 public class RPGGame {
     public static void main(String[] args) {
+    	Eventos eventos = new Eventos();
         String playerName = JOptionPane.showInputDialog(null, "Bem-vindo ao Jogo RPG!\nDigite o nome do jogador:");
 
         Player player = new Player(playerName);
@@ -76,8 +77,6 @@ public class RPGGame {
             default:
                 JOptionPane.showMessageDialog(null, "Opção inválida. "+ player.getName() +" continua sua jornada.");
         }
-        
-        Eventos eventos = new Eventos();
         eventos.coletarItensAleatorios(player);
 
         // Simulação de batalha
