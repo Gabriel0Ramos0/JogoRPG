@@ -1,16 +1,16 @@
 package rpg;
 
-import javax.swing.JOptionPane;
-
-class Item {
+public class Item {
     private String name;
     private int value;
     private int quantity;
+    private String category;
 
-    public Item(String name, int value, int quantity) {
+    public Item(String name, int value, int quantity, String category) {
         this.name = name;
         this.value = value;
         this.quantity = quantity;
+        this.category = category;
     }
     
     public int getQuantity() {
@@ -20,12 +20,6 @@ class Item {
     public void decrementQuantity() {
         if (quantity > 0) {
             quantity--;
-        }
-    }
-    
-    public void use(Player player) {
-        if (this.name.equals("anelRegenerativo")) {
-            player.incrementHealth(1);
         }
     }
 
@@ -47,6 +41,14 @@ class Item {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
     
 }

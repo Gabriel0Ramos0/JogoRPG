@@ -3,6 +3,8 @@ package rpg;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 class Player {
     private String name;
     private int health;
@@ -36,8 +38,13 @@ class Player {
         }
     }
     
-    public void incrementHealth(int amount) {
-        health += amount;
+    public void curaAnelRegenerativo() {
+        for (Item item : inventory) {
+            if (item.getName().equals("anelRegenerativo") && health < 100) {
+                heal(1);
+                JOptionPane.showMessageDialog(null, "O Anel Regenerativo curou 1 de vida!");
+            }
+        }
     }
     
     public void setHealth(int health) {

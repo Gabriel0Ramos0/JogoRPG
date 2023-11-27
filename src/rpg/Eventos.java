@@ -14,11 +14,11 @@ public class Eventos {
 	public static void comprarItens(Player player) {
 	    JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
 
-	    Item itemAVenda1 = new Item("Poção de Cura", 15, 5);
-	    Item itemAVenda2 = new Item("Poção de Mana", 15, 5);
-	    Item itemAVenda3 = new Item("Minério de Ametista", 32, 2);
-	    Item itemAVenda4 = new Item("Espada Misteriosa", 47, 1);
-	    Item itemAVenda5 = new Item("Botas para neve (com cristal)", 75, 1);
+	    Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 5, 25);
+	    Consumivel itemAVenda2 = new Consumivel("Poção de Mana", 15, 5, 25);
+	    Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");
+	    Item itemAVenda4 = new Item("Espada Misteriosa", 47, 1, "Vendível");
+	    Item itemAVenda5 = new Item("Botas para neve (com cristal)", 75, 1, "Vendível");
 
 	    List<Item> itensDisponiveis = new ArrayList<>();
 	    itensDisponiveis.add(itemAVenda1);
@@ -190,7 +190,7 @@ public class Eventos {
         switch (numeroHistoria) {
             case 1:
                 JOptionPane.showMessageDialog(null, "Você tropeça e encontra um anel mágico!");
-                Item anelRegenerativo = new Item("Anel Mágico", 20, 1);
+                Item anelRegenerativo = new Item("anelRegenerativo", 20, 1, "Vendível");
                 
                 player.getInventory().add(anelRegenerativo);
                 player.equipItem(anelRegenerativo);
@@ -200,7 +200,7 @@ public class Eventos {
             case 2:
                 JOptionPane.showMessageDialog(null, "Distraído, você é atingido por uma maçã, causando 3 de dano.");
                 player.setHealth(player.getHealth() - 3);
-                Item maca = new Item("Maçã", 2, 1);
+                Consumivel maca = new Consumivel("Maçã", 2, 1, 2);
                 
                 JOptionPane.showMessageDialog(null, "A maçã não causa muito dano, mas pode ser útil de alguma forma. " + player.getName() + " coletou Maçã!");
                 player.getInventory().add(maca);
@@ -208,9 +208,9 @@ public class Eventos {
                 break;
             case 3:
                 JOptionPane.showMessageDialog(null, player.getName() + " encontra uma bolsa no chão, curioso, abre e encontrar alguns itens nele: ");
-                Item item1 = new Item("Gema Preciosa", 50, 1);
-                Item item2 = new Item("Planta Medicinal", 3, 5);
-                Item item3 = new Item("Bolsa", 8, 1);
+                Item item1 = new Item("Gema Preciosa", 50, 1, "Vendível");
+                Consumivel item2 = new Consumivel("Planta Medicinal", 3, 5, 3);
+                Item item3 = new Item("Bolsa", 8, 1, "Vendível");
 
                 player.getInventory().add(item1);
                 player.getInventory().add(item2);

@@ -11,9 +11,9 @@ public class RPGGame {
 
         Player player = new Player(playerName);
         
-        Item bread = new Item("Pão", 2, 3);
-        Item cellphone = new Item("Celular", 15, 1);
-        Item watch = new Item("Relógio", 12, 1);
+        Consumivel bread = new Consumivel("Pão", 2, 3, 10);
+        Item cellphone = new Item("Celular", 15, 1, "Vendível");
+        Item watch = new Item("Relógio", 12, 1, "Vendível");
 
         player.getInventory().add(bread);
         player.getInventory().add(cellphone);
@@ -53,7 +53,7 @@ public class RPGGame {
                     JOptionPane.showMessageDialog(null, "Ele pede a você para continuar a jornada, fortalecer-se e reunir aliados para evitar que as Trevas Insondáveis retornem e mergulhem o mundo novamente na escuridão.");
                     JOptionPane.showMessageDialog(null, "Com o amuleto em mãos, você agradece ao sábio e parte em sua jornada, ciente da responsabilidade que recai sobre seus ombros.");
 
-                    Item magicAmulet = new Item("Amuleto Mágico", 0, 1);
+                    Item magicAmulet = new Item("Amuleto Mágico", 0, 1, "Vendível");
                     player.getInventory().add(magicAmulet);
                     JOptionPane.showMessageDialog(null, "Você ganhou um novo item: " + magicAmulet.getName());
                     player.equipItem(magicAmulet);
@@ -84,7 +84,6 @@ public class RPGGame {
         eventos.coletarItensAleatoriosComHistorias(player);
 
      // Simulação de batalha
-        List<Item> inventory = player.getInventory();
         JOptionPane.showMessageDialog(null, "Depois de horas caminhando, " + player.getName() + " encontra uma estrada."
                 + "\nDecidido a seguir por ela, um monstro salta em sua direção!");
 
@@ -93,10 +92,9 @@ public class RPGGame {
         int playerArmor = player.getDefense();
 
         while (monstro.getVida() > 0 && player.isAlive()) {
+        	player.curaAnelRegenerativo();
             showPlayerInfo(player);
             showInventory(player);
-            Item primeiroItem = inventory.get(0);
-            primeiroItem.use(player);
 
             int battleChoice = showBattleOptions(player, monstro);
 
@@ -185,28 +183,19 @@ public class RPGGame {
     private static void useItemDuringBattle(Player player) {
         StringBuilder itemOptions = new StringBuilder("Escolha um item para usar:");
         for (int i = 0; i < player.getInventory().size(); i++) {
-            itemOptions.append("\n").append(i + 1).append(". ").append(player.getInventory().get(i).getName());
+            Item item = player.getInventory().get(i);
+            if (item instanceof Consumivel) {
+                itemOptions.append("\n").append(i + 1).append(". ").append(item.getName());
+            }
         }
         int itemChoice = Integer.parseInt(JOptionPane.showInputDialog(null, itemOptions.toString()));
         if (itemChoice >= 1 && itemChoice <= player.getInventory().size()) {
             Item selectedItem = player.getInventory().get(itemChoice - 1);
-
-            // Aplica os efeitos do item
-            if (selectedItem.getName().equals("Pão")) {
-                if (selectedItem.getQuantity() > 0) {
-                    selectedItem.decrementQuantity();
-                    int healthRegen = 10;
-                    player.heal(healthRegen);
-                    JOptionPane.showMessageDialog(null,  player.getName() +" come o pão e recupera " + healthRegen + " de vida!");
-                    if (selectedItem.getQuantity() == 0) {
-                        player.getInventory().remove(selectedItem);
-                        JOptionPane.showMessageDialog(null, "Seu pão acabou! O item foi removido do inventário.");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Você está sem pão! Escolha outra ação.");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Escolha inválida. A batalha continua.");
+            if (selectedItem instanceof Consumivel) {
+                Consumivel consumivel = (Consumivel) selectedItem;
+                int regeneracaoVida = consumivel.getRegeneracaoVida();
+                player.heal(regeneracaoVida);
+                JOptionPane.showMessageDialog(null, player.getName() + " usou " + consumivel.getName() + " e recuperou " + regeneracaoVida + " de vida!");
             }
         }
     }
@@ -217,7 +206,7 @@ public class RPGGame {
             JOptionPane.showMessageDialog(null, "Após matar o monstro, ele se desfaz em uma poeira dourada, deixando um item para trás."
                     + "\n" + player.getName() +" coleta o estranho objeto, mas não consegue identificar o que é.");
 
-            Item raroDesconhecido = new Item("Raro Desconhecido", 0, 1);
+            Item raroDesconhecido = new Item("Raro Desconhecido", 0, 1, "Vendível");
             player.getInventory().add(raroDesconhecido);
             JOptionPane.showMessageDialog(null, "Você encontrou um novo item: " + raroDesconhecido.getName());
 
