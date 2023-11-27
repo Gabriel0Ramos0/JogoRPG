@@ -65,7 +65,7 @@ public class RPGGame {
 
                 case 1:
                     JOptionPane.showMessageDialog(null, player.getName() +" decide ignorar o sábio. Ao olhar para ele, percebe que deixou frustado!"
-                    		+ ", com cara de desaprovação diz que os boatos se espalham rápido nesta terra."
+                    		+ "\nCom cara de desaprovação, diz que os boatos se espalham rápido nesta terra."
                     		+ "\nSem desconfiar, "+ player.getName() +" continuar sua jornada.");
                     break;
 
@@ -94,7 +94,6 @@ public class RPGGame {
         while (monstro.getVida() > 0 && player.isAlive()) {
         	player.curaAnelRegenerativo();
             showPlayerInfo(player);
-            showInventory(player);
 
             int battleChoice = showBattleOptions(player, monstro);
 
@@ -202,13 +201,14 @@ public class RPGGame {
 
     private static void showNextChapterOptions(boolean vitoria, Player player) {
     	Eventos eventos = new Eventos();
+    	Historia historias = new Historia();
         if (vitoria) {
             JOptionPane.showMessageDialog(null, "Após matar o monstro, ele se desfaz em uma poeira dourada, deixando um item para trás."
-                    + "\n" + player.getName() +" coleta o estranho objeto, mas não consegue identificar o que é.");
+                    + "\n" + player.getName() +" coleta o estranho objeto no formato de um amuleto, mas não consegue identificar o que ele pode fazer.");
 
-            Item raroDesconhecido = new Item("Raro Desconhecido", 0, 1, "Vendível");
-            player.getInventory().add(raroDesconhecido);
-            JOptionPane.showMessageDialog(null, "Você encontrou um novo item: " + raroDesconhecido.getName());
+            Item amuletoDesconhecido = new Item("Amuleto Desconhecido", 0, 1, "Vendível");
+            player.getInventory().add(amuletoDesconhecido);
+            JOptionPane.showMessageDialog(null, "Você encontrou um novo item: " + amuletoDesconhecido.getName());
 
             JOptionPane.showMessageDialog(null, "Seguindo pela estrada, "+ player.getName() +" avista uma caverna com um brilho misterioso no seu interior.");
         } else {
@@ -234,11 +234,36 @@ public class RPGGame {
                 help();
                 eventos.venderItens(player);
                 eventos.comprarItens(player);
+                
+                JOptionPane.showMessageDialog(null, "Ao finalizar as compras, " + player.getName() + " sente uma vibração estranha no ar."
+                                            + "\nUma explosão ressoa à distância e uma fumaça densa começa a subir das Montanhas Sombrias.");
+
+                String[] escolhaInvestigar = {"Investigar a explosão", "Ignorar e continuar na caverna"};
+                int escolhaExplosao = JOptionPane.showOptionDialog(null, "O que você deseja fazer?", "Explosão nas Montanhas", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, escolhaInvestigar, escolhaInvestigar[0]);
+                switch (escolhaExplosao) {
+                    case 0:
+                        // Investiga a explosão
+                        JOptionPane.showMessageDialog(null, player.getName() + " decide investigar a explosão e sai da caverna."
+                                                   + "\nAo olhar na direção das Montanhas Sombrias, avista fumaça negra subindo para o céu.");
+                        JOptionPane.showMessageDialog(null, "Sem perder tempo, " + player.getName() + " decide seguir na direção das Montanhas Sombrias para descobrir o que causou a explosão.");
+                        historias.eventosMontanhasSombrias(player);
+                        break;
+
+                    case 1:
+                        // Ignora a explosão
+                        JOptionPane.showMessageDialog(null, player.getName() + " opta por ignorar a explosão e continuar explorando a Caverna das Luminescências."
+                                                   + "\nA figura do vendedor sorri e continua observando " + player.getName() + " com um olhar curioso.");
+                        historias.eventosCavernaDaPerdicao(player);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como reagir à explosão.");
+                }
+                
                 break;
 
             case 1:
                 JOptionPane.showMessageDialog(null, player.getName() +" decide ignorar a caverna e continuar sua jornada.");
-                // Implemente a lógica para a escolha de ignorar a caverna
+                historias.eventosDesastreTerrivel(player);
                 break;
 
             default:

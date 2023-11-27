@@ -226,4 +226,22 @@ public class Eventos {
         JOptionPane.showMessageDialog(null, mensagemItens.toString());
     }
     
+    public Monstro escolherMonstroAleatorioEpic() {
+        Random random = new Random();
+        int numeroMonstro = random.nextInt(4);
+
+        switch (numeroMonstro) {
+            case 0:
+                return Monstro.monstroLobo();
+            case 1:
+                return Monstro.monstroEsqueleto();
+            case 2:
+                return Monstro.monstroOgro();
+            case 3:
+                return Monstro.monstroBoss();
+            default:
+                throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
+        }
+    }
+
 }
