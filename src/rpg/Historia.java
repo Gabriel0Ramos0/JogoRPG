@@ -11,6 +11,9 @@ public class Historia {
         // Adicionando nova situação
         JOptionPane.showMessageDialog(null, "Seguindo adiante, " + player.getName() + " descobre um acampamento de treino, a fumaça era proveniente de uma fogueira com chamas altas."
                 + "\nGuerreiros habilidosos estão treinando suas técnicas de combate, e um mestre de treinamento se aproxima de você.");
+        JOptionPane.showMessageDialog(null, "Sem pensar muito " + player.getName() + " pergunta sobre o grande estrondo que escutou perto daqui."
+        		+ "\nO mestre conta não ter ouvido nada, mas menciona que aqueles destroços foram de um ritual antigo..."
+        		+ "\nSem deixar tempo para pensar, o mestre ofereçe ao "+ player.getName()+", se juntar aos treinos");
         String[] opcoesTreino = {"Juntar-se ao treinamento", "Continuar a jornada"};
         int escolhaTreino = JOptionPane.showOptionDialog(null, "O que você deseja fazer?", "Acampamento de Treino", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesTreino, opcoesTreino[0]);
         switch (escolhaTreino) {
