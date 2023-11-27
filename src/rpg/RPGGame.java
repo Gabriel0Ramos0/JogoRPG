@@ -22,7 +22,7 @@ public class RPGGame {
 
         JOptionPane.showMessageDialog(null, "Prólogo: Você foi teleportado a um mundo desconhecido portando somente seus bens que carregava na hora..."
                 + "\nEnquanto caminhava pela floresta tentando descobrir que mundo era aquele, você encontra uma cabana. Nela havia uma silhueta de um homem."
-                + "\nDevido a luz ofuscante do sol, você não consegue identificar se o velho senhor era perigoso");
+                + "\nDevido a luz ofuscante do sol, você não consegue identificar se o velho senhor era perigoso!");
 
         // Situação de escolha
         String[] options = {"Conversar", "Ignorar o velho senhor e continuar a jornada"};
@@ -30,7 +30,7 @@ public class RPGGame {
 
         switch (choice) {
             case 0:
-                JOptionPane.showMessageDialog(null, "O velho revelou ser um sábio e gostaria de te contar a história deste mundo");
+                JOptionPane.showMessageDialog(null, "O velho revelou ser um sábio e gostaria de te contar a história deste mundo.");
                 
                 String[] opções = {"Ouvir hitória", "Estou com pressa"};
                 int escolha = JOptionPane.showOptionDialog(null, "Escolha uma opção:", "Escolha", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opções, opções[0]);
@@ -55,12 +55,14 @@ public class RPGGame {
                     player.getInventory().add(magicAmulet);
                     JOptionPane.showMessageDialog(null, "Você ganhou um novo item: " + magicAmulet.getName());
                     player.equipItem(magicAmulet);
+                    JOptionPane.showMessageDialog(null, "Ao equipar o amuleto, "+ player.getName()+ " sente que seu poder aumentou!"
+                    		                   + "Defesa + 5 || Ataque + 1");
                     player.setDefense(15);
                     player.setAttack(6);
                     break;
 
                 case 1:
-                    JOptionPane.showMessageDialog(null, player.getName() +" decide ignorar o sábio. Ao olhar para ele, percebe que deixou frustado"
+                    JOptionPane.showMessageDialog(null, player.getName() +" decide ignorar o sábio. Ao olhar para ele, percebe que deixou frustado!"
                     		+ ", com cara de desaprovação diz que os boatos se espalham rápido nesta terra."
                     		+ "\nSem desconfiar, "+ player.getName() +" continuar sua jornada.");
                     break;
@@ -71,13 +73,13 @@ public class RPGGame {
                 break;
 
             case 1:
-                JOptionPane.showMessageDialog(null, player.getName() +" ignora o sábio e continua sua jornada.");
+                JOptionPane.showMessageDialog(null, player.getName() +" ignora o velhor senhor e continua sua jornada.");
                 break;
                 
             default:
                 JOptionPane.showMessageDialog(null, "Opção inválida. "+ player.getName() +" continua sua jornada.");
         }
-        eventos.coletarItensAleatorios(player);
+        eventos.coletarItensAleatoriosComHistorias(player);
 
         // Simulação de batalha
         JOptionPane.showMessageDialog(null, "Depois de horas caminhando, "+ player.getName() +" encontra uma estrada."
@@ -208,6 +210,7 @@ public class RPGGame {
     }
 
     private static void showNextChapterOptions(boolean vitoria, Player player) {
+    	Eventos eventos = new Eventos();
         if (vitoria) {
             JOptionPane.showMessageDialog(null, "Após matar o monstro, ele se desfaz em uma poeira dourada, deixando um item para trás."
                     + "\n" + player.getName() +" coleta o estranho objeto, mas não consegue identificar o que é.");
@@ -229,7 +232,17 @@ public class RPGGame {
         switch (choice) {
             case 0:
                 JOptionPane.showMessageDialog(null, player.getName() +" decide entrar na caverna.");
-                // Implemente a lógica para a escolha de entrar na caverna
+                JOptionPane.showMessageDialog(null, "Ao se aproximar, "+ player.getName() +" descobre uma pequena clareira iluminada por cristais roxos incrustados nas paredes. "
+                		+ "\nNo centro, uma figura peculiar está sentada em uma pedra, emitindo a luz hipnotizante."
+                		+ "\nA figura revela-se como um vendedor peculiar, vestindo roupas exóticas que parecem refletir as cores dançantes ao redor. "
+                		+ "\nSua loja improvisada exibe itens únicos, cada um banhado pela luz roxa que dá vida à caverna."
+                		+ "\nSaudações, aventureiro, à Caverna das Luminescências! "
+                		+ "\nAqui, os cristais guardiões iluminam os tesouros que ofereço, diz o vendedor com um sorriso acolhedor. "
+                		+ "\nEle explica que esses itens têm propriedades especiais, alimentadas pela energia única da caverna.");
+                JOptionPane.showMessageDialog(null, "A luz roxa cintila enquanto "+ player.getName() +" explora as opções disponíveis. Cada item, carregado com a energia mágica da caverna, promete auxiliar na jornada à frente.");
+                help();
+                eventos.venderItens(player);
+                eventos.comprarItens(player);
                 break;
 
             case 1:
@@ -241,6 +254,8 @@ public class RPGGame {
                 JOptionPane.showMessageDialog(null, "Opção inválida. Você fica indeciso.");
         }
     }
-
-
+    
+    private static void help() {
+    	JOptionPane.showMessageDialog(null, "Para comprar ou vender mais de um item, basta colocar uma vírgula (,) depois de cada item escolhido!");
+    }
 }
