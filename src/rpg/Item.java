@@ -1,5 +1,7 @@
 package rpg;
 
+import javax.swing.JOptionPane;
+
 class Item {
     private String name;
     private int value;
@@ -18,6 +20,12 @@ class Item {
     public void decrementQuantity() {
         if (quantity > 0) {
             quantity--;
+        }
+    }
+    
+    public void use(Player player) {
+        if (this.name.equals("anelRegenerativo")) {
+            player.incrementHealth(1);
         }
     }
 

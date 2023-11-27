@@ -190,10 +190,12 @@ public class Eventos {
         switch (numeroHistoria) {
             case 1:
                 JOptionPane.showMessageDialog(null, "Você tropeça e encontra um anel mágico!");
-                Item anelMagico = new Item("Anel Mágico", 20, 1);
+                Item anelRegenerativo = new Item("Anel Mágico", 20, 1);
                 
-                player.getInventory().add(anelMagico);
-                
+                player.getInventory().add(anelRegenerativo);
+                player.equipItem(anelRegenerativo);
+                JOptionPane.showMessageDialog(null, "Ao colocar o anel, "+ player.getName() +" não sentiu nenhuma difença!");
+                //implementar regen de vida
                 break;
             case 2:
                 JOptionPane.showMessageDialog(null, "Distraído, você é atingido por uma maçã, causando 3 de dano.");

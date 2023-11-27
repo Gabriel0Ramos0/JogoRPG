@@ -36,6 +36,10 @@ class Player {
         }
     }
     
+    public void incrementHealth(int amount) {
+        health += amount;
+    }
+    
     public void setHealth(int health) {
         this.health = health;
     }

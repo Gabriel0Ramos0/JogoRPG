@@ -1,5 +1,7 @@
 package rpg;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 public class RPGGame {
@@ -56,7 +58,7 @@ public class RPGGame {
                     JOptionPane.showMessageDialog(null, "Você ganhou um novo item: " + magicAmulet.getName());
                     player.equipItem(magicAmulet);
                     JOptionPane.showMessageDialog(null, "Ao equipar o amuleto, "+ player.getName()+ " sente que seu poder aumentou!"
-                    		                   + "Defesa + 5 || Ataque + 1");
+                    		                   + "\n\nDefesa + 5 || Ataque + 1");
                     player.setDefense(15);
                     player.setAttack(6);
                     break;
@@ -81,35 +83,44 @@ public class RPGGame {
         }
         eventos.coletarItensAleatoriosComHistorias(player);
 
-        // Simulação de batalha
-        JOptionPane.showMessageDialog(null, "Depois de horas caminhando, "+ player.getName() +" encontra uma estrada."
-        		+ "\nDecidido a seguir por ela, um monstro salta em sua direção!");
-        
-        Monstro monstro = new Monstro("Besta", 20, 5, 5);
+     // Simulação de batalha
+        List<Item> inventory = player.getInventory();
+        JOptionPane.showMessageDialog(null, "Depois de horas caminhando, " + player.getName() + " encontra uma estrada."
+                + "\nDecidido a seguir por ela, um monstro salta em sua direção!");
+
+        Monstro monstro = new Monstro("Besta", 25, 5, 5);
         boolean vitoria = false;
         int playerArmor = player.getDefense();
 
         while (monstro.getVida() > 0 && player.isAlive()) {
             showPlayerInfo(player);
             showInventory(player);
+            Item primeiroItem = inventory.get(0);
+            primeiroItem.use(player);
 
             int battleChoice = showBattleOptions(player, monstro);
 
             switch (battleChoice) {
                 case 0:
-                    int playerDamage = player.getAttack();
-                    int monsterArmor = monstro.getDefesa();
-                    int actualMonsterDamage = Math.max(0, playerDamage - monsterArmor);
-                    monstro.takeDamage(actualMonsterDamage);
+                    int playerDamage = calculateDamage(player.getAttack(), monstro.getDefesa());
+                    monstro.takeDamage(playerDamage);
 
-                    JOptionPane.showMessageDialog(null, player.getName() +" ataca o monstro e causa " + player.getAttack() + " de dano!");
-                    monstro.setDefesa(monstro.getDefesa() - player.getAttack());
-                    if (monstro.getDefesa() <=0) {
-                    	monstro.setDefesa(0);
-                    	monstro.setVida(monstro.getVida() - player.getAttack());
+                    if (monstro.getDefesa() > 0) {
+                        monstro.setDefesa(monstro.getDefesa() - player.getAttack());
+                        if (monstro.getDefesa() < 0) {
+                            int defenseRemaining = Math.abs(monstro.getDefesa());
+                            monstro.takeDamage(defenseRemaining);
+                            monstro.setDefesa(0);
+                            JOptionPane.showMessageDialog(null, player.getName() + " ataca o monstro e causa " + playerDamage + " de dano! O monstro perde " + defenseRemaining + " de defesa e " + defenseRemaining + " de vida.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, player.getName() + " ataca o monstro e causa " + playerDamage + " de dano! O monstro perde " + player.getAttack() + " de defesa.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, player.getName() + " ataca o monstro e causa " + playerDamage + " de dano! O monstro perde " + player.getAttack() + " de vida.");
                     }
+
                     if (monstro.getVida() <= 0 && player.isAlive()) {
-                        JOptionPane.showMessageDialog(null, player.getName() +" derrotou o monstro e ganhou a batalha!");
+                        JOptionPane.showMessageDialog(null, player.getName() + " derrotou o monstro e ganhou a batalha!");
                         vitoria = true;
                         showNextChapterOptions(vitoria, player);
                         return;
@@ -132,29 +143,20 @@ public class RPGGame {
                         JOptionPane.showMessageDialog(null, "O monstro ataca você! Você perde " + monstro.getAtaque() + " de vida.");
                     }
                     break;
-                    
+
                 case 1:
                     useItemDuringBattle(player);
                     break;
-                    
+
                 case 2:
                     JOptionPane.showMessageDialog(null, "Ao ver o tamanho da fera, o herói teme seu poder e foge o mais rápido possível...");
                     vitoria = false;
                     showNextChapterOptions(vitoria, player);
                     return;
-                    
+
                 default:
-                    JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() +" hesita na batalha.");
+                    JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " hesita na batalha.");
             }
-        }
-        if (monstro.getVida() <= 0 && player.isAlive()) {
-            JOptionPane.showMessageDialog(null, player.getName() +" derrotou o monstro e ganhou a batalha!");
-            player.setCoins(player.getCoins() + 12);
-            vitoria = true;
-            showNextChapterOptions(vitoria, player);
-            return;
-        } else {
-            JOptionPane.showMessageDialog(null, player.getName() +" foi derrotado pelo monstro. Game over!");
         }
     }
 
@@ -257,5 +259,10 @@ public class RPGGame {
     
     private static void help() {
     	JOptionPane.showMessageDialog(null, "Para comprar ou vender mais de um item, basta colocar uma vírgula (,) depois de cada item escolhido!");
+    }
+    
+    private static int calculateDamage(int attack, int defense) {
+        int damage = Math.max(0, attack - defense);
+        return damage;
     }
 }
