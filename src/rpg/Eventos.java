@@ -195,7 +195,7 @@ public class Eventos {
                 player.getInventory().add(anelRegenerativo);
                 player.equipItem(anelRegenerativo);
                 JOptionPane.showMessageDialog(null, "Ao colocar o anel, "+ player.getName() +" não sentiu nenhuma difença!");
-                //implementar regen de vida
+                
                 break;
             case 2:
                 JOptionPane.showMessageDialog(null, "Distraído, você é atingido por uma maçã, causando 3 de dano.");
@@ -217,6 +217,8 @@ public class Eventos {
                 player.getInventory().add(item3);
                 
                 break;
+            default:
+                throw new IllegalStateException("Número de monstro inválido: " + numeroHistoria);
         }
         StringBuilder mensagemItens = new StringBuilder("Você agora possui: \n");
         for (Item item : player.getInventory()) {
@@ -244,7 +246,7 @@ public class Eventos {
     
     public Monstro escolherMonstroAleatorioComum() {
         Random random = new Random();
-        int numeroMonstro = random.nextInt(4);
+        int numeroMonstro = random.nextInt(2);
 
         switch (numeroMonstro) {
             case 0:

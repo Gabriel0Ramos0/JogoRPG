@@ -17,7 +17,7 @@ public class Batalha extends Eventos {
         int playerArmor = player.getDefense();
 
         while (monstro.getVida() > 0 && player.isAlive()) {
-        	player.curaAnelRegenerativo();
+            player.curaAnelRegenerativo();        	
             showPlayerInfo(player);
 
             int battleChoice = showBattleOptions(player, monstro);
@@ -92,14 +92,6 @@ public class Batalha extends Eventos {
         JOptionPane.showMessageDialog(null, "Jogador: " + player.getName() + "\nVida: " + player.getHealth() + "\nAtaque: " + player.getAttack() + "\nDefesa: " + player.getDefense());
     }
 
-    private static void showInventory(Player player) {
-        StringBuilder inventoryMessage = new StringBuilder("Inventário:");
-        for (Item item : player.getInventory()) {
-            inventoryMessage.append("\n").append(item.getName());
-        }
-        JOptionPane.showMessageDialog(null, inventoryMessage.toString());
-    }
-
     public void showMonsterStatus(Monstro monstro) {
         JOptionPane.showMessageDialog(null, "Status do Monstro:\nNome: " + monstro.getNome() + "\nVida: " + monstro.getVida() + "\nAtaque: " + monstro.getAtaque() + "\nDefesa: " + monstro.getDefesa());
     }
@@ -120,10 +112,15 @@ public class Batalha extends Eventos {
                 int regeneracaoVida = consumivel.getRegeneracaoVida();
                 player.heal(regeneracaoVida);
                 JOptionPane.showMessageDialog(null, player.getName() + " usou " + consumivel.getName() + " e recuperou " + regeneracaoVida + " de vida!");
+                consumivel.reduceQuantity(1);
+                if (consumivel.getQuantity() == 0) {
+                    player.getInventory().remove(selectedItem);
+                    JOptionPane.showMessageDialog(null, consumivel.getName() + " acabou. O item foi removido do inventário.");
+                }
             }
         }
     }
-    
+
     public static int calculateDamage(int attack, int defense) {
         int damage = Math.max(0, attack - defense);
         return damage;

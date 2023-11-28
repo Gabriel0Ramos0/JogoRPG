@@ -3,7 +3,7 @@ package rpg;
 public class Item {
     private String name;
     private int value;
-    private int quantity;
+    protected int quantity;
     private String category;
 
     public Item(String name, int value, int quantity, String category) {

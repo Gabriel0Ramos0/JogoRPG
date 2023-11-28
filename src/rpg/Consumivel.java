@@ -11,4 +11,8 @@ public class Consumivel extends Item {
     public int getRegeneracaoVida() {
         return regeneracaoVida;
     }
+    
+    public void reduceQuantity(int amount) {
+        this.quantity -= amount;
+    }
 }
