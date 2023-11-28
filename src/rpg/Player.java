@@ -105,7 +105,11 @@ class Player {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		if(name != null && !name.isEmpty()) {
+			this.name = name;
+		}else {
+			setName(JOptionPane.showInputDialog("É nescessário informar o nome!"));
+		}
 	}
 
 	public void setInventory(List<Item> inventory) {

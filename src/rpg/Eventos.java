@@ -234,11 +234,11 @@ public class Eventos {
 
         switch (numeroMonstro) {
             case 0:
-                return Monstro.monstroEsqueleto();
+                return Monstro.Esqueleto();
             case 1:
-                return Monstro.monstroOgro();
+                return Monstro.Ogro();
             case 2:
-                return Monstro.monstroBoss();
+                return Monstro.Boss();
             default:
                 throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
         }
@@ -252,7 +252,7 @@ public class Eventos {
             case 0:
                 return Monstro.besta();
             case 1:
-                return Monstro.monstroLobo();
+                return Monstro.Lobo();
             default:
                 throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
         }

@@ -22,20 +22,20 @@ public class Monstro {
         return new Monstro("Besta", 20, 5, 5);
     }
     
-    public static Monstro monstroLobo() {
-        return new Monstro("Lobo Feroz", 20, 8, 2);
+    public static Monstro Lobo() {
+        return new Monstro("Lobo Feroz", 21, 8, 2);
     }
 
-    public static Monstro monstroEsqueleto() {
+    public static Monstro Esqueleto() {
         return new Monstro("Esqueleto Assustador", 15, 6, 4);
     }
 
-    public static Monstro monstroOgro() {
+    public static Monstro Ogro() {
         return new Monstro("Ogro Gigante", 30, 10, 5);
     }
 
     // Boss
-    public static Monstro monstroBoss() {
+    public static Monstro Boss() {
         return new Monstro("Dragão Negro (Boss)", 50, 15, 10);
     }
 
