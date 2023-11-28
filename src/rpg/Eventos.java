@@ -185,7 +185,7 @@ public class Eventos {
     public static void coletarItensAleatoriosComHistorias(Player player) {
         JOptionPane.showMessageDialog(null, "Enquanto explora a região, " + player.getName() + " se depara com uma situação inusitada:");
         Random random = new Random();
-        int numeroHistoria = random.nextInt(3) + 1;
+        int numeroHistoria = random.nextInt(4) + 1;
 
         switch (numeroHistoria) {
             case 1:
@@ -217,8 +217,19 @@ public class Eventos {
                 player.getInventory().add(item3);
                 
                 break;
+            case 4:
+                JOptionPane.showMessageDialog(null, player.getName() + " pensa que as plantas em volta podem ser úteis mais a frente, então decide cata-lás.");
+                Item item4 = new Item("Folhas comuns", 1, 12, "Vendível");
+                Consumivel item5 = new Consumivel("Planta Medicinal", 3, 2, 3);
+                Item item6 = new Item("Folha de télia", 19, 1, "Vendível");
+
+                player.getInventory().add(item4);
+                player.getInventory().add(item5);
+                player.getInventory().add(item6);
+                
+                break;
             default:
-                throw new IllegalStateException("Número de monstro inválido: " + numeroHistoria);
+                throw new IllegalStateException("Número do evento inválido: " + numeroHistoria);
         }
         StringBuilder mensagemItens = new StringBuilder("Você agora possui: \n");
         for (Item item : player.getInventory()) {
