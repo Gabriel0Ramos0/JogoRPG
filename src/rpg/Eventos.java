@@ -228,17 +228,29 @@ public class Eventos {
     
     public Monstro escolherMonstroAleatorioEpic() {
         Random random = new Random();
+        int numeroMonstro = random.nextInt(3);
+
+        switch (numeroMonstro) {
+            case 0:
+                return Monstro.monstroEsqueleto();
+            case 1:
+                return Monstro.monstroOgro();
+            case 2:
+                return Monstro.monstroBoss();
+            default:
+                throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
+        }
+    }
+    
+    public Monstro escolherMonstroAleatorioComum() {
+        Random random = new Random();
         int numeroMonstro = random.nextInt(4);
 
         switch (numeroMonstro) {
             case 0:
-                return Monstro.monstroLobo();
+                return Monstro.besta();
             case 1:
-                return Monstro.monstroEsqueleto();
-            case 2:
-                return Monstro.monstroOgro();
-            case 3:
-                return Monstro.monstroBoss();
+                return Monstro.monstroLobo();
             default:
                 throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
         }
