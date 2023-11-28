@@ -55,6 +55,7 @@ public class Batalha extends Eventos {
                             int armorRemaining = Math.abs(playerArmor);
                             player.takeDamage(armorRemaining);
                             player.setDefense(0);
+                            //Arrumar dano em excesso
                             JOptionPane.showMessageDialog(null, "O monstro ataca você! Você perde " + monstro.getAtaque() + " de armadura e " + armorRemaining + " de vida.");
                         } else {
                             player.setDefense(playerArmor);
