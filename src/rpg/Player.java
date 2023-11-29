@@ -50,9 +50,10 @@ class Player {
         level++;
         experience -= calculateXPPerLevel(level - 1);
         maxHealth += 10;
-        health = maxHealth;
-        attack += 2;
-        defense = (tempDefense + 2);
+        setHealth(maxHealth);
+        setAttack(getAttack() + 2);
+        setTempDefense(getTempDefense() + 2);
+        setDefense(getDefense() + 2);
         JOptionPane.showMessageDialog(null, "Você subiu para o nível " + level + "!");
         JOptionPane.showMessageDialog(null, "Vida aumentou para " + maxHealth + ", Ataque aumentou para " + attack + ", Defesa aumentou para " + defense + ".");
     }
@@ -86,13 +87,29 @@ class Player {
     	setDefense(tempDefense);
     }
     
-    public boolean jaPassouPorParteDaHistoria() {
+    public int getTempDefense() {
+		return tempDefense;
+	}
+
+	public void setTempDefense(int tempDefense) {
+		this.tempDefense = tempDefense;
+	}
+
+	public boolean jaPassouPorParteDaHistoria() {
         return passouPorParteDaHistoria;
     }
 
     public void marcarPassagemPorParteDaHistoria() {
         passouPorParteDaHistoria = true;
     }
+
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
+	}
 
 	public void setHealth(int health) {
         this.health = health;

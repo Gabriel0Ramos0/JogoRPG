@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 public class Batalha extends Eventos {
 
 	private RPGGame game;
+	private boolean tentouFugir = false;
 
     public Batalha(RPGGame game, Player player, Monstro monstro) {
         super();
@@ -60,7 +61,6 @@ public class Batalha extends Eventos {
                             player.marcarPassagemPorParteDaHistoria();
                             game.showNextChapterOptions(vitoria, player);
                         } else {
-                            // Se já passou, continue para a próxima parte da história
                             Historia.continuaHistoriaCave(vitoria, player);
                         }
                         return;
@@ -96,10 +96,20 @@ public class Batalha extends Eventos {
                     break;
 
                 case 2:
-                    JOptionPane.showMessageDialog(null, "Ao ver o tamanho de" + monstro.getNome()+ ", o herói teme seu poder e foge o mais rápido possível...");
-                    vitoria = false;
-                    game.showNextChapterOptions(vitoria, player);
-                    return;
+                	if (!tentouFugir) {
+                        JOptionPane.showMessageDialog(null, "Ao ver o tamanho de " + monstro.getNome() + ", o herói teme seu poder e tenta fugir o mais rápido possível...");
+                        setTentouFugir(true);
+                        vitoria = false;
+                        if (!player.jaPassouPorParteDaHistoria()) {
+                            player.marcarPassagemPorParteDaHistoria();
+                            game.showNextChapterOptions(vitoria, player);
+                        } else {
+                        	JOptionPane.showMessageDialog(null, "Você tenta fugir novamente, mas o " + monstro.getNome() + " bloqueia sua saída!");
+                            executarBatalhaEstendida(player, monstro);
+                        }
+                        return;
+                    }
+                    break;
 
                 default:
                     JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " hesita na batalha.");
@@ -150,4 +160,13 @@ public class Batalha extends Eventos {
         int damage = Math.max(0, attack - defense);
         return damage;
     }
+
+	public boolean isTentouFugir() {
+		return tentouFugir;
+	}
+
+	public void setTentouFugir(boolean tentouFugir) {
+		this.tentouFugir = tentouFugir;
+	}
+    
 }

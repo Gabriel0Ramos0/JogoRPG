@@ -47,13 +47,13 @@ public class RPGGame {
                         JOptionPane.showMessageDialog(null, player.getName() + " decide ouvir a história do mundo.");
                         JOptionPane.showMessageDialog(null, "Percebendo sua humildade, o sábio lhe entrega um amuleto e começa a contar a história do mundo.");
 
-                        JOptionPane.showMessageDialog(null, "Há séculos atrás, este mundo era governado por uma força maligna conhecida como 'As Trevas Insondáveis'.");
-                        JOptionPane.showMessageDialog(null, "As Trevas Insondáveis espalharam caos e destruição por todo o reino, mergulhando-o em uma era de trevas.");
-                        JOptionPane.showMessageDialog(null, "Nesse período sombrio, heróis de diversas origens se uniram para enfrentar o mal.");
-                        JOptionPane.showMessageDialog(null, "Uma batalha épica aconteceu entre as forças do bem e as Trevas Insondáveis.");
-                        JOptionPane.showMessageDialog(null, "Com grande sacrifício, os heróis conseguiram selar o mal em uma dimensão paralela, trazendo paz ao reino.");
-                        JOptionPane.showMessageDialog(null, "O sábio, que é um dos últimos sobreviventes dessa época, revela que as Trevas Insondáveis estão tentando retornar.");
-                        JOptionPane.showMessageDialog(null, "O amuleto mágico que ele lhe deu é uma relíquia antiga que canaliza poderes para enfrentar essa ameaça.");
+                        JOptionPane.showMessageDialog(null, "Há séculos atrás, este mundo era governado por uma força maligna conhecida como 'As Trevas Insondáveis'.\n"
+                                        + "As Trevas Insondáveis espalharam caos e destruição por todo o reino, mergulhando-o em uma era de trevas.\n"
+                                        + "Nesse período sombrio, heróis de diversas origens se uniram para enfrentar o mal.\n"
+                                        + "Uma batalha épica aconteceu entre as forças do bem e as Trevas Insondáveis.\n"
+                                        + "Com grande sacrifício, os heróis conseguiram selar o mal em uma dimensão paralela, trazendo paz ao reino.\n"
+                                        + "O sábio, que é um dos últimos sobreviventes dessa época, revela que as Trevas Insondáveis estão tentando retornar.\n"
+                                        + "O amuleto mágico que ele lhe deu é uma relíquia antiga que canaliza poderes para enfrentar essa ameaça.");
 
                         JOptionPane.showMessageDialog(null, "Ele pede a você para continuar a jornada, fortalecer-se e reunir aliados para evitar que as Trevas Insondáveis retornem e mergulhem o mundo novamente na escuridão.");
                         JOptionPane.showMessageDialog(null, "Com o amuleto em mãos, você agradece ao sábio e parte em sua jornada, ciente da responsabilidade que recai sobre seus ombros.");
@@ -65,6 +65,7 @@ public class RPGGame {
                         JOptionPane.showMessageDialog(null, "Ao equipar o amuleto, " + player.getName() + " sente que seu poder aumentou!"
                                 + "\n\nDefesa + 5 || Ataque + 1");
                         player.setDefense(15);
+                        player.setTempDefense(15);
                         player.setAttack(6);
                         break;
 

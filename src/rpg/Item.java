@@ -16,6 +16,12 @@ public class Item {
     public int getQuantity() {
         return quantity;
     }
+    
+    public void incrementQuantity() {
+        if (quantity >= 0) {
+            quantity++;
+        }
+    }
 
     public void decrementQuantity() {
         if (quantity > 0) {

@@ -43,7 +43,7 @@ public class Monstro {
     
  // Boss
     public static Monstro Mercador() {
-        return new Monstro("Mercador Sombrio", 40, 12, 8, 30);
+        return new Monstro("Mercador Sombrio", 40, 12, 8, 35);
     }
 
     public int getXP() {

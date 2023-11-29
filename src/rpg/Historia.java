@@ -82,7 +82,7 @@ public class Historia {
 	            + "\nO mercador peculiar agora revela sua verdadeira forma, envolto em uma aura vermelha e sinistra."
 	            + "\nEle se autodenomina o Mercador Sombrio, mestre dos artefatos corrompidos pela escuridão.");
 	    
-        Monstro monstro = eventos.escolherMonstroAleatorioBoss();
+        Monstro monstro = eventos.bossMercador();
         Batalha batalha = new Batalha(game, player, monstro);
         batalha.executarBatalhaEstendida(player, monstro);
 	}

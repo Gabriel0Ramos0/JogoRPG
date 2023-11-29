@@ -13,7 +13,7 @@ public class Eventos {
 	// Método para simular uma compra de item pelo jogador
 	public static void comprarItens(Player player) {
 	    JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
-
+	    JOptionPane.showMessageDialog(null, "(Poções são armazenados separadamente)");
 	    Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 5, 25);
 	    Consumivel itemAVenda2 = new Consumivel("Poção de Mana", 15, 5, 25);
 	    Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");
@@ -57,11 +57,9 @@ public class Eventos {
 	            }
 	            mensagemCompra.append(", ");
 	        }
-
 	        if (mensagemCompra.length() > 0) {
-	            mensagemCompra.setLength(mensagemCompra.length() - 2); // Remove a última vírgula
+	            mensagemCompra.setLength(mensagemCompra.length() - 2);
 	        }
-
 	        JOptionPane.showMessageDialog(null, mensagemCompra.toString() + "!");
 	    } else {
 	        JOptionPane.showMessageDialog(null, "Você não possui moedas suficientes para comprar esses itens.");
@@ -239,7 +237,7 @@ public class Eventos {
         JOptionPane.showMessageDialog(null, mensagemItens.toString());
     }
     
-    public Monstro escolherMonstroAleatorioBoss() {
+    public Monstro bossMercador() {
         Random random = new Random();
         int numeroMonstro = random.nextInt(1);
 
@@ -278,5 +276,4 @@ public class Eventos {
                 throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
         }
     }
-
 }
