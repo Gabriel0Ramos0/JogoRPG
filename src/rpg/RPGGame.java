@@ -101,6 +101,7 @@ public class RPGGame {
     	Eventos eventos = new Eventos();
     	Historia historias = new Historia();
         if (vitoria) {
+        	player.regenerarEscudo();
             JOptionPane.showMessageDialog(null, "Após matar o monstro, ele se desfaz em uma poeira dourada, deixando um item para trás."
                     + "\n" + player.getName() +" coleta o estranho objeto no formato de um amuleto, mas não consegue identificar o que ele pode fazer.");
 

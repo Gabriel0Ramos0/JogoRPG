@@ -12,12 +12,14 @@ class Player {
     private int defense;
     private List<Item> inventory;
     private int coins;
+    private int tempDefense;
 
     public Player(String name) {
         this.name = name;
         this.health = 100;
         this.attack = 5;
         this.defense = 10;
+        this.tempDefense = defense;
         this.inventory = new ArrayList<>();
         this.coins = 25;
     }
@@ -45,6 +47,10 @@ class Player {
                 JOptionPane.showMessageDialog(null, "O Anel Regenerativo curou 1 de vida!");
             }
         }
+    }
+    
+    public void regenerarEscudo() {
+    	setDefense(tempDefense);
     }
     
     public void setHealth(int health) {

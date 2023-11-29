@@ -37,15 +37,15 @@ public class Batalha extends Eventos {
                             monstro.takeDamage(excessDamage);
                             
                             JOptionPane.showMessageDialog(null, player.getName() + " ataca o monstro e causa " + playerDamage +
-                                    " de dano! O monstro perde a defesa e " + excessDamage + " de vida.");
+                                    " de dano! \n(O monstro perde a defesa e " + excessDamage + " de vida.)");
                         } else {
                             JOptionPane.showMessageDialog(null, player.getName() + " ataca o monstro e causa " + playerDamage +
-                                    " de dano! A defesa do monstro absorve o dano!");
+                                    " de dano! \n(A defesa do monstro absorve o dano!)");
                         }
                     } else {
                         monstro.takeDamage(playerDamage);
                         JOptionPane.showMessageDialog(null, player.getName() + " ataca o monstro e causa " + playerDamage +
-                                " de dano! O monstro perde " + playerAttack + " de vida.");
+                                " de dano! \n(O monstro perde " + playerAttack + " de vida.)");
                     }
 
                     if (monstro.getVida() <= 0 && player.isAlive()) {
@@ -61,25 +61,22 @@ public class Batalha extends Eventos {
 
                     if (player.getDefense() > 0) {
                         if (monstroAttack >= player.getDefense()) {
-                            int defesaRestante = Math.max(0, player.getDefense() - monstroAttack);
                             int excessDamage = monstroAttack - player.getDefense();
-
-                            player.setDefense(defesaRestante);
                             player.takeDamage(excessDamage);
 
                             JOptionPane.showMessageDialog(null, monstro.getNome() + " ataca você e causa " + monstroDamage +
-                                    " de dano! " + player.getName() + " perde a defesa e " + excessDamage + " de vida.");
+                                    " de dano! \n(" + player.getName() + " perde a defesa e " + excessDamage + " de vida.)");
                             player.setDefense(0);
                         } else {
                         	int defesaRestante = Math.max(0, player.getDefense() - monstroAttack);
                         	player.setDefense(defesaRestante);
                             JOptionPane.showMessageDialog(null, monstro.getNome() + " ataca você e causa " + monstroDamage +
-                                    " de dano! A defesa de " + player.getName() + " absorve o dano!");
+                                    " de dano! \n(A defesa de " + player.getName() + " absorve o dano!)");
                         }
                     } else {
                         player.takeDamage(monstroDamage);
                         JOptionPane.showMessageDialog(null, monstro.getNome() + " ataca você e causa " + monstroDamage +
-                                " de dano! " + player.getName() + " perde " + monstroAttack + " de vida.");
+                                " de dano! \n(" + player.getName() + " perde " + monstroAttack + " de vida.)");
                     }
                     break;
 
