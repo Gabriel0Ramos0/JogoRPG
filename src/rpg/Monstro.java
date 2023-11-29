@@ -5,12 +5,14 @@ public class Monstro {
     private int vida;
     private int ataque;
     private int defesa;
+    private int xp;
 
-    public Monstro(String nome, int vida, int ataque, int defesa) {
+    public Monstro(String nome, int vida, int ataque, int defesa, int xp) {
         this.nome = nome;
         this.vida = vida;
         this.ataque = ataque;
         this.defesa = defesa;
+        this.xp = xp;
     }
     
     public void takeDamage(int damage) {
@@ -19,24 +21,28 @@ public class Monstro {
     }
     
     public static Monstro besta() {
-        return new Monstro("Besta", 20, 5, 5);
+        return new Monstro("Besta", 20, 5, 5, 10);
     }
-    
+
     public static Monstro Lobo() {
-        return new Monstro("Lobo Feroz", 21, 8, 2);
+        return new Monstro("Lobo Feroz", 21, 8, 2, 15);
     }
 
     public static Monstro Esqueleto() {
-        return new Monstro("Esqueleto Assustador", 15, 6, 4);
+        return new Monstro("Esqueleto Assustador", 15, 6, 4, 15);
     }
 
     public static Monstro Ogro() {
-        return new Monstro("Ogro Gigante", 30, 10, 5);
+        return new Monstro("Ogro Gigante", 30, 10, 5, 20);
     }
 
     // Boss
     public static Monstro Boss() {
-        return new Monstro("Dragão Negro (Boss)", 50, 15, 10);
+        return new Monstro("Dragão Negro (Boss)", 50, 15, 10, 50);
+    }
+
+    public int getXP() {
+        return xp;
     }
 
     public String getNome() {

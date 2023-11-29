@@ -51,6 +51,9 @@ public class Batalha extends Eventos {
                     if (monstro.getVida() <= 0 && player.isAlive()) {
                         JOptionPane.showMessageDialog(null, player.getName() + " derrotou o monstro e ganhou a batalha!");
                         vitoria = true;
+                        player.regenerarEscudo();
+                        player.gainExperience(monstro.getXP());
+                        showPlayerInfo(player);
                         game.showNextChapterOptions(vitoria, player);
                         return;
                     }

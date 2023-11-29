@@ -8,20 +8,52 @@ import javax.swing.JOptionPane;
 class Player {
     private String name;
     private int health;
+    private int maxHealth;
     private int attack;
     private int defense;
-    private List<Item> inventory;
+    private int level;
+    private int experience;
     private int coins;
     private int tempDefense;
+    private List<Item> inventory;
+    private static final int BASE_XP_PER_LEVEL = 10;
+    private static final int XP_INCREASE_PER_LEVEL = 10;
 
     public Player(String name) {
         this.name = name;
         this.health = 100;
+        this.maxHealth = 100;
         this.attack = 5;
         this.defense = 10;
         this.tempDefense = defense;
+        this.level = 1;
+        this.experience = 0;
         this.inventory = new ArrayList<>();
         this.coins = 25;
+    }
+    
+    private static int calculateXPPerLevel(int level) {
+        return BASE_XP_PER_LEVEL + (level - 1) * XP_INCREASE_PER_LEVEL;
+    }
+    
+    public void gainExperience(int amount) {
+        experience += amount;
+        JOptionPane.showMessageDialog(null, "Você ganhou " + amount + " de XP!");
+        int xpRequiredForNextLevel = calculateXPPerLevel(level);
+        if (experience >= xpRequiredForNextLevel) {
+            levelUp();
+        }
+    }
+
+    private void levelUp() {
+        level++;
+        experience -= calculateXPPerLevel(level - 1);
+        maxHealth += 10;
+        health = maxHealth;
+        attack += 2;
+        defense += 2;
+        JOptionPane.showMessageDialog(null, "Você subiu para o nível " + level + "!");
+        JOptionPane.showMessageDialog(null, "Vida aumentou para " + maxHealth + ", Ataque aumentou para " + attack + ", Defesa aumentou para " + defense + ".");
     }
     
     public void decrementCoins(int amount) {
