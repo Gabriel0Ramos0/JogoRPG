@@ -18,6 +18,7 @@ class Player {
     private List<Item> inventory;
     private static final int BASE_XP_PER_LEVEL = 10;
     private static final int XP_INCREASE_PER_LEVEL = 10;
+    private boolean passouPorParteDaHistoria = false;
 
     public Player(String name) {
         this.name = name;
@@ -51,7 +52,7 @@ class Player {
         maxHealth += 10;
         health = maxHealth;
         attack += 2;
-        defense += 2;
+        defense = (tempDefense + 2);
         JOptionPane.showMessageDialog(null, "Você subiu para o nível " + level + "!");
         JOptionPane.showMessageDialog(null, "Vida aumentou para " + maxHealth + ", Ataque aumentou para " + attack + ", Defesa aumentou para " + defense + ".");
     }
@@ -85,7 +86,15 @@ class Player {
     	setDefense(tempDefense);
     }
     
-    public void setHealth(int health) {
+    public boolean jaPassouPorParteDaHistoria() {
+        return passouPorParteDaHistoria;
+    }
+
+    public void marcarPassagemPorParteDaHistoria() {
+        passouPorParteDaHistoria = true;
+    }
+
+	public void setHealth(int health) {
         this.health = health;
     }
 

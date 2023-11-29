@@ -36,25 +36,33 @@ public class Batalha extends Eventos {
                             monstro.setDefesa(defenseRemaining);
                             monstro.takeDamage(excessDamage);
                             
-                            JOptionPane.showMessageDialog(null, player.getName() + " ataca o monstro e causa " + playerDamage +
-                                    " de dano! \n(O monstro perde a defesa e " + excessDamage + " de vida.)");
+                            JOptionPane.showMessageDialog(null, player.getName() + " ataca o " +monstro.getNome() +" e causa " + playerDamage +
+                                    " de dano! \n(O " +monstro.getNome() +" perde a defesa e " + excessDamage + " de vida.)");
+                            monstro.setDefesa(0);
                         } else {
-                            JOptionPane.showMessageDialog(null, player.getName() + " ataca o monstro e causa " + playerDamage +
-                                    " de dano! \n(A defesa do monstro absorve o dano!)");
+                        	monstro.setDefesa(monstroArmor);
+                            JOptionPane.showMessageDialog(null, player.getName() + " ataca o " +monstro.getNome() +" e causa " + playerDamage +
+                                    " de dano! \n(A defesa do " +monstro.getNome() +" absorve o dano!)");
                         }
                     } else {
                         monstro.takeDamage(playerDamage);
-                        JOptionPane.showMessageDialog(null, player.getName() + " ataca o monstro e causa " + playerDamage +
-                                " de dano! \n(O monstro perde " + playerAttack + " de vida.)");
+                        JOptionPane.showMessageDialog(null, player.getName() + " ataca o " +monstro.getNome() +" e causa " + playerDamage +
+                                " de dano! \n(O " +monstro.getNome() +" perde " + playerAttack + " de vida.)");
                     }
 
                     if (monstro.getVida() <= 0 && player.isAlive()) {
-                        JOptionPane.showMessageDialog(null, player.getName() + " derrotou o monstro e ganhou a batalha!");
+                        JOptionPane.showMessageDialog(null, player.getName() + " derrotou o " +monstro.getNome() +" e ganhou a batalha!");
                         vitoria = true;
                         player.regenerarEscudo();
                         player.gainExperience(monstro.getXP());
                         showPlayerInfo(player);
-                        game.showNextChapterOptions(vitoria, player);
+                        if (!player.jaPassouPorParteDaHistoria()) {
+                            player.marcarPassagemPorParteDaHistoria();
+                            game.showNextChapterOptions(vitoria, player);
+                        } else {
+                            // Se já passou, continue para a próxima parte da história
+                            Historia.continuaHistoriaCave(vitoria, player);
+                        }
                         return;
                     }
                     showMonsterStatus(monstro);

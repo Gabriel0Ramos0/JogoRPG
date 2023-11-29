@@ -37,8 +37,13 @@ public class Monstro {
     }
 
     // Boss
-    public static Monstro Boss() {
+    public static Monstro Dragao() {
         return new Monstro("Dragão Negro (Boss)", 50, 15, 10, 50);
+    }
+    
+ // Boss
+    public static Monstro Mercador() {
+        return new Monstro("Mercador Sombrio", 40, 12, 8, 30);
     }
 
     public int getXP() {

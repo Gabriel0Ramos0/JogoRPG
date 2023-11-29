@@ -239,17 +239,27 @@ public class Eventos {
         JOptionPane.showMessageDialog(null, mensagemItens.toString());
     }
     
+    public Monstro escolherMonstroAleatorioBoss() {
+        Random random = new Random();
+        int numeroMonstro = random.nextInt(1);
+
+        switch (numeroMonstro) {
+            case 0:
+                return Monstro.Mercador();
+            default:
+                throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
+        }
+    }
+    
     public Monstro escolherMonstroAleatorioEpic() {
         Random random = new Random();
-        int numeroMonstro = random.nextInt(3);
+        int numeroMonstro = random.nextInt(2);
 
         switch (numeroMonstro) {
             case 0:
                 return Monstro.Esqueleto();
             case 1:
                 return Monstro.Ogro();
-            case 2:
-                return Monstro.Boss();
             default:
                 throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
         }
