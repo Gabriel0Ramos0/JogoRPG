@@ -65,15 +65,13 @@ public class RPGGame {
                         JOptionPane.showMessageDialog(null, "Ele pede a você para continuar a jornada, fortalecer-se e reunir aliados para evitar que as Trevas Insondáveis retornem e mergulhem o mundo novamente na escuridão.");
                         JOptionPane.showMessageDialog(null, "Com o amuleto em mãos, você agradece ao sábio e parte em sua jornada, ciente da responsabilidade que recai sobre seus ombros.");
 
-                        Item magicAmulet = new Item("Amuleto Mágico", 0, 1, "Vendível");
-                        player.getInventory().add(magicAmulet);
+                        Equipavel magicAmulet = new Equipavel("Amulato Mágico", 12, 1, 1, 5, 0);
                         JOptionPane.showMessageDialog(null, "Você ganhou um novo item: " + magicAmulet.getName());
                         player.equipItem(magicAmulet);
                         JOptionPane.showMessageDialog(null, "Ao equipar o amuleto, " + player.getName() + " sente que seu poder aumentou!"
                                 + "\n\nDefesa + 5 || Ataque + 1");
-                        player.setDefense(player.getDefense()+ 5);
+                        showPlayerInfo(player);
                         player.setTempDefense(player.getTempDefense() + 5);
-                        player.setAttack(player.getAttack()+ 1);
                         break;
 
                     case 1:

@@ -103,11 +103,9 @@ public class Historia {
 	                + "\n- Chapéu de Mercador (Aumenta a Vida em 5)"
 	                + "\n- Bife (Regenera 40 de Vida)");
 	        
-	        Item chapeuDeMercador = new Item("Chapéu de Mercador", 0, 1, "Vendível");
-	        player.setHealth(player.getHealth() + 5);
+	        Equipavel chapeuDeMercador = new Equipavel("Chapéu do Mercador", 10, 1, 0, 0, 5);
+	        player.equipItem(chapeuDeMercador);
 	        Consumivel bife = new Consumivel("Bife", 10, 1, 40);
-	        
-	        player.getInventory().add(chapeuDeMercador);
 	        player.getInventory().add(bife);
 	        
 	        JOptionPane.showMessageDialog(null, player.getName() + " sai da caverna e avista uma montanha à distância."

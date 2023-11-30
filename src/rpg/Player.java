@@ -176,9 +176,63 @@ class Player {
     public void heal(int amount) {
         health = Math.min(100, health + amount);
     }
+    
+    private int calculateTotalAttack() {
+        int totalAttack = attack;
+        for (Item item : inventory) {
+            if (item instanceof Equipavel) {
+                Equipavel equipavel = (Equipavel) item;
+                totalAttack += equipavel.getDano();
+            }
+        }
+        return totalAttack;
+    }
+
+    private int calculateTotalDefense() {
+        int totalDefense = defense;
+        for (Item item : inventory) {
+            if (item instanceof Equipavel) {
+                Equipavel equipavel = (Equipavel) item;
+                totalDefense += equipavel.getDef();
+            }
+        }
+        return totalDefense;
+    }
+
+    private int calculateTotalVida() {
+        int totalVida = health;
+        for (Item item : inventory) {
+            if (item instanceof Equipavel) {
+                Equipavel equipavel = (Equipavel) item;
+                totalVida += equipavel.getVida();
+            }
+        }
+        return totalVida;
+    }
+
+    public void updatePlayerStats() {
+        setAttack(calculateTotalAttack());
+        setDefense(calculateTotalDefense());
+        setHealth(calculateTotalVida());
+    }
+    
+    private void applyEquipavelStats(Equipavel equipavel) {
+        attack += equipavel.getDano();
+        defense += equipavel.getDef();
+        health += equipavel.getVida();
+        maxHealth += equipavel.getVida();
+        updatePlayerStats();
+    }
 
     public void equipItem(Item item) {
-        // Implemente a lógica para equipar o item, se necessário
+    	if (item instanceof Equipavel) {
+            Equipavel equipavel = (Equipavel) item;
+            applyEquipavelStats(equipavel);
+            inventory.add(item);
+            JOptionPane.showMessageDialog(null, "Você equipou: " + item.getName());
+        } else {
+        	inventory.add(item);
+        }
     }
 
 	public void setCoins(int coins) {

@@ -11,71 +11,78 @@ import java.util.Random;
 public class Eventos {
 
 	public static void comprarItens(Player player) {
-        JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
-        JOptionPane.showMessageDialog(null, "(Poções são armazenadas separadamente)");
+	    JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
+	    JOptionPane.showMessageDialog(null, "(Poções são armazenadas separadamente)");
 
-        
-            Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 5, 25);
-            Consumivel itemAVenda2 = new Consumivel("Poção de Mana", 15, 5, 25);
-            Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");
-            Item itemAVenda4 = new Item("Espada Misteriosa", 47, 1, "Vendível");
-            Item itemAVenda5 = new Item("Botas para neve (com cristal)", 75, 1, "Vendível");
+	    
+	        Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 5, 25);
+	        Consumivel itemAVenda2 = new Consumivel("Poção de Mana", 15, 5, 25);
+	        Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");
+	        Equipavel itemAVenda4 = new Equipavel("Espada Misteriosa", 47, 1, 4, 0, 0);
+	        Equipavel itemAVenda5 = new Equipavel("Botas para neve (com cristal)", 75, 1, 0, 15, 5);
 
-            List<Item> itensDisponiveis = new ArrayList<>();
-            itensDisponiveis.add(itemAVenda1);
-            itensDisponiveis.add(itemAVenda2);
-            itensDisponiveis.add(itemAVenda3);
-            itensDisponiveis.add(itemAVenda4);
-            itensDisponiveis.add(itemAVenda5);
-        do {
-            StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja comprar:\n");
-            escolhaItens.append("Ouro disponível: ").append(player.getCoins()).append("\n");
-            for (int i = 0; i < itensDisponiveis.size(); i++) {
-                Item item = itensDisponiveis.get(i);
-                escolhaItens.append(i + 1).append(". ").append(item.getName())
-                            .append(" - Valor: ").append(item.getValue())
-                            .append(" - Disponível: ").append(item.getQuantity()).append("\n");
-            }
-            int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensDisponiveis.size());
-            int custoTotal = calcularCustoTotal(itensDisponiveis, indicesEscolhidos);
-            Map<String, Integer> quantidadePorItem = new HashMap<>();
+	        List<Item> itensDisponiveis = new ArrayList<>();
+	        itensDisponiveis.add(itemAVenda1);
+	        itensDisponiveis.add(itemAVenda2);
+	        itensDisponiveis.add(itemAVenda3);
+	        itensDisponiveis.add(itemAVenda4);
+	        itensDisponiveis.add(itemAVenda5);
+	    do {
+	        StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja comprar:\n");
+	        escolhaItens.append("Ouro disponível: ").append(player.getCoins()).append("\n");
 
-            if (player.getCoins() >= custoTotal) {
-                for (int indice : indicesEscolhidos) {
-                    Item itemEscolhido = itensDisponiveis.get(indice);
-                    player.getInventory().add(itemEscolhido);
-                    
-                    if (itemEscolhido.getQuantity() > 0) {
-                        itemEscolhido.decrementQuantity();
-                    } else {
-                        itensDisponiveis.remove(itemEscolhido);
-                    }
-                    quantidadePorItem.put(itemEscolhido.getName(), quantidadePorItem.getOrDefault(itemEscolhido.getName(), 0) + 1);
-                }
-                player.decrementCoins(custoTotal);
-                StringBuilder mensagemCompra = new StringBuilder("Você comprou: ");
-                
-                for (Map.Entry<String, Integer> entry : quantidadePorItem.entrySet()) {
-                    mensagemCompra.append(entry.getValue()).append(" ").append(entry.getKey());
-                    if (entry.getValue() > 1) {
-                        mensagemCompra.append("s");
-                    }
-                    mensagemCompra.append(", ");
-                }
-                if (mensagemCompra.length() > 0) {
-                    mensagemCompra.setLength(mensagemCompra.length() - 2);
-                }
-                JOptionPane.showMessageDialog(null, mensagemCompra.toString() + "!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Você não possui moedas suficientes para comprar esses itens.");
-                break;
-            }
-            int opcaoContinuar = JOptionPane.showConfirmDialog(null, "Deseja comprar mais itens?", "Continuar Compras", JOptionPane.YES_NO_OPTION);
-            if (opcaoContinuar != JOptionPane.YES_OPTION) {
-                break;
-            }
-        } while (true);
-    }
+	        for (int i = 0; i < itensDisponiveis.size(); i++) {
+	            Item item = itensDisponiveis.get(i);
+	            escolhaItens.append(i + 1).append(". ").append(item.getName())
+	                        .append(" - Valor: ").append(item.getValue())
+	                        .append(" - Disponível: ").append(item.getQuantity()).append("\n");
+	        }
+
+	        int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensDisponiveis.size());
+	        int custoTotal = calcularCustoTotal(itensDisponiveis, indicesEscolhidos);
+	        Map<String, Integer> quantidadePorItem = new HashMap<>();
+
+	        if (player.getCoins() >= custoTotal) {
+	            for (int indice : indicesEscolhidos) {
+	                Item itemEscolhido = itensDisponiveis.get(indice);
+	                if (itemEscolhido instanceof Equipavel) {
+	                    player.equipItem(itemEscolhido);
+	                } else {
+	                    player.getInventory().add(itemEscolhido);
+	                    if (itemEscolhido.getQuantity() > 1) {
+	                        itemEscolhido.decrementQuantity();
+	                    } else {
+	                        itensDisponiveis.remove(itemEscolhido);
+	                    }
+	                    quantidadePorItem.put(itemEscolhido.getName(), quantidadePorItem.getOrDefault(itemEscolhido.getName(), 0) + 1);
+	                }
+	            }
+	            player.decrementCoins(custoTotal);
+	            StringBuilder mensagemCompra = new StringBuilder("Você comprou: ");
+
+	            for (Map.Entry<String, Integer> entry : quantidadePorItem.entrySet()) {
+	                mensagemCompra.append(entry.getValue()).append(" ").append(entry.getKey());
+	                if (entry.getValue() > 1) {
+	                    mensagemCompra.append("s");
+	                }
+	                mensagemCompra.append(", ");
+	            }
+
+	            if (mensagemCompra.length() > 0) {
+	                mensagemCompra.setLength(mensagemCompra.length() - 2);
+	            }
+	            JOptionPane.showMessageDialog(null, mensagemCompra.toString() + "!");
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Você não possui moedas suficientes para comprar esses itens.");
+	            break;
+	        }
+
+	        int opcaoContinuar = JOptionPane.showConfirmDialog(null, "Deseja comprar mais itens?", "Continuar Compras", JOptionPane.YES_NO_OPTION);
+	        if (opcaoContinuar != JOptionPane.YES_OPTION) {
+	            break;
+	        }
+	    } while (true);
+	}
 
 	public static void venderItens(Player player) {
 	    JOptionPane.showMessageDialog(null, "Você encontra um mercador disposto a comprar seus itens.");  
@@ -200,8 +207,6 @@ public class Eventos {
             case 1:
                 JOptionPane.showMessageDialog(null, "Você tropeça e encontra um anel mágico!");
                 Item anelRegenerativo = new Item("anelRegenerativo", 20, 1, "Vendível");
-                
-                player.getInventory().add(anelRegenerativo);
                 player.equipItem(anelRegenerativo);
                 JOptionPane.showMessageDialog(null, "Ao colocar o anel, "+ player.getName() +" não sentiu nenhuma difença!");
                 
@@ -228,7 +233,7 @@ public class Eventos {
                 break;
             case 4:
                 JOptionPane.showMessageDialog(null, player.getName() + " pensa que as plantas em volta podem ser úteis mais a frente, então decide cata-lás.");
-                Item item4 = new Item("Folhas comuns", 1, 12, "Vendível");
+                Item item4 = new Item("Folha", 1, 12, "Vendível");
                 Consumivel item5 = new Consumivel("Planta Medicinal", 3, 2, 3);
                 Item item6 = new Item("Folha de télia", 19, 1, "Vendível");
 
