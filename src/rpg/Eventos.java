@@ -14,7 +14,7 @@ public class Eventos {
 	    JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
 	    JOptionPane.showMessageDialog(null, "(Poções são armazenadas separadamente)");
 
-	    
+	    // Pensar em uma maneira de deixar 20 itens aqui e mostrar 5 aleatórios para comprar
 	        Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 5, 25);
 	        Consumivel itemAVenda2 = new Consumivel("Poção de Mana", 15, 5, 25);
 	        Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");

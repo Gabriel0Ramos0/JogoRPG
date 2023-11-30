@@ -1,7 +1,6 @@
 package rpg;
 
 import javax.swing.JOptionPane;
-import java.util.List;
 
 public class RPGGame {
 
@@ -11,7 +10,6 @@ public class RPGGame {
 
     public void startGame() {
         Eventos eventos = new Eventos();
-        Historia historias = new Historia();
 
         String playerName = JOptionPane.showInputDialog(null, "Bem-vindo ao Jogo RPG!\nDigite o nome do jogador:");
         
@@ -93,7 +91,7 @@ public class RPGGame {
                 JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " continua sua jornada.");
         }
 
-        eventos.coletarItensAleatoriosComHistorias(player);
+        Eventos.coletarItensAleatoriosComHistorias(player);
 
         // Simulação de batalha 
         JOptionPane.showMessageDialog(null, "Depois de horas caminhando, " + player.getName() + " encontra uma estrada."
@@ -104,8 +102,6 @@ public class RPGGame {
     }
 
     public static void showNextChapterOptions(boolean vitoria, Player player) {
-    	Eventos eventos = new Eventos();
-    	Historia historias = new Historia();
         if (vitoria) {
             JOptionPane.showMessageDialog(null, "Após matar o monstro, ele se desfaz em uma poeira dourada, deixando um item para trás."
                     + "\n" + player.getName() +" coleta o estranho objeto no formato de um amuleto, mas não consegue identificar o que ele pode fazer.");
@@ -136,8 +132,8 @@ public class RPGGame {
                 		+ "\nEle explica que esses itens têm propriedades especiais, alimentadas pela energia única da caverna.");
                 JOptionPane.showMessageDialog(null, "A luz roxa cintila enquanto "+ player.getName() +" explora as opções disponíveis. Cada item, carregado com a energia mágica da caverna, promete auxiliar na jornada à frente.");
                 help();
-                eventos.venderItens(player);
-                eventos.comprarItens(player);
+                Eventos.venderItens(player);
+                Eventos.comprarItens(player);
                 
                 JOptionPane.showMessageDialog(null, "Ao finalizar as compras, " + player.getName() + " sente uma vibração estranha no ar."
                                             + "\nUma explosão ressoa à distância e uma fumaça densa começa a subir das Montanhas Sombrias.");
@@ -150,14 +146,14 @@ public class RPGGame {
                         JOptionPane.showMessageDialog(null, player.getName() + " decide investigar a explosão e sai da caverna."
                                                    + "\nAo olhar na direção das Montanhas Sombrias, avista fumaça negra subindo para o céu.");
                         JOptionPane.showMessageDialog(null, "Sem perder tempo, " + player.getName() + " decide seguir na direção das Montanhas Sombrias para descobrir o que causou a explosão.");
-                        historias.eventosMontanhasSombrias(player);
+                        Historia.eventosMontanhasSombrias(player);
                         break;
 
                     case 1:
                         // Ignora a explosão
                         JOptionPane.showMessageDialog(null, player.getName() + " opta por ignorar a explosão e continuar explorando a Caverna das Luminescências."
                                                    + "\nA figura do vendedor sorri e continua observando " + player.getName() + " com um olhar curioso.");
-                        historias.eventosCavernaDaPerdicao(player);
+                        Historia.eventosCavernaDaPerdicao(player);
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como reagir à explosão.");
@@ -167,7 +163,7 @@ public class RPGGame {
 
             case 1:
                 JOptionPane.showMessageDialog(null, player.getName() +" decide ignorar a caverna e continuar sua jornada.");
-                historias.eventosDesastreTerrivel(player);
+                Historia.eventosDesastreTerrivel(player);
                 break;
 
             default:

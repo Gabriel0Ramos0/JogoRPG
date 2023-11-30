@@ -4,12 +4,10 @@ import javax.swing.JOptionPane;
 
 public class Batalha extends Eventos {
 
-	private RPGGame game;
 	private boolean tentouFugir = false;
 
     public Batalha(RPGGame game, Player player, Monstro monstro) {
         super();
-        this.game = game;
         executarBatalhaEstendida(player, monstro);
     }
 
@@ -61,7 +59,7 @@ public class Batalha extends Eventos {
                         //Verifica Progresso de História
                         if (!player.jaPassouPorParteDaHistoria("Prólogo")) {
                         	player.marcarPassagemPorParteDaHistoria("Prólogo");
-                            game.showNextChapterOptions(vitoria, player);
+                            RPGGame.showNextChapterOptions(vitoria, player);
                         } else if (!player.jaPassouPorParteDaHistoria("Caverna")){
                         	player.marcarPassagemPorParteDaHistoria("Caverna");
                             Historia.continuaHistoriaCave(vitoria, player);
@@ -115,7 +113,7 @@ public class Batalha extends Eventos {
                         vitoria = false;
                         if (!player.jaPassouPorParteDaHistoria("Prólogo")) {
                         	player.marcarPassagemPorParteDaHistoria("Prólogo");
-                            game.showNextChapterOptions(vitoria, player);
+                            RPGGame.showNextChapterOptions(vitoria, player);
                         } else {
                         	JOptionPane.showMessageDialog(null, "Você tenta fugir novamente, mas o " + monstro.getNome() + " bloqueia sua saída!");
                             executarBatalhaEstendida(player, monstro);

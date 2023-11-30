@@ -10,6 +10,7 @@ public class Historia {
         JOptionPane.showMessageDialog(null, "Ao se aproximar das Montanhas Sombrias, " + player.getName() + " percebe uma sensação familiar, e continua seguindo a trilha."
                 + "\nA trilha íngreme leva a uma clareira onde destroços de uma estrutura desconhecida estão espalhados."
                 + "\nInvestigando os destroços, " + player.getName() + " encontra pistas que sugerem um ritual mágico interrompido.");
+        Eventos.coletarItensAleatoriosComHistorias(player);
         JOptionPane.showMessageDialog(null, "Seguindo adiante, " + player.getName() + " descobre um acampamento de treino, a fumaça era proveniente de uma fogueira com chamas altas."
                 + "\nGuerreiros habilidosos estão treinando suas técnicas de combate, e um mestre de treinamento se aproxima de você.");
         JOptionPane.showMessageDialog(null, "Sem pensar muito " + player.getName() + " pergunta sobre o grande estrondo que escutou perto daqui."
@@ -52,7 +53,6 @@ public class Historia {
     }
 	
 	public static void eventosCavernaDaPerdicao (Player player) {
-		Eventos eventos = new Eventos();
 		JOptionPane.showMessageDialog(null, player.getName() + " escolhe explorar mais a Caverna das Luminescências."
 	            + "\nAo adentrar as profundezas da caverna, " + player.getName() + " sente a presença de algo sinistro."
 	            + "\nA escuridão parece ganhar vida ao seu redor, e uma voz sussurra na mente de " + player.getName() + ", instigando-o a continuar.");
@@ -91,10 +91,7 @@ public class Historia {
         batalha.executarBatalhaEstendida(player, monstro);
 	}
         
-	public static void continuaHistoriaCave(boolean vitoria, Player player) {
-	    Eventos eventos = new Eventos();
-	    Historia historias = new Historia();
-	    
+	public static void continuaHistoriaCave(boolean vitoria, Player player) {	    
 	    if (vitoria) {
 	        JOptionPane.showMessageDialog(null, player.getName() + " derrota o Mercador Sombrio, dissipando a aura sinistra que envolvia a caverna."
 	                + "\nA luz roxa dos cristais volta ao seu brilho normal.");
@@ -136,10 +133,7 @@ public class Historia {
         continuaHistoriaForaCave(false, player);
 	}
 	
-	public static void continuaHistoriaForaCave(boolean vitoria, Player player) {
-	    Eventos eventos = new Eventos();
-	    Historia historias = new Historia();
-	    
+	public static void continuaHistoriaForaCave(boolean vitoria, Player player) {	    
 	    if (vitoria) {
 		    JOptionPane.showMessageDialog(null, player.getName() + " emerge vitorioso da batalha épica contra o Monstro Épico."
 		    		+ "\nA atmosfera pesada que se formou perto da Montanhas Sombrias começa a se dissipar, e você sente um alívio momentâneo.");
