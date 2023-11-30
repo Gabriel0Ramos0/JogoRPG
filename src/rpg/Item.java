@@ -13,6 +13,8 @@ public class Item {
         this.category = category;
     }
     
+    //Itens comprados "Consumíveis" ficam infinitos ao usar. Corrigir
+    
     public int getQuantity() {
         return quantity;
     }

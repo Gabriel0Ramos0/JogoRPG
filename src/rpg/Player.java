@@ -1,7 +1,9 @@
 package rpg;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -18,7 +20,7 @@ class Player {
     private List<Item> inventory;
     private static final int BASE_XP_PER_LEVEL = 10;
     private static final int XP_INCREASE_PER_LEVEL = 10;
-    private boolean passouPorParteDaHistoria = false;
+    private Map<String, Boolean> partesHistoria;
 
     public Player(String name) {
         this.name = name;
@@ -31,6 +33,7 @@ class Player {
         this.experience = 0;
         this.inventory = new ArrayList<>();
         this.coins = 25;
+        this.partesHistoria = new HashMap<>();
     }
     
     private static int calculateXPPerLevel(int level) {
@@ -95,12 +98,12 @@ class Player {
 		this.tempDefense = tempDefense;
 	}
 
-	public boolean jaPassouPorParteDaHistoria() {
-        return passouPorParteDaHistoria;
+	public boolean jaPassouPorParteDaHistoria(String parte) {
+        return partesHistoria.getOrDefault(parte, false);
     }
 
-    public void marcarPassagemPorParteDaHistoria() {
-        passouPorParteDaHistoria = true;
+    public void marcarPassagemPorParteDaHistoria(String parte) {
+        partesHistoria.put(parte, true);
     }
 
 	public int getMaxHealth() {

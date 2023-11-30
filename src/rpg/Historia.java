@@ -4,10 +4,10 @@ import javax.swing.JOptionPane;
 
 public class Historia {
 	
-	private RPGGame game;
+	private static RPGGame game;
 	
 	public static void eventosMontanhasSombrias(Player player) {
-        JOptionPane.showMessageDialog(null, "Ao se aproximar das Montanhas Sombrias, " + player.getName() + " percebe uma atmosfera pesada e sinistra."
+        JOptionPane.showMessageDialog(null, "Ao se aproximar das Montanhas Sombrias, " + player.getName() + " percebe uma sensação familiar, e continua seguindo a trilha."
                 + "\nA trilha íngreme leva a uma clareira onde destroços de uma estrutura desconhecida estão espalhados."
                 + "\nInvestigando os destroços, " + player.getName() + " encontra pistas que sugerem um ritual mágico interrompido.");
         JOptionPane.showMessageDialog(null, "Seguindo adiante, " + player.getName() + " descobre um acampamento de treino, a fumaça era proveniente de uma fogueira com chamas altas."
@@ -40,7 +40,10 @@ public class Historia {
             default:
                 JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como interagir com o acampamento de treino.");
         }
-        JOptionPane.showMessageDialog(null, "Com essa descoberta, " + player.getName() + " decide retornar à Caverna das Luminescências e compartilhar suas descobertas.");
+        JOptionPane.showMessageDialog(null, "Com essa descoberta, " + player.getName() + " decide buscar mais conhecimento sobre as batalhas passadas.");
+        
+        JOptionPane.showMessageDialog(null, "Continuar história alinhada!!!");
+        // Continuação do jogo!!!
     }
 	
 	public static void eventosCavernaDaPerdicao (Player player) {
@@ -71,10 +74,6 @@ public class Historia {
 	            JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como reagir à presença sinistra.");
 	    }
 	}
-
-	public static void eventosDesastreTerrivel (Player player) {
-	
-	}
 	
 	private void confrontoMercadorSombrio(Boolean vitoria, Player player) {
 		Eventos eventos = new Eventos();
@@ -87,19 +86,63 @@ public class Historia {
         batalha.executarBatalhaEstendida(player, monstro);
 	}
         
-        public static void continuaHistoriaCave(boolean vitoria, Player player) {
-        	Eventos eventos = new Eventos();
-        	Historia historias = new Historia();
+	public static void continuaHistoriaCave(boolean vitoria, Player player) {
+	    Eventos eventos = new Eventos();
+	    Historia historias = new Historia();
+	    
 	    if (vitoria) {
 	        JOptionPane.showMessageDialog(null, player.getName() + " derrota o Mercador Sombrio, dissipando a aura sinistra que envolvia a caverna."
 	                + "\nA luz roxa dos cristais volta ao seu brilho normal.");
 	        
-	        // Pode adicionar recompensas específicas por derrotar o Mercador Sombrio
+	        JOptionPane.showMessageDialog(null, "Você encontra alguns itens deixados pelo Mercador Sombrio:"
+	                + "\n- Chapéu de Mercador (Aumenta a Vida em 5)"
+	                + "\n- Bife (Regenera 40 de Vida)");
+	        
+	        Item chapeuDeMercador = new Item("Chapéu de Mercador", 0, 1, "Vendível");
+	        player.setHealth(player.getHealth() + 5);
+	        Consumivel bife = new Consumivel("Bife", 10, 1, 40);
+	        
+	        player.getInventory().add(chapeuDeMercador);
+	        player.getInventory().add(bife);
+	        
+	        JOptionPane.showMessageDialog(null, player.getName() + " sai da caverna e avista uma montanha à distância."
+	                + "\nIntrigado pela montanha e pelo barulho que tinha feito, " + player.getName() + " decide explorar e se aproximar dela.");
+	        eventosMontanhasSombrias(player);
+	    }
+	}
+        
+	public static void eventosDesastreTerrivel(Player player) {
+		Eventos eventos = new Eventos();
+		player.marcarPassagemPorParteDaHistoria("Caverna");
+	    JOptionPane.showMessageDialog(null, "Enquanto " + player.getName() + " se afasta da caverna, uma flexa mágica rasga o ar e o atinge nas costas."
+	            + "\nA dor é intensa, e " + player.getName() + " se vê enfraquecido pela energia mágica da flexa.");
+	    JOptionPane.showMessageDialog(null, player.getName() + " perde 20 de vida!");
+	    player.setHealth(player.getHealth() - 20);
 
-	    } else {
-	        JOptionPane.showMessageDialog(null, player.getName() + " é derrotado pelo poder sombrio do Mercador."
-	                + "\nA escuridão consome " + player.getName() + " enquanto ele desmaia na caverna.");
-	        // Adote as consequências de ser derrotado, como retorno à entrada ou outro desenvolvimento na história.
+	    JOptionPane.showMessageDialog(null, "Você se sente apreensivo, como se algo maligno estivesse observando cada movimento seu."
+	            + "\nMesmo ferido, " + player.getName() + " decide continuar sua jornada, agora com um fardo adicional a carregar e com medo do terreno ao redor.");
+
+	    JOptionPane.showMessageDialog(null, "De repente, uma sombra gigante surge das Montanhas Sombrias, um monstro épico de olhos flamejantes."
+	            + "\nEle dispara outra flexa, mas, com sorte, você consegue se esquivar no último momento.");
+	    JOptionPane.showMessageDialog(null, "O monstro épico está furioso e avança em sua direção!");
+	    
+	    Monstro monstro = eventos.escolherMonstroAleatorioEpic();
+        Batalha batalha = new Batalha(game, player, monstro);
+        batalha.executarBatalhaEstendida(player, monstro);
+        
+        continuaHistoriaForaCave(false, player);
+	}
+	
+	public static void continuaHistoriaForaCave(boolean vitoria, Player player) {
+	    Eventos eventos = new Eventos();
+	    Historia historias = new Historia();
+	    
+	    if (vitoria) {
+		    JOptionPane.showMessageDialog(null, player.getName() + " emerge vitorioso da batalha épica contra o Monstro Épico."
+		    		+ "\nA atmosfera pesada que se formou perto da Montanhas Sombrias começa a se dissipar, e você sente um alívio momentâneo.");
+	        JOptionPane.showMessageDialog(null, "Agora que está tudo bem, você ouve seu nome vindo do alto da montanha. Intrigado, "
+	        		+ player.getName() + " segue em direção a montanha e a fumaça que consegue ver.");
+	        eventosMontanhasSombrias(player);
 	    }
 	}
 }

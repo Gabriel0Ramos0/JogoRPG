@@ -57,14 +57,25 @@ public class Batalha extends Eventos {
                         player.regenerarEscudo();
                         player.gainExperience(monstro.getXP());
                         showPlayerInfo(player);
-                        if (!player.jaPassouPorParteDaHistoria()) {
-                            player.marcarPassagemPorParteDaHistoria();
+                        
+                        //Verifica Progresso de História
+                        if (!player.jaPassouPorParteDaHistoria("Prólogo")) {
+                        	player.marcarPassagemPorParteDaHistoria("Prólogo");
                             game.showNextChapterOptions(vitoria, player);
-                        } else {
+                        } else if (!player.jaPassouPorParteDaHistoria("Caverna")){
+                        	player.marcarPassagemPorParteDaHistoria("Caverna");
                             Historia.continuaHistoriaCave(vitoria, player);
+                        } else if (!player.jaPassouPorParteDaHistoria("IgnoraCave")) {
+                        	player.marcarPassagemPorParteDaHistoria("IgnoraCave");
+                        	Historia.continuaHistoriaForaCave(vitoria, player);
                         }
                         return;
-                    }
+                    } else if (player.getHealth() <=0){
+            	    	JOptionPane.showMessageDialog(null, player.getName() + " é derrotado pelo poder avassalador do " + monstro.getNome() +"."
+            	    			+ "\nA escuridão consome você enquanto desmaia na trilha.");
+            	    	JOptionPane.showMessageDialog(null, "---GAME OVER---");
+            	   }                    
+                    
                     showMonsterStatus(monstro);
                     
                     int monstroAttack = monstro.getAtaque();
@@ -100,8 +111,8 @@ public class Batalha extends Eventos {
                         JOptionPane.showMessageDialog(null, "Ao ver o tamanho de " + monstro.getNome() + ", o herói teme seu poder e tenta fugir o mais rápido possível...");
                         setTentouFugir(true);
                         vitoria = false;
-                        if (!player.jaPassouPorParteDaHistoria()) {
-                            player.marcarPassagemPorParteDaHistoria();
+                        if (!player.jaPassouPorParteDaHistoria("Prólogo")) {
+                        	player.marcarPassagemPorParteDaHistoria("Prólogo");
                             game.showNextChapterOptions(vitoria, player);
                         } else {
                         	JOptionPane.showMessageDialog(null, "Você tenta fugir novamente, mas o " + monstro.getNome() + " bloqueia sua saída!");

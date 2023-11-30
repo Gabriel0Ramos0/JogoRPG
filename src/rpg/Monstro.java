@@ -20,18 +20,22 @@ public class Monstro {
         vida = Math.max(0, vida - actualDamage);
     }
     
+    //Comum
     public static Monstro besta() {
         return new Monstro("Besta", 20, 5, 5, 10);
     }
-
+    
+    //Comum
     public static Monstro Lobo() {
         return new Monstro("Lobo Feroz", 21, 8, 2, 15);
     }
 
+    //Epic
     public static Monstro Esqueleto() {
-        return new Monstro("Esqueleto Assustador", 15, 6, 4, 15);
+        return new Monstro("Esqueleto Sombrio", 35, 6, 20, 25);
     }
 
+    //Epic
     public static Monstro Ogro() {
         return new Monstro("Ogro Gigante", 30, 10, 5, 20);
     }
@@ -41,7 +45,7 @@ public class Monstro {
         return new Monstro("Dragão Negro (Boss)", 50, 15, 10, 50);
     }
     
- // Boss
+    // Boss
     public static Monstro Mercador() {
         return new Monstro("Mercador Sombrio", 40, 12, 8, 35);
     }
