@@ -15,7 +15,6 @@ public class Batalha extends Eventos {
 
     public void executarBatalhaEstendida(Player player, Monstro monstro) {
         boolean vitoria = false;
-        int playerArmor = player.getDefense();
         int monstroArmor = monstro.getDefesa();
         
         while (monstro.getVida() > 0 && player.isAlive()) {
@@ -29,6 +28,7 @@ public class Batalha extends Eventos {
                     int playerAttack = player.getAttack();
                     int playerDamage = calculateDamage(playerAttack, monstro.getDefesa());
                     
+                    //Player ataca monstro
                     if (monstro.getDefesa() > 0) {
                         if (playerAttack >= monstro.getDefesa()) {
                             int defenseRemaining = Math.max(0, monstro.getDefesa() - playerAttack);
@@ -75,9 +75,11 @@ public class Batalha extends Eventos {
             	    			+ "\nA escuridão consome você enquanto desmaia na trilha.");
             	    	JOptionPane.showMessageDialog(null, "---GAME OVER---");
             	   }                    
-                    
+
                     showMonsterStatus(monstro);
-                    int danomais = player.getDanoExtra();
+                    
+                    //Monstro ataca player
+                    int danomais = player.getDanoRecebidoExtra();
                     int monstroAttack = monstro.getAtaque() + danomais;
                     int monstroDamage = calculateDamage(monstroAttack, player.getDefense());
 

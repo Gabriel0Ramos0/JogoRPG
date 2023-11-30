@@ -17,7 +17,7 @@ class Player {
     private int experience;
     private int coins;
     private int tempDefense;
-    private int danoExtra;
+    private int danoRecebidoExtra;
     private List<Item> inventory;
     private static final int BASE_XP_PER_LEVEL = 10;
     private static final int XP_INCREASE_PER_LEVEL = 10;
@@ -35,7 +35,7 @@ class Player {
         this.inventory = new ArrayList<>();
         this.coins = 25;
         this.partesHistoria = new HashMap<>();
-        this.danoExtra = 0;
+        this.danoRecebidoExtra = 0;
     }
     
     private static int calculateXPPerLevel(int level) {
@@ -108,12 +108,12 @@ class Player {
         partesHistoria.put(parte, true);
     }
     
-    public int getDanoExtra() {
-        return danoExtra;
+    public int getDanoRecebidoExtra() {
+        return danoRecebidoExtra;
     }
 
-    public void setDanoExtra(int danoExtra) {
-        this.danoExtra = danoExtra;
+    public void setDanoRecebidoExtra(int danoRecebidoExtra) {
+        this.danoRecebidoExtra = danoRecebidoExtra;
     }
 
 	public int getMaxHealth() {

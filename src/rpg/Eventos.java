@@ -69,9 +69,7 @@ public class Eventos {
 	// Método para simular uma compra de item pelo jogador
 	public static void venderItens(Player player) {
 	    JOptionPane.showMessageDialog(null, "Você encontra um mercador disposto a comprar seus itens.");
-
 	    List<Item> itensParaVender = player.getInventory();
-
 	    StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja vender:\n");
 	    for (int i = 0; i < itensParaVender.size(); i++) {
 	        Item item = itensParaVender.get(i);
@@ -79,9 +77,7 @@ public class Eventos {
 	                    .append(" - Valor: ").append(item.getValue())
 	                    .append(" - Quantidade: ").append(item.getQuantity()).append("\n");
 	    }
-
 	    int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensParaVender.size());
-
 	    Map<String, Integer> quantidadePorItem = new HashMap<>();
 	    List<Item> itensVendidos = new ArrayList<>();
 
@@ -94,7 +90,6 @@ public class Eventos {
 	            quantidadePorItem.put(itemVendido.getName(), quantidadePorItem.getOrDefault(itemVendido.getName(), 0) + 1);
 	        }
 	    }
-
 	    StringBuilder mensagemVenda = new StringBuilder("Você vendeu: ");
 	    for (Map.Entry<String, Integer> entry : quantidadePorItem.entrySet()) {
 	        mensagemVenda.append(entry.getValue()).append(" ").append(entry.getKey());
@@ -145,7 +140,6 @@ public class Eventos {
         return indicesEscolhidos;
     }
 
-    // Método auxiliar para calcular o custo total dos itens escolhidos
     private static int calcularCustoTotal(List<Item> itens, int[] indicesEscolhidos) {
         int custoTotal = 0;
         for (int indice : indicesEscolhidos) {
@@ -154,7 +148,6 @@ public class Eventos {
         return custoTotal;
     }
 
-    // Método auxiliar para calcular o custo total dos itens
     private static int calcularCustoTotal(List<Item> itens) {
         int custoTotal = 0;
         for (Item item : itens) {
@@ -163,7 +156,6 @@ public class Eventos {
         return custoTotal;
     }
 
-    // Método auxiliar para obter os itens escolhidos pelos índices
     private static List<Item> obterItensPorIndices(List<Item> itens, int[] indicesEscolhidos) {
         List<Item> itensEscolhidos = new ArrayList<>();
         for (int indice : indicesEscolhidos) {
@@ -172,7 +164,6 @@ public class Eventos {
         return itensEscolhidos;
     }
     
-    // Método auxiliar para escolher um item aleatório do inventário do jogador
     private static Item escolherItemAleatorio(List<Item> inventory) {
         Random random = new Random();
         int indiceAleatorio = random.nextInt(inventory.size());
@@ -261,7 +252,7 @@ public class Eventos {
                     case 0:
                         JOptionPane.showMessageDialog(null, player.getName() + " decide equipar o objeto. Uma sensação sombria envolve " + player.getName() + ".");
                         
-                        player.setDanoExtra(player.getDanoExtra() + 3);
+                        player.setDanoRecebidoExtra(player.getDanoRecebidoExtra() + 3);
 
                         JOptionPane.showMessageDialog(null, "O objeto misterioso revela sua verdadeira natureza. " + player.getName() + " agora carrega uma maldição impossível de ser removida! "
                         		+ "tornando-o mais vulnerável em batalhas."
