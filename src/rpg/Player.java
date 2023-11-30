@@ -24,7 +24,11 @@ class Player {
     private Map<String, Boolean> partesHistoria;
 
     public Player(String name) {
-        this.name = name;
+    	if (name == null || name.trim().isEmpty()) {
+            this.name = "Steve";
+        } else {
+            this.name = name;
+        }
         this.health = 100;
         this.maxHealth = 100;
         this.attack = 5;
@@ -182,11 +186,7 @@ class Player {
 	}
 
 	public void setName(String name) {
-		if(name != null && !name.isEmpty()) {
 			this.name = name;
-		}else {
-			setName(JOptionPane.showInputDialog("É nescessário informar o nome!"));
-		}
 	}
 
 	public void setInventory(List<Item> inventory) {

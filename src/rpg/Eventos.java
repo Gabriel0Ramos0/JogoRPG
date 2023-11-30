@@ -10,99 +10,119 @@ import java.util.Random;
 
 public class Eventos {
 
-	// Método para simular uma compra de item pelo jogador
 	public static void comprarItens(Player player) {
-	    JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
-	    JOptionPane.showMessageDialog(null, "(Poções são armazenados separadamente)");
-	    Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 5, 25);
-	    Consumivel itemAVenda2 = new Consumivel("Poção de Mana", 15, 5, 25);
-	    Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");
-	    Item itemAVenda4 = new Item("Espada Misteriosa", 47, 1, "Vendível");
-	    Item itemAVenda5 = new Item("Botas para neve (com cristal)", 75, 1, "Vendível");
+        JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
+        JOptionPane.showMessageDialog(null, "(Poções são armazenadas separadamente)");
 
-	    List<Item> itensDisponiveis = new ArrayList<>();
-	    itensDisponiveis.add(itemAVenda1);
-	    itensDisponiveis.add(itemAVenda2);
-	    itensDisponiveis.add(itemAVenda3);
-	    itensDisponiveis.add(itemAVenda4);
-	    itensDisponiveis.add(itemAVenda5);
+        
+            Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 5, 25);
+            Consumivel itemAVenda2 = new Consumivel("Poção de Mana", 15, 5, 25);
+            Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");
+            Item itemAVenda4 = new Item("Espada Misteriosa", 47, 1, "Vendível");
+            Item itemAVenda5 = new Item("Botas para neve (com cristal)", 75, 1, "Vendível");
 
-	    StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja comprar:\n");
-	    for (int i = 0; i < itensDisponiveis.size(); i++) {
-	        Item item = itensDisponiveis.get(i);
-	        escolhaItens.append(i + 1).append(". ").append(item.getName())
-	                    .append(" - Valor: ").append(item.getValue())
-	                    .append(" - Disponível: ").append(item.getQuantity()).append("\n");
-	    }
+            List<Item> itensDisponiveis = new ArrayList<>();
+            itensDisponiveis.add(itemAVenda1);
+            itensDisponiveis.add(itemAVenda2);
+            itensDisponiveis.add(itemAVenda3);
+            itensDisponiveis.add(itemAVenda4);
+            itensDisponiveis.add(itemAVenda5);
+        do {
+            StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja comprar:\n");
+            escolhaItens.append("Ouro disponível: ").append(player.getCoins()).append("\n");
+            for (int i = 0; i < itensDisponiveis.size(); i++) {
+                Item item = itensDisponiveis.get(i);
+                escolhaItens.append(i + 1).append(". ").append(item.getName())
+                            .append(" - Valor: ").append(item.getValue())
+                            .append(" - Disponível: ").append(item.getQuantity()).append("\n");
+            }
+            int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensDisponiveis.size());
+            int custoTotal = calcularCustoTotal(itensDisponiveis, indicesEscolhidos);
+            Map<String, Integer> quantidadePorItem = new HashMap<>();
 
-	    int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensDisponiveis.size());
-	    int custoTotal = calcularCustoTotal(itensDisponiveis, indicesEscolhidos);
+            if (player.getCoins() >= custoTotal) {
+                for (int indice : indicesEscolhidos) {
+                    Item itemEscolhido = itensDisponiveis.get(indice);
+                    player.getInventory().add(itemEscolhido);
+                    
+                    if (itemEscolhido.getQuantity() > 0) {
+                        itemEscolhido.decrementQuantity();
+                    } else {
+                        itensDisponiveis.remove(itemEscolhido);
+                    }
+                    quantidadePorItem.put(itemEscolhido.getName(), quantidadePorItem.getOrDefault(itemEscolhido.getName(), 0) + 1);
+                }
+                player.decrementCoins(custoTotal);
+                StringBuilder mensagemCompra = new StringBuilder("Você comprou: ");
+                
+                for (Map.Entry<String, Integer> entry : quantidadePorItem.entrySet()) {
+                    mensagemCompra.append(entry.getValue()).append(" ").append(entry.getKey());
+                    if (entry.getValue() > 1) {
+                        mensagemCompra.append("s");
+                    }
+                    mensagemCompra.append(", ");
+                }
+                if (mensagemCompra.length() > 0) {
+                    mensagemCompra.setLength(mensagemCompra.length() - 2);
+                }
+                JOptionPane.showMessageDialog(null, mensagemCompra.toString() + "!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Você não possui moedas suficientes para comprar esses itens.");
+                break;
+            }
+            int opcaoContinuar = JOptionPane.showConfirmDialog(null, "Deseja comprar mais itens?", "Continuar Compras", JOptionPane.YES_NO_OPTION);
+            if (opcaoContinuar != JOptionPane.YES_OPTION) {
+                break;
+            }
+        } while (true);
+    }
 
-	    Map<String, Integer> quantidadePorItem = new HashMap<>();
-
-	    if (player.getCoins() >= custoTotal) {
-	        for (int indice : indicesEscolhidos) {
-	            Item itemEscolhido = itensDisponiveis.get(indice);
-	            player.getInventory().add(itemEscolhido);
-	            itemEscolhido.decrementQuantity();
-	            quantidadePorItem.put(itemEscolhido.getName(), quantidadePorItem.getOrDefault(itemEscolhido.getName(), 0) + 1);
-	        }
-	        player.decrementCoins(custoTotal);
-	        StringBuilder mensagemCompra = new StringBuilder("Você comprou: ");
-
-	        for (Map.Entry<String, Integer> entry : quantidadePorItem.entrySet()) {
-	            mensagemCompra.append(entry.getValue()).append(" ").append(entry.getKey());
-	            if (entry.getValue() > 1) {
-	                mensagemCompra.append("s");
-	            }
-	            mensagemCompra.append(", ");
-	        }
-	        if (mensagemCompra.length() > 0) {
-	            mensagemCompra.setLength(mensagemCompra.length() - 2);
-	        }
-	        JOptionPane.showMessageDialog(null, mensagemCompra.toString() + "!");
-	    } else {
-	        JOptionPane.showMessageDialog(null, "Você não possui moedas suficientes para comprar esses itens.");
-	    }
-	}
-
-	// Método para simular uma compra de item pelo jogador
 	public static void venderItens(Player player) {
-	    JOptionPane.showMessageDialog(null, "Você encontra um mercador disposto a comprar seus itens.");
-	    List<Item> itensParaVender = player.getInventory();
-	    StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja vender:\n");
-	    for (int i = 0; i < itensParaVender.size(); i++) {
-	        Item item = itensParaVender.get(i);
-	        escolhaItens.append(i + 1).append(". ").append(item.getName())
-	                    .append(" - Valor: ").append(item.getValue())
-	                    .append(" - Quantidade: ").append(item.getQuantity()).append("\n");
-	    }
-	    int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensParaVender.size());
-	    Map<String, Integer> quantidadePorItem = new HashMap<>();
-	    List<Item> itensVendidos = new ArrayList<>();
+	    JOptionPane.showMessageDialog(null, "Você encontra um mercador disposto a comprar seus itens.");  
+	    do {
+	        List<Item> itensParaVender = player.getInventory();
+	        StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja vender:\n");
+	        escolhaItens.append("Ouro disponível: ").append(player.getCoins()).append("\n");
 
-	    for (int indice : indicesEscolhidos) {
-	        if (indice >= 0 && indice < itensParaVender.size()) {
-	            Item itemVendido = itensParaVender.get(indice);
-	            player.incrementCoins(itemVendido.getValue());
-	            itemVendido.decrementQuantity();
-	            itensVendidos.add(itemVendido);
-	            quantidadePorItem.put(itemVendido.getName(), quantidadePorItem.getOrDefault(itemVendido.getName(), 0) + 1);
+	        for (int i = 0; i < itensParaVender.size(); i++) {
+	            Item item = itensParaVender.get(i);
+	            escolhaItens.append(i + 1).append(". ").append(item.getName())
+	                        .append(" - Valor: ").append(item.getValue())
+	                        .append(" - Quantidade: ").append(item.getQuantity()).append("\n");
 	        }
-	    }
-	    StringBuilder mensagemVenda = new StringBuilder("Você vendeu: ");
-	    for (Map.Entry<String, Integer> entry : quantidadePorItem.entrySet()) {
-	        mensagemVenda.append(entry.getValue()).append(" ").append(entry.getKey());
-	        if (entry.getValue() > 1) {
-	            mensagemVenda.append("s");
+	        int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensParaVender.size());
+	        Map<String, Integer> quantidadePorItem = new HashMap<>();
+	        List<Item> itensVendidos = new ArrayList<>();
+
+	        for (int indice : indicesEscolhidos) {
+	            if (indice >= 0 && indice < itensParaVender.size()) {
+	                Item itemVendido = itensParaVender.get(indice);
+	                player.incrementCoins(itemVendido.getValue());
+	                itemVendido.decrementQuantity();
+	                itensVendidos.add(itemVendido);
+	                quantidadePorItem.put(itemVendido.getName(), quantidadePorItem.getOrDefault(itemVendido.getName(), 0) + 1);
+	            }
 	        }
-	        mensagemVenda.append(", ");
-	    }
-	    if (mensagemVenda.length() > 0) {
-	        mensagemVenda.setLength(mensagemVenda.length() - 2);
-	    }
-	    JOptionPane.showMessageDialog(null, mensagemVenda.toString() + " por " + calcularCustoTotal(itensVendidos) + " moedas!");
+	        StringBuilder mensagemVenda = new StringBuilder("Você vendeu: ");
+	        for (Map.Entry<String, Integer> entry : quantidadePorItem.entrySet()) {
+	            mensagemVenda.append(entry.getValue()).append(" ").append(entry.getKey());
+	            if (entry.getValue() > 1) {
+	                mensagemVenda.append("s");
+	            }
+	            mensagemVenda.append(", ");
+	        }
+	        if (mensagemVenda.length() > 0) {
+	            mensagemVenda.setLength(mensagemVenda.length() - 2);
+	        }
+	        JOptionPane.showMessageDialog(null, mensagemVenda.toString() + " por " + calcularCustoTotal(itensVendidos) + " moedas!");
+	        int opcaoContinuar = JOptionPane.showConfirmDialog(null, "Deseja vender mais itens?", "Continuar Vendas", JOptionPane.YES_NO_OPTION);
+	        if (opcaoContinuar != JOptionPane.YES_OPTION) {
+	            break;
+	        }
+
+	    } while (true);
 	}
+
 
     private static String obterNomesItens(int[] indicesEscolhidos, List<Item> itens) {
         StringBuilder nomesItens = new StringBuilder();

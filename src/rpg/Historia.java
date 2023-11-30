@@ -21,28 +21,33 @@ public class Historia {
         switch (escolhaTreino) {
             case 0:
                 JOptionPane.showMessageDialog(null, player.getName() + " decide juntar-se ao treinamento."
-                        + "\nO mestre de treinamento elogia sua coragem e concede a você uma técnica especial aprendida durante o treinamento.");
-                //Recompensa de Treino
+                        + "\nO mestre de treinamento elogia sua coragem e concede a você uma técnica especial aprendida durante o treinamento."
+                        + "\n Ataque +1 || Exeperiência +25");
+                player.setAttack(player.getAttack() + 1);
                 player.gainExperience(25);
-
-                JOptionPane.showMessageDialog(null, "Com novas habilidades adquiridas, " + player.getName() + " agradece ao mestre e parte em sua jornada, agora mais preparado para os desafios que o aguardam.");
+                JOptionPane.showMessageDialog(null, "Com novas habilidades adquiridas, " + player.getName() + " agradece ao mestre e parte em sua jornada, "
+                		+ "agora mais preparado para os desafios que o aguardam."
+                		+ "Os guerreiros ali presentem, lhe entregam uma comida típica para ajudar em sua aventura!"
+                		+ "Ganhou 2 espetinho!");
+                Consumivel espetinho = new Consumivel("Espetinho", 3, 2, 10);
+                player.getInventory().add(espetinho);
+                JOptionPane.showMessageDialog(null, "Com os suprimentos e boas vibrações dos guerreiros, " + player.getName() + " parte determinado para explorar mais desse mundo misterioso.");
                 break;
 
             case 1:
                 JOptionPane.showMessageDialog(null, player.getName() + " decide continuar sua jornada, agradecendo pelo acolhimento no acampamento de treino."
-                        + "\nOs guerreiros desejam boa sorte em sua jornada e oferecem suprimentos para a viagem.");
+                        + "\nOs guerreiros desejam boa sorte em sua jornada e oferecem suprimentos para a viagem."
+                        + "Ganhou 2 espetinho!");
+                Consumivel espetinhos = new Consumivel("Espetinho", 3, 2, 10);
+                player.getInventory().add(espetinhos);
                 
-                // Adicione aqui os benefícios ou eventos específicos de continuar a jornada.
-
                 JOptionPane.showMessageDialog(null, "Com os suprimentos e boas vibrações dos guerreiros, " + player.getName() + " parte determinado para explorar mais desse mundo misterioso.");
                 break;
 
             default:
                 JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como interagir com o acampamento de treino.");
         }
-        JOptionPane.showMessageDialog(null, "Com essa descoberta, " + player.getName() + " decide buscar mais conhecimento sobre as batalhas passadas.");
         
-        JOptionPane.showMessageDialog(null, "Continuar história alinhada!!!");
         // Continuação do jogo!!!
     }
 	

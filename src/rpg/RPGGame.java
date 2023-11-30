@@ -14,8 +14,15 @@ public class RPGGame {
         Historia historias = new Historia();
 
         String playerName = JOptionPane.showInputDialog(null, "Bem-vindo ao Jogo RPG!\nDigite o nome do jogador:");
-
+        
         Player player = new Player(playerName);
+        
+        if ("Naofumi".equals(playerName)) {
+        	JOptionPane.showMessageDialog(null, "Você ativou a classe escudeiro!");
+        	player.setAttack(player.getAttack() - 2);
+            player.setDefense(player.getDefense() + 10);
+            player.setTempDefense(player.getTempDefense() + 10);
+        }
 
         Consumivel bread = new Consumivel("Pão", 2, 3, 10);
         Item cellphone = new Item("Celular", 15, 1, "Vendível");
@@ -64,9 +71,9 @@ public class RPGGame {
                         player.equipItem(magicAmulet);
                         JOptionPane.showMessageDialog(null, "Ao equipar o amuleto, " + player.getName() + " sente que seu poder aumentou!"
                                 + "\n\nDefesa + 5 || Ataque + 1");
-                        player.setDefense(15);
-                        player.setTempDefense(15);
-                        player.setAttack(6);
+                        player.setDefense(player.getDefense()+ 5);
+                        player.setTempDefense(player.getTempDefense() + 5);
+                        player.setAttack(player.getAttack()+ 1);
                         break;
 
                     case 1:
