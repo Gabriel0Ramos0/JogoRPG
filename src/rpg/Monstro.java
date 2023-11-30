@@ -29,6 +29,21 @@ public class Monstro {
     public static Monstro Lobo() {
         return new Monstro("Lobo Feroz", 21, 8, 2, 15);
     }
+    
+	// Comum
+    public static Monstro Cão() {
+        return new Monstro("Cão Infernal", 25, 7, 5, 15);
+    }
+
+    // Comum
+    public static Monstro Goblin() {
+        return new Monstro("Goblin", 18, 6, 3, 12);
+    }
+
+    // Epic
+    public static Monstro DragaoDeGelo() {
+        return new Monstro("Dragão de Gelo", 40, 5, 15, 60);
+    }
 
     //Epic
     public static Monstro Esqueleto() {
@@ -42,12 +57,12 @@ public class Monstro {
 
     // Boss
     public static Monstro Dragao() {
-        return new Monstro("Dragão Negro (Boss)", 50, 15, 10, 50);
+        return new Monstro("Dragão Negro", 75, 15, 40, 100);
     }
     
     // Boss
     public static Monstro Mercador() {
-        return new Monstro("Mercador Sombrio", 40, 12, 8, 35);
+        return new Monstro("Mercador Sombrio", 40, 12, 8, 40);
     }
 
     public int getXP() {

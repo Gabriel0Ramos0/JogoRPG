@@ -183,7 +183,7 @@ public class Eventos {
     public static void coletarItensAleatoriosComHistorias(Player player) {
         JOptionPane.showMessageDialog(null, "Enquanto explora a região, " + player.getName() + " se depara com uma situação inusitada:");
         Random random = new Random();
-        int numeroHistoria = random.nextInt(4) + 1;
+        int numeroHistoria = random.nextInt(6) + 1;
 
         switch (numeroHistoria) {
             case 1:
@@ -226,6 +226,55 @@ public class Eventos {
                 player.getInventory().add(item6);
                 
                 break;
+            case 5:
+            	JOptionPane.showMessageDialog(null, player.getName() + " encontra uma poção estranha em uma encruzilhada."
+                        + "\nA poção emite um brilho peculiar e exala um aroma misterioso.");
+
+                String[] opcoesPocao = {"Beber a poção", "Ignorar a poção"};
+                int escolhaPocao = JOptionPane.showOptionDialog(null, "O que você deseja fazer?", "Poção Estranha", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesPocao, opcoesPocao[0]);
+
+                switch (escolhaPocao) {
+                    case 0:
+                    	JOptionPane.showMessageDialog(null, player.getName() + " decide beber a poção. Uma sensação de calor percorre seu corpo.");
+                        JOptionPane.showMessageDialog(null, "No entanto, algo não está certo. A sensação de calor transforma-se em uma dor intensa, como se sua essência estivesse sendo perturbada.");
+                        player.takeDamage(50);
+                        JOptionPane.showMessageDialog(null, "Após momentos de agonia insuportável, a dor diminui gradualmente, deixando " + player.getName() + " debilitado e exausto.");
+                        JOptionPane.showMessageDialog(null, player.getName() +" perde 50 de vida!");
+                        break;
+
+                    case 1:
+                        JOptionPane.showMessageDialog(null, player.getName() + " opta por ignorar a poção, com receio de seus efeitos desconhecidos.");
+                        break;
+
+                    default:
+                        JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como lidar com a poção estranha.");
+                }
+                break;
+            case 6:
+                JOptionPane.showMessageDialog(null, player.getName() + " encontra um objeto misterioso em seu caminho."
+                        + "\nO objeto emana uma aura sombria, mas parece poderoso.");
+
+                String[] opcoesItem = {"Equipar o objeto", "Ignorar o objeto"};
+                int escolhaItem = JOptionPane.showOptionDialog(null, "O que você deseja fazer?", "Objeto Misterioso", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesItem, opcoesItem[0]);
+
+                switch (escolhaItem) {
+                    case 0:
+                        JOptionPane.showMessageDialog(null, player.getName() + " decide equipar o objeto. Uma sensação sombria envolve " + player.getName() + ".");
+                        
+                        player.setDanoExtra(player.getDanoExtra() + 3);
+
+                        JOptionPane.showMessageDialog(null, "O objeto misterioso revela sua verdadeira natureza. " + player.getName() + " agora carrega uma maldição impossível de ser removida! "
+                        		+ "tornando-o mais vulnerável em batalhas."
+                        		+ player.getName() + " agora recebe mais 3 de danos dos monstros!");
+                        break;
+                    case 1:
+                        JOptionPane.showMessageDialog(null, player.getName() + " opta por ignorar o objeto, temendo seus efeitos sombrios.");
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como lidar com o objeto misterioso.");
+                }
+                break;
+                
             default:
                 throw new IllegalStateException("Número do evento inválido: " + numeroHistoria);
         }
@@ -238,26 +287,25 @@ public class Eventos {
     }
     
     public Monstro bossMercador() {
-        Random random = new Random();
-        int numeroMonstro = random.nextInt(1);
-
-        switch (numeroMonstro) {
-            case 0:
-                return Monstro.Mercador();
-            default:
-                throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
-        }
+        return Monstro.Mercador();
     }
+    
+    public Monstro bossDragao() {
+        return Monstro.Dragao();
+    }
+
     
     public Monstro escolherMonstroAleatorioEpic() {
         Random random = new Random();
-        int numeroMonstro = random.nextInt(2);
+        int numeroMonstro = random.nextInt(3);
 
         switch (numeroMonstro) {
             case 0:
                 return Monstro.Esqueleto();
             case 1:
                 return Monstro.Ogro();
+            case 2:
+            	return Monstro.DragaoDeGelo();
             default:
                 throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
         }
@@ -265,13 +313,17 @@ public class Eventos {
     
     public Monstro escolherMonstroAleatorioComum() {
         Random random = new Random();
-        int numeroMonstro = random.nextInt(2);
+        int numeroMonstro = random.nextInt(4);
 
         switch (numeroMonstro) {
             case 0:
                 return Monstro.besta();
             case 1:
                 return Monstro.Lobo();
+            case 2:
+                return Monstro.Cão();
+            case 3:
+                return Monstro.Goblin();
             default:
                 throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
         }

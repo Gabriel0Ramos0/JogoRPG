@@ -77,8 +77,8 @@ public class Batalha extends Eventos {
             	   }                    
                     
                     showMonsterStatus(monstro);
-                    
-                    int monstroAttack = monstro.getAtaque();
+                    int danomais = player.getDanoExtra();
+                    int monstroAttack = monstro.getAtaque() + danomais;
                     int monstroDamage = calculateDamage(monstroAttack, player.getDefense());
 
                     if (player.getDefense() > 0) {
