@@ -15,8 +15,8 @@ public class Eventos {
 	    JOptionPane.showMessageDialog(null, "(Poções são armazenadas separadamente)");
 
 	    // Pensar em uma maneira de deixar 20 itens aqui e mostrar 5 aleatórios para comprar
-	        Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 5, 25);
-	        Consumivel itemAVenda2 = new Consumivel("Poção de Mana", 15, 5, 25);
+	        Consumivel itemAVenda1 = new Consumivel("Poção de Cura (25)", 15, 7, 25);
+	        Consumivel itemAVenda2 = new Consumivel("Poção de Cura Grande (50)", 127, 9, 50);
 	        Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");
 	        Equipavel itemAVenda4 = new Equipavel("Espada Misteriosa", 47, 1, 4, 0, 0);
 	        Equipavel itemAVenda5 = new Equipavel("Botas para neve (com cristal)", 75, 1, 0, 15, 5);
@@ -47,9 +47,10 @@ public class Eventos {
 	                Item itemEscolhido = itensDisponiveis.get(indice);
 	                if (itemEscolhido instanceof Equipavel) {
 	                    player.equipItem(itemEscolhido);
+	                    itensDisponiveis.remove(itemEscolhido);
 	                } else {
 	                    player.getInventory().add(itemEscolhido);
-	                    if (itemEscolhido.getQuantity() > 1) {
+	                    if (itemEscolhido.getQuantity() >= 1) {
 	                        itemEscolhido.decrementQuantity();
 	                    } else {
 	                        itensDisponiveis.remove(itemEscolhido);
@@ -100,8 +101,6 @@ public class Eventos {
 	        int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensParaVender.size());
 	        Map<String, Integer> quantidadePorItem = new HashMap<>();
 	        List<Item> itensVendidos = new ArrayList<>();
-
-	        // Remover itens da lista, percorrendo de trás para frente
 	        for (int i = indicesEscolhidos.length - 1; i >= 0; i--) {
 	            int indice = indicesEscolhidos[i];
 	            if (indice >= 0 && indice < itensParaVender.size()) {
@@ -110,8 +109,6 @@ public class Eventos {
 	                itemVendido.decrementQuantity();
 	                itensVendidos.add(itemVendido);
 	                quantidadePorItem.put(itemVendido.getName(), quantidadePorItem.getOrDefault(itemVendido.getName(), 0) + 1);
-
-	                // Remover o item do inventário se a quantidade for zero
 	                if (itemVendido.getQuantity() == 0) {
 	                    itensParaVender.remove(itemVendido);
 	                }

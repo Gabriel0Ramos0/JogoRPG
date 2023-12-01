@@ -74,6 +74,38 @@ class Player {
         }
     }
     
+    public void chooseClass(String className) {
+        switch (className) {
+            case "Escudeiro":
+                activateEscudeiro();
+                break;
+            case "Lanceiro":
+                activateLanceiro();
+                break;
+            default:
+                initializeDefaultPlayer();
+                break;
+        }
+    }
+
+    private void activateEscudeiro() {
+        setAttack(getAttack() - 2);
+        setDefense(getDefense() + 10);
+        setTempDefense(getTempDefense() + 10);
+    }
+
+    private void activateLanceiro() {
+        setAttack(getAttack() + 5);
+        setDefense(getDefense() - 5);
+        setTempDefense(getTempDefense() - 5);
+    }
+
+    private void initializeDefaultPlayer() {
+        setAttack(5);
+        setDefense(10);
+        setTempDefense(10);
+    }
+    
     public void decrementCoins(int amount) {
         if (amount >= 0 && coins >= amount) {
             coins -= amount;

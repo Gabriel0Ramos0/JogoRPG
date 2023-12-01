@@ -7,6 +7,8 @@ public class Historia {
 	private static RPGGame game;
 	
 	public static void eventosMontanhasSombrias(Player player) {
+		player.marcarPassagemPorParteDaHistoria("IgnoraCave");
+		player.marcarPassagemPorParteDaHistoria("ForaCave");
         JOptionPane.showMessageDialog(null, "Ao se aproximar das Montanhas Sombrias, " + player.getName() + " percebe uma sensação familiar, e continua seguindo a trilha."
                 + "\nA trilha íngreme leva a uma clareira onde destroços de uma estrutura desconhecida estão espalhados."
                 + "\nInvestigando os destroços, " + player.getName() + " encontra pistas que sugerem um ritual mágico interrompido.");
@@ -28,8 +30,8 @@ public class Historia {
                 player.gainExperience(25);
                 JOptionPane.showMessageDialog(null, "Com novas habilidades adquiridas, " + player.getName() + " agradece ao mestre e parte em sua jornada, "
                 		+ "\nagora mais preparado para os desafios que o aguardam."
-                		+ "Os guerreiros ali presentem, lhe entregam uma comida típica para ajudar em sua aventura!"
-                		+ "Ganhou 2 espetinho!");
+                		+ "\nOs guerreiros ali presentem, lhe entregam uma comida típica para ajudar em sua aventura!"
+                		+ "\nGanhou 2 espetinho!");
                 Consumivel espetinho = new Consumivel("Espetinho", 3, 2, 10);
                 player.getInventory().add(espetinho);
                 JOptionPane.showMessageDialog(null, "Com os suprimentos e boas vibrações dos guerreiros, " + player.getName() + " parte determinado para explorar mais desse mundo misterioso.");
@@ -38,7 +40,7 @@ public class Historia {
             case 1:
                 JOptionPane.showMessageDialog(null, player.getName() + " decide continuar sua jornada, agradecendo pelo acolhimento no acampamento de treino."
                         + "\nOs guerreiros desejam boa sorte em sua jornada e oferecem suprimentos para a viagem."
-                        + "Ganhou 2 espetinho!");
+                        + "\nGanhou 2 espetinho!");
                 Consumivel espetinhos = new Consumivel("Espetinho", 3, 2, 10);
                 player.getInventory().add(espetinhos);
                 
@@ -147,7 +149,7 @@ public class Historia {
 	public static void ContinuaHistoriaParte3(Player player) {
 		Eventos eventos = new Eventos();
 		JOptionPane.showMessageDialog(null, "Após um tempo procurando por pistas, " + player.getName() +" encontra uma rachadura com passagem de ar."
-				+ "Determinado " + player.getName() + " avança mais fundo nas Montanhas Sombrias, superando obstáculos e desvendando mistérios."
+				+ "\nDeterminado " + player.getName() + " avança mais fundo nas Montanhas Sombrias, superando obstáculos e desvendando mistérios."
 	            + "\nA trilha leva a uma caverna escondida, cuja entrada está decorada com inscrições misteriosas.");
 	    JOptionPane.showMessageDialog(null, "Ao entrar na caverna, " + player.getName() + " se depara com uma antiga câmara secreta."
 	            + "\nNo centro, uma Ampulheta com fonte de energia mágica resplandece, iluminando a sala com uma luz cintilante.");
@@ -164,33 +166,40 @@ public class Historia {
 	        Monstro monstro = eventos.bossDragao();
 	        Batalha batalha = new Batalha(game, player, monstro);
 	        
-	        JOptionPane.showMessageDialog(null, "Você emerge vitorioso da caverna, onde as paredes ecoam com o rugido dos monstros derrotados. "
-	        		+ "O guardião, admirando sua coragem, entrega-lhe uma armadura ancestral e uma poção grande (regenera 70 de vida) como reconhecimento por sua vitória. "
-	        		+ "Ele fala sobre a tradição de fortalecer a armadura a cada batalha, uma herança dos heróis que enfrentaram as sombras que agora se erguem novamente.");
-	        Equipavel armaduraAncestral = new Equipavel("Armadura Ancestral", 10, 1, 0, 0, 1);
-	        player.equipItem(armaduraAncestral);
-	        
 	    } else {
-	        JOptionPane.showMessageDialog(null, "Ao recusar o desafio, o guardião, respeitando sua escolha, "
-	        		+ "compartilha informações cruciais sobre a crescente ameaça nas Montanhas Sombrias. "
-	        		+ "Ele concede sua bênção para a jornada que está por vir e, como gesto final, fortalece sua defesa.");
-	        player.setDefense(player.getDefense() + 1);
+	        JOptionPane.showMessageDialog(null, "Ao recusar o desafio, o guardião agora enfurecido, avisa que você não está pronto!"
+	        		+ "\n Sem perder tempo, o guardião lhe teleporta e quando a luz se dissipa, "
+	        		+ "\n você se encontra em um local totalmente diferente, enfurecido por tal situação.");
 	        
+	        Monstro monstro = eventos.bossDragao();
+	        Batalha batalha = new Batalha(game, player, monstro);
 	    }
 	    Historia.destinoFinal(player);
 	}
 
 	public static void destinoFinal(Player player) {
-		JOptionPane.showMessageDialog(null, "Com sua nova armadura e sabedoria adquirida, você avança para as profundezas das Montanhas Sombrias. "
-		        + "À medida que avança, a escuridão se intensifica, e você descobre o terrível segredo por trás da ameaça crescente. "
-		        + "Os heróis antigos falharam em conter a Sombra Devoradora, uma entidade que ressurge para consumir tudo em seu caminho.\n"
-		        + "Preparado para o confronto final, você enfrenta a Sombra Devoradora em um campo de batalha sombrio e sinistro. "
-		        + "A criatura macabra, com olhos brilhando com malícia, se ergue para desafiar sua coragem.\n"
-		        + "A batalha é intensa, cada golpe trocado ressoando como um trovão nas profundezas da montanha. "
-		        + "A Sombra Devoradora, com sua defesa impenetrável, tenta consumir sua luz, mas a armadura ancestral brilha, resistindo à escuridão. "
-		        + "A poção grande, consumida estrategicamente, revigora suas forças quando mais necessário.\n"
-		        + "Enquanto você luta, lembranças das batalhas anteriores surgem, cada vitória e sacrifício moldando o herói que você se tornou. "
-		        + "A esperança, como uma luz tênue, queima em seu coração, alimentando sua determinação.");
+		
+		JOptionPane.showMessageDialog(null, "Você emerge vitorioso da caverna, onde as paredes ecoam com o rugido dos monstros derrotados. "
+        		+ "\nO guardião, admirando sua coragem, entrega-lhe uma armadura ancestral e uma poção grande (regenera 70 de vida) como reconhecimento por sua vitória. "
+        		+ "\nEle fala sobre a tradição de fortalecer a armadura a cada batalha, uma herança dos heróis que enfrentaram as sombras que agora se erguem novamente.");
+        Equipavel armaduraAncestral = new Equipavel("Armadura Ancestral", 10, 1, 0, 0, 1);
+        player.equipItem(armaduraAncestral);
+        
+		JOptionPane.showMessageDialog(null, "Com sua nova armadura e sabedoria adquirida, você avança para as profundezas das Montanhas Sombrias."
+		        + "\nÀ medida que avança, a escuridão se intensifica, e você descobre o terrível segredo por trás da ameaça crescente."
+		        + "\nOs heróis antigos falharam em conter a Sombra Devoradora, uma entidade que ressurge para consumir tudo em seu caminho."
+		        + "\nPreparado para o confronto final, você enfrenta a Sombra Devoradora em um campo de batalha sombrio e sinistro."
+		        + "\nA criatura macabra, com olhos brilhando com malícia, se ergue para desafiar sua coragem."
+		        + "\nA batalha é intensa, cada golpe trocado ressoando como um trovão nas profundezas da montanha."
+		        + "\nA Sombra Devoradora, com sua defesa impenetrável, tenta consumir sua luz, mas a armadura ancestral brilha, resistindo à escuridão."
+		        + "\nA poção grande, consumida estrategicamente, revigora suas forças quando mais necessário."
+		        + "\nEnquanto você luta, lembranças das batalhas anteriores surgem, cada vitória e sacrifício moldando o herói que você se tornou."
+		        + "\nA esperança, como uma luz tênue, queima em seu coração, alimentando sua determinação.");
+		JOptionPane.showMessageDialog(null, "Enquanto você lembrava, sua espada misteriosa revela-se ser uma espada sagrada, podendo a cada golpe"
+				+ "\nperfurar a armadura do seu inimigo. Agora com esta vantagem em mãos, " + player.getName() +" está mais determinado a colocar "
+				+ "\num fim nas trevas!!!");
+		JOptionPane.showMessageDialog(null, "Após alguns golpes bem sucedidos, as sombras da criatura lhe atacam com tanta violência, que sua espada"
+				+ "\nperde a força da luz e sua perfuração. Mesmo sem seu bônus de ataque, " + player.getName() +" continua lutando.");
 		Historia.iniciarBatalhaFinal(player);
 	}
 	
@@ -207,9 +216,9 @@ public class Historia {
 	public static void finalBatalhaFinal(boolean vitoria, Player player) {
 	    if (player.isAlive() && vitoria) {
 	        JOptionPane.showMessageDialog(null, "Finalmente, com um golpe heroico, você derrota a Sombra Devoradora. "
-	        		+ "A escuridão se dissipa, revelando uma cena de tranquilidade. "
-	        		+ "Você salvou o reino da iminente destruição. "
-	        		+ "O equilíbrio é restaurado, e sua jornada chega ao fim.");
+	        		+ "\nA escuridão se dissipa, revelando uma cena de tranquilidade. "
+	        		+ "\nVocê salvou o reino da iminente destruição. "
+	        		+ "\nO equilíbrio é restaurado, e sua jornada chega ao fim.");
 	        RPGGame.fimDaHistoria(player);
 	    } else {
 	        JOptionPane.showMessageDialog(null, "Infelizmente, você foi derrotado pela Sombra Devoradora. A escuridão consome o reino...");

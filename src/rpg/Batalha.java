@@ -69,6 +69,12 @@ public class Batalha extends Eventos {
                         } else if (!player.jaPassouPorParteDaHistoria("IgnoraCave")) {
                         	player.marcarPassagemPorParteDaHistoria("IgnoraCave");
                         	Historia.continuaHistoriaForaCave(vitoria, player);
+                        } else if (!player.jaPassouPorParteDaHistoria("ForaCave")) {
+                        	player.marcarPassagemPorParteDaHistoria("ForaCave");
+                        	Historia.eventosDesastreTerrivel(player);
+                        } else if (!player.jaPassouPorParteDaHistoria("Préluta")) {
+                        	player.marcarPassagemPorParteDaHistoria("Préluta");
+                        	Historia.destinoFinal(player);
                         } else if (!player.jaPassouPorParteDaHistoria("Final")) {
                         	player.marcarPassagemPorParteDaHistoria("Final");
                         	Historia.finalBatalhaFinal(vitoria, player);

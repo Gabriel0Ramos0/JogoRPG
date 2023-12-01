@@ -10,25 +10,20 @@ public class RPGGame {
 
     public void startGame() {
         Eventos eventos = new Eventos();
-
         String playerName = JOptionPane.showInputDialog(null, "Bem-vindo ao Jogo RPG!\nDigite o nome do jogador:");
-        
         Player player = new Player(playerName);
         
-        if ("Naofumi".equals(playerName)) {
-        	JOptionPane.showMessageDialog(null, "Você ativou a classe Escudeiro!");
-        	player.setAttack(player.getAttack() - 2);
-            player.setDefense(player.getDefense() + 10);
-            player.setTempDefense(player.getTempDefense() + 10);
-        }
+        String[] classOptions = {"Escudeiro", "Lanceiro"};
+        String chosenClass = (String) JOptionPane.showInputDialog(
+                null,
+                "Escolha a classe do seu personagem:",
+                "Escolha de Classe",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                classOptions,
+                classOptions[0]);
+        player.chooseClass(chosenClass);
         
-        if ("Motoyasu".equals(playerName)) {
-        	JOptionPane.showMessageDialog(null, "Você ativou a classe Lanceiro!");
-        	player.setAttack(player.getAttack() + 5);
-            player.setDefense(player.getDefense() - 5);
-            player.setTempDefense(player.getTempDefense() - 5);
-        }
-
         Consumivel bread = new Consumivel("Pão", 2, 3, 10);
         Item cellphone = new Item("Celular", 15, 1, "Vendível");
         Item watch = new Item("Relógio", 12, 1, "Vendível");
@@ -70,10 +65,10 @@ public class RPGGame {
                         JOptionPane.showMessageDialog(null, "Ele pede a você para continuar a jornada, fortalecer-se e reunir aliados para evitar que as Trevas Insondáveis retornem e mergulhem o mundo novamente na escuridão.");
                         JOptionPane.showMessageDialog(null, "Com o amuleto em mãos, você agradece ao sábio e parte em sua jornada, ciente da responsabilidade que recai sobre seus ombros.");
 
-                        Equipavel magicAmulet = new Equipavel("Amulato Mágico", 12, 1, 1, 5, 0);
+                        Equipavel magicAmulet = new Equipavel("Amuleto Mágico", 12, 1, 1, 5, 0);
                         JOptionPane.showMessageDialog(null, "Você ganhou um novo item: " + magicAmulet.getName());
                         player.equipItem(magicAmulet);
-                        JOptionPane.showMessageDialog(null, "Ao equipar o amuleto, " + player.getName() + " sente que seu poder aumentou!"
+                        JOptionPane.showMessageDialog(null, "Ao equipar o amuleto, " + player.getName() + " Absorve o poder daquela joia!"
                                 + "\n\nDefesa + 5 || Ataque + 1");
                         showPlayerInfo(player);
                         player.setTempDefense(player.getTempDefense() + 5);
@@ -111,9 +106,9 @@ public class RPGGame {
     public static void showNextChapterOptions(boolean vitoria, Player player) {
         if (vitoria) {
             JOptionPane.showMessageDialog(null, "Após matar o monstro, ele se desfaz em uma poeira dourada, deixando um item para trás."
-                    + "\n" + player.getName() +" coleta o estranho objeto no formato de um amuleto, mas não consegue identificar o que ele pode fazer.");
+                    + "\n" + player.getName() +" coleta o estranho objeto no formato de um amuleto, mas não consegue identificar o que ele pode fazer, mas aparenta ser valioso!");
 
-            Item amuletoDesconhecido = new Item("Amuleto Desconhecido", 0, 1, "Vendível");
+            Item amuletoDesconhecido = new Item("Amuleto Desconhecido", 54, 1, "Vendível");
             player.getInventory().add(amuletoDesconhecido);
             JOptionPane.showMessageDialog(null, "Você encontrou um novo item: " + amuletoDesconhecido.getName());
 
@@ -154,6 +149,7 @@ public class RPGGame {
                                                    + "\nAo olhar na direção das Montanhas Sombrias, avista fumaça negra subindo para o céu.");
                         JOptionPane.showMessageDialog(null, "Sem perder tempo, " + player.getName() + " decide seguir na direção das Montanhas Sombrias para descobrir o que causou a explosão.");
                         Historia.eventosMontanhasSombrias(player);
+                        player.marcarPassagemPorParteDaHistoria("IgnoraCave");
                         break;
 
                     case 1:
@@ -180,9 +176,9 @@ public class RPGGame {
     
     public static void fimDaHistoria(Player player) {
         JOptionPane.showMessageDialog(null, "Ao retornar das Montanhas Sombrias, o guardião saúda você com um sorriso. "
-                + "O reino celebra sua bravura, e sua história ecoará pelos séculos como um testemunho da coragem que vence as trevas.");
+                + "\nO reino celebra sua bravura, e sua história ecoará pelos séculos como um testemunho da coragem que vence as trevas.");
         JOptionPane.showMessageDialog(null, "E assim, você se torna uma lenda, lembrada não apenas pelas batalhas que travou, mas pela esperança que trouxe ao reino. "
-                + "Seu nome: " + player.getName() + ", será cantado em canções, suas aventuras compartilhadas ao redor das fogueiras, "
+                + "\nSeu nome: " + player.getName() + ", será cantado em canções, suas aventuras compartilhadas ao redor das fogueiras, "
                 + "enquanto a luz da vitória ilumina as Montanhas Sombrias, afastando as sombras da memória.");
         JOptionPane.showMessageDialog(null, "Parabéns por completar o Jogo. Seu personagem ficou muito forte!!");
         showPlayerInfo(player);

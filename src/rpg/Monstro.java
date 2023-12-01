@@ -67,7 +67,7 @@ public class Monstro {
     
     //Boss Final
     public static Monstro Sombras() {
-    	return new Monstro("Sombra Devoradora", 200, 20, 50, 200);
+    	return new Monstro("Sombra Devoradora", 174, 35, 52, 200);
     }
 
     public int getXP() {
