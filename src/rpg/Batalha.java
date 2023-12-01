@@ -29,17 +29,15 @@ public class Batalha extends Eventos {
                     //Player ataca monstro
                     if (monstro.getDefesa() > 0) {
                         if (playerAttack >= monstro.getDefesa()) {
-                            int defenseRemaining = Math.max(0, monstro.getDefesa() - playerAttack);
                             int excessDamage = playerAttack - monstro.getDefesa();
-
-                            monstro.setDefesa(defenseRemaining);
                             monstro.takeDamage(excessDamage);
                             
                             JOptionPane.showMessageDialog(null, player.getName() + " ataca o " +monstro.getNome() +" e causa " + playerDamage +
                                     " de dano! \n(O " +monstro.getNome() +" perde a defesa e " + excessDamage + " de vida.)");
                             monstro.setDefesa(0);
                         } else {
-                        	monstro.setDefesa(monstroArmor);
+                        	int defenseRemaining = Math.max(0, monstro.getDefesa() - playerAttack);
+                        	monstro.setDefesa(defenseRemaining);
                             JOptionPane.showMessageDialog(null, player.getName() + " ataca o " +monstro.getNome() +" e causa " + playerDamage +
                                     " de dano! \n(A defesa do " +monstro.getNome() +" absorve o dano!)");
                         }
