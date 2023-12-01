@@ -85,7 +85,7 @@ public class Eventos {
 	}
 
 	public static void venderItens(Player player) {
-	    JOptionPane.showMessageDialog(null, "Você encontra um mercador disposto a comprar seus itens.");  
+	    JOptionPane.showMessageDialog(null, "Você encontra um mercador disposto a comprar seus itens.");
 	    do {
 	        List<Item> itensParaVender = player.getInventory();
 	        StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja vender:\n");
@@ -101,15 +101,23 @@ public class Eventos {
 	        Map<String, Integer> quantidadePorItem = new HashMap<>();
 	        List<Item> itensVendidos = new ArrayList<>();
 
-	        for (int indice : indicesEscolhidos) {
+	        // Remover itens da lista, percorrendo de trás para frente
+	        for (int i = indicesEscolhidos.length - 1; i >= 0; i--) {
+	            int indice = indicesEscolhidos[i];
 	            if (indice >= 0 && indice < itensParaVender.size()) {
 	                Item itemVendido = itensParaVender.get(indice);
 	                player.incrementCoins(itemVendido.getValue());
 	                itemVendido.decrementQuantity();
 	                itensVendidos.add(itemVendido);
 	                quantidadePorItem.put(itemVendido.getName(), quantidadePorItem.getOrDefault(itemVendido.getName(), 0) + 1);
+
+	                // Remover o item do inventário se a quantidade for zero
+	                if (itemVendido.getQuantity() == 0) {
+	                    itensParaVender.remove(itemVendido);
+	                }
 	            }
 	        }
+
 	        StringBuilder mensagemVenda = new StringBuilder("Você vendeu: ");
 	        for (Map.Entry<String, Integer> entry : quantidadePorItem.entrySet()) {
 	            mensagemVenda.append(entry.getValue()).append(" ").append(entry.getKey());
@@ -122,6 +130,7 @@ public class Eventos {
 	            mensagemVenda.setLength(mensagemVenda.length() - 2);
 	        }
 	        JOptionPane.showMessageDialog(null, mensagemVenda.toString() + " por " + calcularCustoTotal(itensVendidos) + " moedas!");
+
 	        int opcaoContinuar = JOptionPane.showConfirmDialog(null, "Deseja vender mais itens?", "Continuar Vendas", JOptionPane.YES_NO_OPTION);
 	        if (opcaoContinuar != JOptionPane.YES_OPTION) {
 	            break;
@@ -307,7 +316,7 @@ public class Eventos {
     }
     
     public Monstro bossDragao() {
-        return Monstro.Dragao();
+        return Monstro.DragaoNegro();
     }
 
     

@@ -27,7 +27,7 @@ public class Historia {
                 player.setAttack(player.getAttack() + 1);
                 player.gainExperience(25);
                 JOptionPane.showMessageDialog(null, "Com novas habilidades adquiridas, " + player.getName() + " agradece ao mestre e parte em sua jornada, "
-                		+ "agora mais preparado para os desafios que o aguardam."
+                		+ "\nagora mais preparado para os desafios que o aguardam."
                 		+ "Os guerreiros ali presentem, lhe entregam uma comida típica para ajudar em sua aventura!"
                 		+ "Ganhou 2 espetinho!");
                 Consumivel espetinho = new Consumivel("Espetinho", 3, 2, 10);
@@ -48,8 +48,9 @@ public class Historia {
             default:
                 JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como interagir com o acampamento de treino.");
         }
-        
-        // Continuação do jogo!!!
+        JOptionPane.showMessageDialog(null, "Pensando no que o mestre disse sobre as histórias passadas, "
+        	    + player.getName() +" procura um meio de investigar mais a fundo sobre o ocorrido na montanha!");
+        ContinuaHistoriaParte3(player);
     }
 	
 	public static void eventosCavernaDaPerdicao (Player player) {
@@ -142,4 +143,37 @@ public class Historia {
 	        eventosMontanhasSombrias(player);
 	    }
 	}
+	
+	public static void ContinuaHistoriaParte3(Player player) {
+		Eventos eventos = new Eventos();
+		JOptionPane.showMessageDialog(null, "Após um tempo procurando por pistas, " + player.getName() +" encontra uma rachadura com passagem de ar."
+				+ "Determinado " + player.getName() + " avança mais fundo nas Montanhas Sombrias, superando obstáculos e desvendando mistérios."
+	            + "\nA trilha leva a uma caverna escondida, cuja entrada está decorada com inscrições misteriosas.");
+	    JOptionPane.showMessageDialog(null, "Ao entrar na caverna, " + player.getName() + " se depara com uma antiga câmara secreta."
+	            + "\nNo centro, uma Ampulheta com fonte de energia mágica resplandece, iluminando a sala com uma luz cintilante.");
+	    JOptionPane.showMessageDialog(null, "De repente, sombras se materializam ao redor da fonte e se fundem, tomando a forma de um ser ancestral."
+	            + "\nEle se apresenta como o Guardião das Montanhas e revela uma profecia há muito tempo esquecida.");
+	    JOptionPane.showMessageDialog(null, "'Aquele que chegar até aqui será testado, e sua jornada tomará um rumo inesperado."
+	            + "\nVocê, " + player.getName() + ", é o escolhido para enfrentar o desafio que decidirá o destino destas terras.'");
+	    int escolhaDesafio = JOptionPane.showOptionDialog(null, "O Guardião oferece a você um desafio. Aceita?",
+	            "Desafio do Guardião", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+	    if (escolhaDesafio == JOptionPane.YES_OPTION) {
+	        JOptionPane.showMessageDialog(null, "Você aceita o desafio e é envolvido por uma luz intensa."
+	                + "\nQuando a luz se dissipa, você se encontra em um local totalmente diferente, pronto para enfrentar o desafio do Guardião.");
+
+	        Monstro monstro = eventos.bossDragao();
+	        Batalha batalha = new Batalha(game, player, monstro);
+	    } else {
+	        JOptionPane.showMessageDialog(null, "Você recusa o desafio, e o Guardião respeita sua escolha."
+	                + "\nEle revela informações cruciais sobre a ameaça crescente nas Montanhas Sombrias e oferece sua benção para a jornada que está por vir.");
+
+	        // Introduza eventos adicionais ou informações reveladoras aqui
+	    }
+
+	    // Continuação da história...
+	}
+
+	
 }
+
+

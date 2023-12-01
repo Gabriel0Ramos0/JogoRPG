@@ -10,8 +10,8 @@ public class Batalha extends Eventos {
         super();
         executarBatalhaEstendida(player, monstro);
     }
-
-    public void executarBatalhaEstendida(Player player, Monstro monstro) {
+    
+	public void executarBatalhaEstendida(Player player, Monstro monstro) {
         boolean vitoria = false;
         int monstroArmor = monstro.getDefesa();
         

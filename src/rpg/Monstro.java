@@ -56,7 +56,7 @@ public class Monstro {
     }
 
     // Boss
-    public static Monstro Dragao() {
+    public static Monstro DragaoNegro() {
         return new Monstro("Dragão Negro", 75, 15, 40, 100);
     }
     
