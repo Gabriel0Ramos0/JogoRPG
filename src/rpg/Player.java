@@ -22,6 +22,8 @@ class Player {
     private static final int BASE_XP_PER_LEVEL = 10;
     private static final int XP_INCREASE_PER_LEVEL = 10;
     private Map<String, Boolean> partesHistoria;
+    private boolean hasArmourAncestral = false;
+
 
     public Player(String name) {
     	if (name == null || name.trim().isEmpty()) {
@@ -40,6 +42,7 @@ class Player {
         this.coins = 25;
         this.partesHistoria = new HashMap<>();
         this.danoRecebidoExtra = 0;
+        this.ganhaEscudoAdicional();
     }
     
     private static int calculateXPPerLevel(int level) {
@@ -56,15 +59,19 @@ class Player {
     }
 
     private void levelUp() {
-        level++;
-        experience -= calculateXPPerLevel(level - 1);
-        maxHealth += 10;
-        setHealth(maxHealth);
-        setAttack(getAttack() + 2);
-        setTempDefense(getTempDefense() + 2);
-        setDefense(getDefense() + 2);
-        JOptionPane.showMessageDialog(null, "Você subiu para o nível " + level + "!");
-        JOptionPane.showMessageDialog(null, "Vida aumentou para " + maxHealth + ", Ataque aumentou para " + attack + ", Defesa aumentou para " + defense + ".");
+        int xpRequiredForNextLevel = calculateXPPerLevel(level);  
+        while (experience >= xpRequiredForNextLevel) {
+            level++;
+            experience -= xpRequiredForNextLevel;
+            maxHealth += 10;
+            setHealth(maxHealth);
+            setAttack(getAttack() + 2);
+            setTempDefense(getTempDefense() + 2);
+            setDefense(getDefense() + 2);
+            JOptionPane.showMessageDialog(null, "Você subiu para o nível " + level + "!");
+            JOptionPane.showMessageDialog(null, "Vida aumentou para " + maxHealth + ", Ataque aumentou para " + attack + ", Defesa aumentou para " + defense + ".");
+            xpRequiredForNextLevel = calculateXPPerLevel(level);
+        }
     }
     
     public void decrementCoins(int amount) {
@@ -89,6 +96,16 @@ class Player {
                 heal(1);
                 JOptionPane.showMessageDialog(null, "O Anel Regenerativo curou 1 de vida!");
             }
+        }
+    }
+    
+    public boolean hasArmourAncestral() {
+        return hasArmourAncestral;
+    }
+    
+    void ganhaEscudoAdicional() {
+        if (hasArmourAncestral) {
+            setDefense(getDefense() + 1);
         }
     }
     
@@ -228,6 +245,10 @@ class Player {
     	if (item instanceof Equipavel) {
             Equipavel equipavel = (Equipavel) item;
             applyEquipavelStats(equipavel);
+            
+            if ("armaduraAncestral".equals(item.getName())) {
+                hasArmourAncestral = true;
+            }            
             inventory.add(item);
             JOptionPane.showMessageDialog(null, "Você equipou: " + item.getName());
         } else {

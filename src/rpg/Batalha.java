@@ -54,6 +54,11 @@ public class Batalha extends Eventos {
                         player.gainExperience(monstro.getXP());
                         showPlayerInfo(player);
                         
+                        if (player.hasArmourAncestral()) {
+                        	player.ganhaEscudoAdicional();
+                            JOptionPane.showMessageDialog(null, "A Armadura Ancestral concedeu 1 de escudo adicional!");
+                        }
+                        
                         //Verifica Progresso de História
                         if (!player.jaPassouPorParteDaHistoria("Prólogo")) {
                         	player.marcarPassagemPorParteDaHistoria("Prólogo");
@@ -64,6 +69,9 @@ public class Batalha extends Eventos {
                         } else if (!player.jaPassouPorParteDaHistoria("IgnoraCave")) {
                         	player.marcarPassagemPorParteDaHistoria("IgnoraCave");
                         	Historia.continuaHistoriaForaCave(vitoria, player);
+                        } else if (!player.jaPassouPorParteDaHistoria("Final")) {
+                        	player.marcarPassagemPorParteDaHistoria("Final");
+                        	Historia.finalBatalhaFinal(vitoria, player);
                         }
                         return;
                     } else if (player.getHealth() <=0){

@@ -163,17 +163,60 @@ public class Historia {
 
 	        Monstro monstro = eventos.bossDragao();
 	        Batalha batalha = new Batalha(game, player, monstro);
+	        
+	        JOptionPane.showMessageDialog(null, "Você emerge vitorioso da caverna, onde as paredes ecoam com o rugido dos monstros derrotados. "
+	        		+ "O guardião, admirando sua coragem, entrega-lhe uma armadura ancestral e uma poção grande (regenera 70 de vida) como reconhecimento por sua vitória. "
+	        		+ "Ele fala sobre a tradição de fortalecer a armadura a cada batalha, uma herança dos heróis que enfrentaram as sombras que agora se erguem novamente.");
+	        Equipavel armaduraAncestral = new Equipavel("Armadura Ancestral", 10, 1, 0, 0, 1);
+	        player.equipItem(armaduraAncestral);
+	        
 	    } else {
-	        JOptionPane.showMessageDialog(null, "Você recusa o desafio, e o Guardião respeita sua escolha."
-	                + "\nEle revela informações cruciais sobre a ameaça crescente nas Montanhas Sombrias e oferece sua benção para a jornada que está por vir.");
-
-	        // Introduza eventos adicionais ou informações reveladoras aqui
+	        JOptionPane.showMessageDialog(null, "Ao recusar o desafio, o guardião, respeitando sua escolha, "
+	        		+ "compartilha informações cruciais sobre a crescente ameaça nas Montanhas Sombrias. "
+	        		+ "Ele concede sua bênção para a jornada que está por vir e, como gesto final, fortalece sua defesa.");
+	        player.setDefense(player.getDefense() + 1);
+	        
 	    }
-
-	    // Continuação da história...
+	    Historia.destinoFinal(player);
 	}
 
+	public static void destinoFinal(Player player) {
+		JOptionPane.showMessageDialog(null, "Com sua nova armadura e sabedoria adquirida, você avança para as profundezas das Montanhas Sombrias. "
+		        + "À medida que avança, a escuridão se intensifica, e você descobre o terrível segredo por trás da ameaça crescente. "
+		        + "Os heróis antigos falharam em conter a Sombra Devoradora, uma entidade que ressurge para consumir tudo em seu caminho.\n"
+		        + "Preparado para o confronto final, você enfrenta a Sombra Devoradora em um campo de batalha sombrio e sinistro. "
+		        + "A criatura macabra, com olhos brilhando com malícia, se ergue para desafiar sua coragem.\n"
+		        + "A batalha é intensa, cada golpe trocado ressoando como um trovão nas profundezas da montanha. "
+		        + "A Sombra Devoradora, com sua defesa impenetrável, tenta consumir sua luz, mas a armadura ancestral brilha, resistindo à escuridão. "
+		        + "A poção grande, consumida estrategicamente, revigora suas forças quando mais necessário.\n"
+		        + "Enquanto você luta, lembranças das batalhas anteriores surgem, cada vitória e sacrifício moldando o herói que você se tornou. "
+		        + "A esperança, como uma luz tênue, queima em seu coração, alimentando sua determinação.");
+		Historia.iniciarBatalhaFinal(player);
+	}
 	
+	public static void iniciarBatalhaFinal(Player player) {
+		Eventos eventos = new Eventos();
+		
+	    Monstro monstro = eventos.bossFinal();
+	    player.setHealth(player.getMaxHealth() / 2);
+	    player.setDefense(player.getDefense() / 2);	    
+	    Batalha batalha = new Batalha(game, player, monstro);
+	    Historia.finalBatalhaFinal(false, player);
+	}
+	
+	public static void finalBatalhaFinal(boolean vitoria, Player player) {
+	    if (player.isAlive() && vitoria) {
+	        JOptionPane.showMessageDialog(null, "Finalmente, com um golpe heroico, você derrota a Sombra Devoradora. "
+	        		+ "A escuridão se dissipa, revelando uma cena de tranquilidade. "
+	        		+ "Você salvou o reino da iminente destruição. "
+	        		+ "O equilíbrio é restaurado, e sua jornada chega ao fim.");
+	        RPGGame.fimDaHistoria(player);
+	    } else {
+	        JOptionPane.showMessageDialog(null, "Infelizmente, você foi derrotado pela Sombra Devoradora. A escuridão consome o reino...");
+	        JOptionPane.showMessageDialog(null, "---GAME OVER---");
+	    }
+	}
+
 }
 
 

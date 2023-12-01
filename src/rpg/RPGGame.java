@@ -16,10 +16,17 @@ public class RPGGame {
         Player player = new Player(playerName);
         
         if ("Naofumi".equals(playerName)) {
-        	JOptionPane.showMessageDialog(null, "Você ativou a classe escudeiro!");
+        	JOptionPane.showMessageDialog(null, "Você ativou a classe Escudeiro!");
         	player.setAttack(player.getAttack() - 2);
             player.setDefense(player.getDefense() + 10);
             player.setTempDefense(player.getTempDefense() + 10);
+        }
+        
+        if ("Motoyasu".equals(playerName)) {
+        	JOptionPane.showMessageDialog(null, "Você ativou a classe Lanceiro!");
+        	player.setAttack(player.getAttack() + 5);
+            player.setDefense(player.getDefense() - 5);
+            player.setTempDefense(player.getTempDefense() - 5);
         }
 
         Consumivel bread = new Consumivel("Pão", 2, 3, 10);
@@ -168,6 +175,24 @@ public class RPGGame {
 
             default:
                 JOptionPane.showMessageDialog(null, "Opção inválida. Você fica indeciso.");
+        }
+    }
+    
+    public static void fimDaHistoria(Player player) {
+        JOptionPane.showMessageDialog(null, "Ao retornar das Montanhas Sombrias, o guardião saúda você com um sorriso. "
+                + "O reino celebra sua bravura, e sua história ecoará pelos séculos como um testemunho da coragem que vence as trevas.");
+        JOptionPane.showMessageDialog(null, "E assim, você se torna uma lenda, lembrada não apenas pelas batalhas que travou, mas pela esperança que trouxe ao reino. "
+                + "Seu nome: " + player.getName() + ", será cantado em canções, suas aventuras compartilhadas ao redor das fogueiras, "
+                + "enquanto a luz da vitória ilumina as Montanhas Sombrias, afastando as sombras da memória.");
+        JOptionPane.showMessageDialog(null, "Parabéns por completar o Jogo. Seu personagem ficou muito forte!!");
+        showPlayerInfo(player);
+        int opcaoJogarNovamente = JOptionPane.showConfirmDialog(null, "Deseja jogar novamente e desbloquear uma nova classe?", "Jogar Novamente", JOptionPane.YES_NO_OPTION);
+        if (opcaoJogarNovamente == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Parabéns! Você desbloqueou uma nova classe lanceiro! Nome: 'Motoyasu', basta inserir como nome de jogador!!");
+            new RPGGame().startGame();
+        } else {
+            JOptionPane.showMessageDialog(null, "Obrigado por jogar! Até a próxima.");
+            System.exit(0);
         }
     }
     

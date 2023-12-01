@@ -318,7 +318,10 @@ public class Eventos {
     public Monstro bossDragao() {
         return Monstro.DragaoNegro();
     }
-
+    
+    public Monstro bossFinal() {
+        return Monstro.Sombras();
+    }
     
     public Monstro escolherMonstroAleatorioEpic() {
         Random random = new Random();
@@ -344,11 +347,11 @@ public class Eventos {
             case 0:
                 return Monstro.besta();
             case 1:
-                return Monstro.Lobo();
+                return Monstro.Goblin();
             case 2:
                 return Monstro.Cão();
             case 3:
-                return Monstro.Goblin();
+                return Monstro.Lobo();
             default:
                 throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
         }
