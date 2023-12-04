@@ -105,7 +105,9 @@ class Player {
     }
 
     private void activateEscudeiro() {
-        setAttack(getAttack() - 3);
+    	setHealth(getHealth()  + 10);
+    	setMaxHealth(getMaxHealth() + 10);
+        setAttack(getAttack() - 4);
         setDefense(getDefense() + 10);
         setTempDefense(getTempDefense() + 10);
         
@@ -120,7 +122,9 @@ class Player {
         getInventory().add(watch);
     }
     private void activateLanceiro() {
-        setAttack(getAttack() + 10);
+    	setHealth(getHealth()  + 5);
+    	setMaxHealth(getMaxHealth() + 5);
+        setAttack(getAttack() + 6);
         setDefense(getDefense() - 10);
         setTempDefense(getTempDefense() - 10);
         
@@ -134,9 +138,11 @@ class Player {
         
     }
     private void activateAqueiro() {
+    	setHealth(getHealth()  - 20);
+    	setMaxHealth(getMaxHealth() - 20);
         setAttack(getAttack() + 1);
-        setDefense(getDefense() + 5);
-        setTempDefense(getTempDefense() + 5);
+        setDefense(getDefense() - 9);
+        setTempDefense(getTempDefense() - 9);
         
         Equipavel armor = new Equipavel("Armadura de Fogo", 30, 1, 0, 0, 0);
         Consumivel spicyFood = new Consumivel("Prato Apimentado", 12, 1, 20);

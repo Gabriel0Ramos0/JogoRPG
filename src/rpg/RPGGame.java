@@ -167,20 +167,25 @@ public class RPGGame {
     }
     
     public static void fimDaHistoria(Player player) {
-        JOptionPane.showMessageDialog(null, "Ao retornar das Montanhas Sombrias, o guardião saúda você com um sorriso. "
+        JOptionPane.showMessageDialog(null, "Ao retornar das Montanhas Sombrias, o guardião saúda você com um sorriso e lhe teleporta para o reino de MELROMARC."
                 + "\nO reino celebra sua bravura, e sua história ecoará pelos séculos como um testemunho da coragem que vence as trevas.");
         JOptionPane.showMessageDialog(null, "E assim, você se torna uma lenda, lembrada não apenas pelas batalhas que travou, mas pela esperança que trouxe ao reino. "
-                + "\nSeu nome: " + player.getName() + ", será cantado em canções, suas aventuras compartilhadas ao redor das fogueiras, "
-                + "enquanto a luz da vitória ilumina as Montanhas Sombrias, afastando as sombras da memória.");
+                + "\nSeu nome: " + player.getName() + ", será cantado em canções, suas aventuras compartilhadas ao redor das fogueiras, enquanto a luz da vitória "
+                + "\nilumina as Montanhas Sombrias, afastando as sombras da memória.");
         JOptionPane.showMessageDialog(null, "Parabéns por completar o Jogo. Seu personagem ficou muito forte!!");
         showPlayerInfo(player);
-        int opcaoJogarNovamente = JOptionPane.showConfirmDialog(null, "Deseja jogar novamente e desbloquear uma nova classe?", "Jogar Novamente", JOptionPane.YES_NO_OPTION);
-        if (opcaoJogarNovamente == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, "Parabéns! Você desbloqueou uma nova classe lanceiro! Nome: 'Motoyasu', basta inserir como nome de jogador!!");
-            new RPGGame().startGame();
+        String EasterEgg = JOptionPane.showInputDialog(null, "Indentificou um nome?");
+        if ("Naofumi".equalsIgnoreCase(EasterEgg) && "Escudeiro".equals(player.getPlayerClass())) {
+        	Historia.EasterEgg(player);
         } else {
-            JOptionPane.showMessageDialog(null, "Obrigado por jogar! Até a próxima.");
-            System.exit(0);
+        	JOptionPane.showMessageDialog(null, "Nome ou Classe Incorreto!!");
+	        int opcaoJogarNovamente = JOptionPane.showConfirmDialog(null, "Deseja jogar novamente?", "Jogar Novamente", JOptionPane.YES_NO_OPTION);
+	        if (opcaoJogarNovamente == JOptionPane.YES_OPTION) {
+	            new RPGGame().startGame();
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Obrigado por jogar! Até a próxima.");
+	            System.exit(0);
+	        }
         }
     }
     

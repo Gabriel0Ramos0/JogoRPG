@@ -17,8 +17,10 @@ public class Historia {
         JOptionPane.showMessageDialog(null, "Seguindo adiante, " + player.getName() + " descobre um acampamento de treino, a fumaça era proveniente de uma fogueira com chamas altas."
                 + "\nGuerreiros habilidosos estão treinando suas técnicas de combate, e um mestre de treinamento se aproxima de você.");
         JOptionPane.showMessageDialog(null, "Sem pensar muito " + player.getName() + " pergunta sobre o grande estrondo que escutou perto daqui."
-        		+ "\nO mestre conta não ter ouvido nada, mas menciona que aqueles destroços foram de um ritual antigo..."
-        		+ "\nSem deixar tempo para pensar, o mestre ofereçe ao "+ player.getName()+", se juntar aos treinos");
+        		+ "\nO mestre conta não ter ouvido nada, mas menciona que aqueles destroços foram de um ritual antigo realizado pelos hérois anteriores."
+        		+ "\nNa tentativa de acabar de uma vez com o mau que habita neste mundo. Conta também, que o herói de escudo conseguiu aprisionar as trevas"
+        		+ "\nNo interior desta montanha, mas ninguém sabe o que aconteceu de fato!.");
+        JOptionPane.showMessageDialog(null, "Sem deixar tempo para pensar, o mestre ofereçe ao "+ player.getName()+ ", se juntar aos treinos");
         String[] opcoesTreino = {"Juntar-se ao treinamento", "Continuar a jornada"};
         
         int escolhaTreino = JOptionPane.showOptionDialog(null, "O que você deseja fazer?", "Acampamento de Treino", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesTreino, opcoesTreino[0]);
@@ -226,7 +228,10 @@ public class Historia {
 	        JOptionPane.showMessageDialog(null, "---GAME OVER---");
 	    }
 	}
-
+	
+	public static void EasterEgg(Player player) {
+		JOptionPane.showMessageDialog(null, "Teste EasterEgg");
+	}
 }
 
 
