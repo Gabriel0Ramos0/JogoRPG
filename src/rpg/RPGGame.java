@@ -87,30 +87,44 @@ public class RPGGame {
 
         Eventos.coletarItensAleatoriosComHistorias(player);
 
-        // Simulação de batalha 
-        JOptionPane.showMessageDialog(null, "Depois de horas caminhando, " + player.getName() + " encontra uma estrada."
-                + "\nDecidido a seguir por ela, um monstro salta em sua direção!");
+        // Simulação de batalha
+        JOptionPane.showMessageDialog(null, "Enquanto você atravessa densas florestas, os sons da natureza criam uma melodia serena."
+                + "\nSubitamente, um arrepio percorre sua espinha, e você percebe que não está sozinho. Um monstro surge das sombras!");
 
         Monstro monstro = eventos.escolherMonstroAleatorioComum();
+
+        JOptionPane.showMessageDialog(null, "Você se depara com um(a) " + monstro.getNome() + "! Ele(a) emerge com olhos faiscantes e presas afiadas, pronto(a) para atacar.");
+        JOptionPane.showMessageDialog(null, "Prepare-se para a batalha!");
+
         Batalha batalha = new Batalha(this, player, monstro);
+
     }
 
     public static void showNextChapterOptions(boolean vitoria, Player player) {
-        if (vitoria) {
-            JOptionPane.showMessageDialog(null, "Após matar o monstro, ele se desfaz em uma poeira dourada, deixando um item para trás."
-                    + "\n" + player.getName() +" coleta o estranho objeto no formato de um amuleto, mas não consegue identificar o que ele pode fazer, mas aparenta ser valioso!");
+    	if (vitoria) {
+            JOptionPane.showMessageDialog(null, "Com um golpe final, você derrota o monstro, e ele se desfaz em uma poeira dourada, deixando um item para trás."
+                    + "\n" + player.getName() + " coleta o estranho objeto em formato de amuleto, incapaz de identificar seu propósito, mas ele parece valioso!");
 
             Item amuletoDesconhecido = new Item("Amuleto Desconhecido", 54, 1, "Vendível");
             player.getInventory().add(amuletoDesconhecido);
             JOptionPane.showMessageDialog(null, "Você encontrou um novo item: " + amuletoDesconhecido.getName());
-
-            JOptionPane.showMessageDialog(null, "Seguindo pela estrada, "+ player.getName() +" avista uma caverna com um brilho misterioso no seu interior.");
+            JOptionPane.showMessageDialog(null, "Enquanto você examina o amuleto, percebe que ele emite um leve brilho. Curioso(a) com o que isso pode significar, você decide explorar mais a floresta."
+            		+ "\nCaminhando pela densa floresta, você avista uma trilha que se desvia do caminho principal. "
+            		+ "\nDecidindo seguir a trilha, você se encontra imerso na natureza, ouvindo os sons dos pássaros e sentindo o cheiro das árvores."
+            		+ "\nA trilha leva você a uma clareira oculta, revelando uma vista deslumbrante do horizonte. "
+            		+ "\nNo centro da clareira, você encontra uma caverna intrigante com um brilho misterioso em seu interior.");
         } else {
             JOptionPane.showMessageDialog(null, "Você corre para longe do monstro, escapando de seu alcance."
-            		+ "\nEnquanto corria, você sentia que estava sendo observado."
-                    + "\nApós correr por horas, "+ player.getName() +" avista uma caverna com um brilho misterioso no seu interior.");
-        }
+                    + "\nEnquanto corre, você sente que está sendo observado, mas continua a se afastar do perigo."
+                    + "\nApós horas de fuga, " + player.getName() + " descobre uma trilha que se aprofunda na densa floresta.");
 
+            JOptionPane.showMessageDialog(null, "A floresta é repleta de mistérios, e você não pode deixar de se perguntar sobre a origem do monstro que encontrou."
+            		+ "\nExplorando mais a floresta, você avista uma trilha que se desvia do caminho principal. "
+            		+ "\nCurioso(a) para descobrir para onde a trilha leva, você decide segui-la, ouvindo os sons suaves da natureza enquanto caminha."
+            		+ "\nA trilha finalmente o leva a uma clareira oculta, onde você é recebido por uma vista panorâmica impressionante. "
+            		+ "\nNo centro da clareira, uma caverna intrigante chama sua atenção com um brilho misterioso em seu interior.");
+        }
+    	
         String[] options = {"Entrar na caverna", "Ignorar a caverna e continuar a jornada"};
         int choice = JOptionPane.showOptionDialog(null, "Escolha uma opção:", "Nova Escolha", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
@@ -125,7 +139,6 @@ public class RPGGame {
                 		+ "\nAqui, os cristais guardiões iluminam os tesouros que ofereço, diz o vendedor com um sorriso acolhedor. "
                 		+ "\nEle explica que esses itens têm propriedades especiais, alimentadas pela energia única da caverna.");
                 JOptionPane.showMessageDialog(null, "A luz roxa cintila enquanto "+ player.getName() +" explora as opções disponíveis. Cada item, carregado com a energia mágica da caverna, promete auxiliar na jornada à frente.");
-                help();
                 Eventos.venderItens(player);
                 Eventos.comprarItens(player);
                 
@@ -143,7 +156,6 @@ public class RPGGame {
                         Historia.eventosMontanhasSombrias(player);
                         player.marcarPassagemPorParteDaHistoria("IgnoraCave");
                         break;
-
                     case 1:
                         // Ignora a explosão
                         JOptionPane.showMessageDialog(null, player.getName() + " opta por ignorar a explosão e continuar explorando a Caverna das Luminescências."
@@ -153,14 +165,11 @@ public class RPGGame {
                     default:
                         JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como reagir à explosão.");
                 }
-                
                 break;
-
             case 1:
                 JOptionPane.showMessageDialog(null, player.getName() +" decide ignorar a caverna e continuar sua jornada.");
                 Historia.eventosDesastreTerrivel(player);
                 break;
-
             default:
                 JOptionPane.showMessageDialog(null, "Opção inválida. Você fica indeciso.");
         }
@@ -201,9 +210,4 @@ public class RPGGame {
         }
         JOptionPane.showMessageDialog(null, inventoryMessage.toString());
     }
-    
-    private static void help() {
-    	JOptionPane.showMessageDialog(null, "Para comprar ou vender mais de um item, basta colocar uma vírgula (,) depois de cada item escolhido!");
-    }
-    
 }

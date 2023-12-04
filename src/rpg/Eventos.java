@@ -11,6 +11,7 @@ import java.util.Random;
 public class Eventos {
 
 	public static void comprarItens(Player player) {
+		JOptionPane.showMessageDialog(null, "Para comprar ou vender mais de um item, basta colocar uma vírgula (,) depois de cada item escolhido!");
 	    JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
 	    JOptionPane.showMessageDialog(null, "Itens_Consumíveis pode ser comprado na mesma venda. Exemplo: 1,1"
 	    		+ "\nItens_Equipáveis devem ser comprados separadamente em cada transação. Exemplo: somente o item 4");

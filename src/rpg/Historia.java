@@ -1,5 +1,7 @@
 package rpg;
 
+import java.util.Random;
+
 import javax.swing.JOptionPane;
 
 public class Historia {
@@ -68,8 +70,9 @@ public class Historia {
 
 	    switch (escolhaContinuar) {
 	        case 0:
-	            JOptionPane.showMessageDialog(null, player.getName() + " decide continuar explorando, seguindo o chamado sombrio."
-	                    + "\nÀ medida que avança, a luz roxa dos cristais se transforma em uma luminosidade vermelha e pulsante.");
+	            JOptionPane.showMessageDialog(null, player.getName() + " decide continuar explorando, seguindo o chamado sombrio.");
+	            JOptionPane.showMessageDialog(null, "A luz da fogueira vacila e se apaga, mergulhando-o na escuridão."
+	                    + "\nConforme avança, os cristais que antes emanavam uma luz roxa, agora pulsam em um vermelho sombrio.");
 	            Historia historia = new Historia();
 	            historia.confrontoMercadorSombrio(null, player);            
 	            break;
@@ -91,7 +94,8 @@ public class Historia {
 	    JOptionPane.showMessageDialog(null, "De repente, " + player.getName() + " se depara com uma figura encapuzada, emergindo das sombras."
 	            + "\nO mercador peculiar agora revela sua verdadeira forma, envolto em uma aura vermelha e sinistra."
 	            + "\nEle se autodenomina o Mercador Sombrio, mestre dos artefatos corrompidos pela escuridão.");
-	    
+	    JOptionPane.showMessageDialog(null, "O Mercador Sombrio desafia você para um confronto, suas palavras ecoando nas câmaras cavernosas como um sussurro ameaçador.");
+
         Monstro monstro = eventos.bossMercador();
         Batalha batalha = new Batalha(game, player, monstro);
         batalha.executarBatalhaEstendida(player, monstro);
@@ -103,7 +107,7 @@ public class Historia {
 	                + "\nA luz roxa dos cristais volta ao seu brilho normal.");
 	        
 	        JOptionPane.showMessageDialog(null, "Você encontra alguns itens deixados pelo Mercador Sombrio:"
-	                + "\n- Chapéu de Mercador (Aumenta a Vida em 5)"
+	                + "\n- Chapéu de Mercador Corrompido (Aumenta a Vida em 5)"
 	                + "\n- Bife (Regenera 40 de Vida)");
 	        
 	        Equipavel chapeuDeMercador = new Equipavel("Chapéu do Mercador", 10, 1, 0, 0, 5);
@@ -128,10 +132,45 @@ public class Historia {
 	    JOptionPane.showMessageDialog(null, "Você se sente apreensivo, como se algo maligno estivesse observando cada movimento seu."
 	            + "\nMesmo ferido, " + player.getName() + " decide continuar sua jornada, agora com um fardo adicional a carregar e com medo do terreno ao redor.");
 
-	    JOptionPane.showMessageDialog(null, "De repente, uma sombra gigante surge das Montanhas Sombrias, um monstro épico de olhos flamejantes."
-	            + "\nEle dispara outra flexa, mas, com sorte, você consegue se esquivar no último momento.");
-	    JOptionPane.showMessageDialog(null, "O monstro épico está furioso e avança em sua direção!");
-	    
+	    JOptionPane.showMessageDialog(null, "De repente, uma sombra gigante emerge das Montanhas Sombrias, um monstro épico de olhos flamejantes."
+	            + "\nEle dispara outra flecha, mas, com sorte, você consegue se esquivar no último momento.");
+	    JOptionPane.showMessageDialog(null, "Para sua surpresa, você reconhece o monstro como sendo o antigo senhor da vila, corrompido pela escuridão."
+	            + "\nAgora ele se tornou uma ameaça, atacando com flechas espectrais mágicas.");
+	    String escolhaConversar = JOptionPane.showInputDialog(null, "Deseja tentar conversar com o antigo senhor corrompido? (Digite 'sim' ou 'não')");
+	    if ("sim".equalsIgnoreCase(escolhaConversar)) {
+	        JOptionPane.showMessageDialog(null, "Você chama pelo nome do antigo senhor, tentando trazer à tona suas memórias da vila pacífica que um dia existiu."
+	                + "\nNo início, parece que ele hesita, como se lutasse contra a escuridão que o consome.");
+	        boolean transformacao = new Random().nextBoolean();
+	        if (transformacao) {
+	            JOptionPane.showMessageDialog(null, "No entanto, a escuridão prevalece, e o antigo senhor começa a se transformar diante de seus olhos."
+	                    + "\nSua forma torna-se distorcida e grotesca, e ele não parece mais capaz de compreender suas palavras.");
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Por um breve momento, parece que suas palavras tocaram o coração do antigo senhor."
+	                    + "\nA escuridão recua momentaneamente, mas não por muito tempo.");
+	        }
+	    } else {
+	        int escolhaSalvar = JOptionPane.showConfirmDialog(null,
+	                "Você vê que o antigo senhor está prestes a sucumbir à escuridão. Deseja tributar 50% de seus status para tentar salvá-lo?",
+	                "Escolha",
+	                JOptionPane.YES_NO_OPTION);
+
+	        if (escolhaSalvar == JOptionPane.YES_OPTION) {
+	            player.setAttack(player.getAttack() / 2);
+	            player.setDefense(player.getDefense() / 2);
+	            player.setTempDefense(player.getTempDefense() / 2);
+	            player.setHealth(player.getHealth() / 20);
+	            player.setMaxHealth(player.getMaxHealth() / 2);
+	            JOptionPane.showMessageDialog(null, "Você decide tributar 50% de seus status para tentar salvar o antigo senhor."
+	                    + "\nSua força é reduzida pela metade, mas o senhor parece momentaneamente aliviado da escuridão.");
+	            JOptionPane.showMessageDialog(null, "Aliviado agora pelo bem estar do senhor, você ouve seu nome vindo do alto da montanha. Intrigado,"
+	            		+ "\n" + player.getName() + " segue em direção a montanha e a fumaça que consegue ver.");
+	            player.gainExperience(75);
+	            
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Você decide não arriscar sacrificar seus status para salvar o antigo senhor."
+	                    + "\nEle se transforma diante de seus olhos, agora completamente corrompido pela escuridão.");
+	        }
+	    }
 	    Monstro monstro = eventos.escolherMonstroAleatorioEpic();
         Batalha batalha = new Batalha(game, player, monstro);
         batalha.executarBatalhaEstendida(player, monstro);
@@ -141,7 +180,9 @@ public class Historia {
 	
 	public static void continuaHistoriaForaCave(boolean vitoria, Player player) {	    
 	    if (vitoria) {
-		    JOptionPane.showMessageDialog(null, player.getName() + " emerge vitorioso da batalha épica contra o Monstro Épico."
+	    	JOptionPane.showMessageDialog(null, "Com a derrota do antigo senhor, a corrupção que o consumia é dissipada."
+	                + "\nEle desaparece nas sombras, deixando para trás um sentimento agridoce.");
+		    JOptionPane.showMessageDialog(null, player.getName() + " emerge vitorioso da batalha, porém trites pelo senhor."
 		    		+ "\nA atmosfera pesada que se formou perto da Montanhas Sombrias começa a se dissipar, e você sente um alívio momentâneo.");
 	        JOptionPane.showMessageDialog(null, "Agora que está tudo bem, você ouve seu nome vindo do alto da montanha. Intrigado, "
 	        		+ player.getName() + " segue em direção a montanha e a fumaça que consegue ver.");
