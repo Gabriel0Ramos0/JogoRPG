@@ -174,7 +174,7 @@ public class RPGGame {
                 + "\nilumina as Montanhas Sombrias, afastando as sombras da memória.");
         JOptionPane.showMessageDialog(null, "Parabéns por completar o Jogo. Seu personagem ficou muito forte!!");
         showPlayerInfo(player);
-        String EasterEgg = JOptionPane.showInputDialog(null, "Indentificou um nome?");
+        String EasterEgg = JOptionPane.showInputDialog(null, "Indentificou algum nome especial?");
         if ("Naofumi".equalsIgnoreCase(EasterEgg) && "Escudeiro".equals(player.getPlayerClass())) {
         	Historia.EasterEgg(player);
         } else {

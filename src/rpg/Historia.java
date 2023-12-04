@@ -230,8 +230,34 @@ public class Historia {
 	}
 	
 	public static void EasterEgg(Player player) {
-		JOptionPane.showMessageDialog(null, "Teste EasterEgg");
+		JOptionPane.showMessageDialog(null, "Enquanto você explora Melromarc, descobre uma sala secreta escondida no Palácio Real."
+				+ "\nAo entrar na sala, encontra um antigo mural decorado com inscrições e ilustrações que contam a história dos heróis lendários."
+				+ "\nEntre as figuras ilustres, uma inscrição chama a sua atenção. Ela descreve as ações e feitos heroicos de um antigo herói invocado em tempos sombrios."
+				+ "\nO nome desse herói, cujas ações inspiraram gerações futuras, é mencionado como 'Naofumi Iwatani, o Escudeiro Lendário'."
+				+ "\nSegundo as lendas, Naofumi enfrentou desafios imensuráveis, sendo o principal defensor do reino contra as Ondas Catastróficas."
+				+ "\nSua habilidade única de invocar e fortalecer escudos tornou-se uma fonte de esperança em tempos de desespero."
+				+ "\nOs registros indicam que Naofumi Iwatani deixou um legado duradouro, não apenas como um herói, mas como alguém que inspirou coragem, compaixão e superação."
+				+ "\nA descoberta dessa inscrição deixa você se perguntando sobre a conexão entre o seu próprio destino e as lendas antigas.");
+	    
+		JOptionPane.showMessageDialog(null, "Enquanto contempla as ilustrações, seus olhos são atraídos por uma imagem de Naofumi Iwatani usando uma imponente armadura ancestral."
+				+ "\nA lendária 'Armadura do Escudeiro' era conhecida por ser uma relíquia poderosa, forjada em tempos antigos para proteger os heróis invocados."
+				+ "\nDizem que essa armadura ancestral era imbuida com a essência protetora dos escudos, tornando-a quase indestrutível e concedendo habilidades formidáveis a quem a vestisse."
+				+ "\n(" + player.getName()+ " se lembra do sorriso do Guardião...)"
+				+ "\nA existência dessa armadura ancestral permaneceu oculta por eras, até agora, revelando-se como parte fundamental da história do herói lendário Naofumi Iwatani."
+				+ "\nVocê se sente abençoado por ter encontrado essa sala secreta, conectando-se não apenas com a lenda de Naofumi, mas também com a herança da 'Armadura do Escudeiro'."
+				+ "\nEm um gesto de respeito e reconhecimento, você decide honrar essa herança, tornando-se o portador da armadura ancestral e continuando a tradição do Escudeiro Lendário."
+				+ "\nA sala secreta torna-se um local de reflexão, onde você se conecta com as raízes profundas da história e do heroísmo."
+				+ "\nVocê se sente honrado por seguir os passos de Naofumi Iwatani, e sua presença é adicionada ao mural dos heróis, ao lado dos grandes defensores do reino.");
+	    
+	    int opcaoJogarNovamente = JOptionPane.showConfirmDialog(null, "Deseja jogar novamente?", "Jogar Novamente", JOptionPane.YES_NO_OPTION);
+	    if (opcaoJogarNovamente == JOptionPane.YES_OPTION) {
+	        new RPGGame().startGame();
+	    } else {
+	        JOptionPane.showMessageDialog(null, "Obrigado por jogar! Até a próxima.");
+	        System.exit(0);
+	    }
 	}
+
 }
 
 
