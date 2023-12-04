@@ -109,26 +109,26 @@ class Player {
         setDefense(getDefense() + 10);
         setTempDefense(getTempDefense() + 10);
         
-        //Equipavel shield = new Equipavel("Escudo", 15, 1, 0, 10, 0);
+        Equipavel shield = new Equipavel("Escudo", 15, 1, 0, 0, 0);
         Consumivel bread = new Consumivel("Pão", 2, 3, 10);
         Item cellphone = new Item("Celular", 15, 1, "Vendível");
         Item watch = new Item("Relógio", 12, 1, "Vendível");
         
-        //equipItem(shield);
+        equipItem(shield);
         getInventory().add(bread);
         getInventory().add(cellphone);
         getInventory().add(watch);
     }
     private void activateLanceiro() {
-        setAttack(getAttack() + 5);
-        setDefense(getDefense() - 5);
-        setTempDefense(getTempDefense() - 5);
+        setAttack(getAttack() + 10);
+        setDefense(getDefense() - 10);
+        setTempDefense(getTempDefense() - 10);
         
-        //Equipavel lance = new Equipavel("Lança", 15, 1, 10, 0, 0);
+        Equipavel lance = new Equipavel("Lança", 15, 1, 0, 0, 0);
         Consumivel energyDrink = new Consumivel("Bebida Energética", 5, 3, 15);
         Item map = new Item("Mapa Antigo", 20, 1, "Vendível");
 
-        //equipItem(lance);
+        equipItem(lance);
         getInventory().add(energyDrink);
         getInventory().add(map);
         
@@ -138,13 +138,13 @@ class Player {
         setDefense(getDefense() + 5);
         setTempDefense(getTempDefense() + 5);
         
-        //Equipavel armor = new Equipavel("Armadura de Fogo", 30, 1, 0, 5, 0);
+        Equipavel armor = new Equipavel("Armadura de Fogo", 30, 1, 0, 0, 0);
         Consumivel spicyFood = new Consumivel("Prato Apimentado", 12, 1, 20);
         Consumivel pepper = new Consumivel("Pimenta", 3, 2, 8);
-
+        
+        equipItem(armor);
         getInventory().add(spicyFood);
-        getInventory().add(pepper);
-        //equipItem(armor);
+        getInventory().add(pepper);        
     }
     private void activateCavaleirodaEspada() {
     	setHealth(getHealth()  - 50);
@@ -153,14 +153,14 @@ class Player {
         setDefense(getDefense() + 5);
         setTempDefense(getTempDefense() + 5);
         
-        //Equipavel sword = new Equipavel("Espada Longa", 50, 1, 2, 0, 0);
-        //Equipavel helmet = new Equipavel("Elmo Resistente", 25, 1, 0, 5, 0);
+        Equipavel sword = new Equipavel("Espada Longa", 50, 1, 0, 0, 0);
+        Equipavel helmet = new Equipavel("Elmo Resistente", 25, 1, 0, 0, 0);
         Consumivel meatPie = new Consumivel("Torta de Carne", 15, 1, 35);
         Item notebook = new Item("Notebook", 75, 1, "Vendível");
         Item remoteControl = new Item("Controle Remoto", 52, 1, "Vendível");
         
-        //equipItem(sword);
-        //equipItem(helmet);
+        equipItem(sword);
+        equipItem(helmet);
         getInventory().add(meatPie);
         getInventory().add(notebook);
         getInventory().add(remoteControl);
