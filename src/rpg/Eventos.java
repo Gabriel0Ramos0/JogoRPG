@@ -12,8 +12,8 @@ public class Eventos {
 
 	public static void comprarItens(Player player) {
 	    JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
-	    JOptionPane.showMessageDialog(null, "Itens Consumíveis pode ser comprado na mesma venda. Exemplo: 1,1"
-	    		+ "\nItens Equipáveis devem ser comprados separadamente em cada transação. Exemplo: somente o item 4");
+	    JOptionPane.showMessageDialog(null, "Itens_Consumíveis pode ser comprado na mesma venda. Exemplo: 1,1"
+	    		+ "\nItens_Equipáveis devem ser comprados separadamente em cada transação. Exemplo: somente o item 4");
 	    
 	    // Pensar em uma maneira de deixar 20 itens aqui e mostrar 5 aleatórios para comprar
 	        Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 7, 25);
