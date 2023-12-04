@@ -12,11 +12,10 @@ public class Eventos {
 
 	public static void comprarItens(Player player) {
 	    JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
-	    JOptionPane.showMessageDialog(null, "(Poções são armazenadas separadamente)");
 
 	    // Pensar em uma maneira de deixar 20 itens aqui e mostrar 5 aleatórios para comprar
-	        Consumivel itemAVenda1 = new Consumivel("Poção de Cura (25)", 15, 7, 25);
-	        Consumivel itemAVenda2 = new Consumivel("Poção de Cura Grande (50)", 127, 9, 50);
+	        Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 7, 25);
+	        Consumivel itemAVenda2 = new Consumivel("Poção de Cura Grande", 25, 9, 50);
 	        Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");
 	        Equipavel itemAVenda4 = new Equipavel("Espada Misteriosa", 47, 1, 4, 0, 0);
 	        Equipavel itemAVenda5 = new Equipavel("Botas para neve (com cristal)", 75, 1, 0, 15, 5);
@@ -49,8 +48,22 @@ public class Eventos {
 	                    player.equipItem(itemEscolhido);
 	                    itensDisponiveis.remove(itemEscolhido);
 	                } else {
-	                    player.getInventory().add(itemEscolhido);
-	                    if (itemEscolhido.getQuantity() >= 1) {
+	                    if (itemEscolhido instanceof Consumivel) {
+	                        Consumivel consumivelExistente = player.getInventory().stream()
+	                                .filter(i -> i instanceof Consumivel && i.getName().equals(itemEscolhido.getName()))
+	                                .map(i -> (Consumivel) i)
+	                                .findFirst()
+	                                .orElse(null);
+
+	                        if (consumivelExistente != null) {
+	                            consumivelExistente.incrementQuantity();
+	                        } else {
+	                            player.getInventory().add(new Consumivel(itemEscolhido.getName(), itemEscolhido.getValue(), 1, ((Consumivel) itemEscolhido).getRegeneracaoVida()));
+	                        }
+	                    } else {
+	                        player.getInventory().add(itemEscolhido);
+	                    }
+	                    if (!(itemEscolhido instanceof Consumivel) || itemEscolhido.getQuantity() >= 1) {
 	                        itemEscolhido.decrementQuantity();
 	                    } else {
 	                        itensDisponiveis.remove(itemEscolhido);
@@ -68,7 +81,6 @@ public class Eventos {
 	                }
 	                mensagemCompra.append(", ");
 	            }
-
 	            if (mensagemCompra.length() > 0) {
 	                mensagemCompra.setLength(mensagemCompra.length() - 2);
 	            }
@@ -77,7 +89,6 @@ public class Eventos {
 	            JOptionPane.showMessageDialog(null, "Você não possui moedas suficientes para comprar esses itens.");
 	            break;
 	        }
-
 	        int opcaoContinuar = JOptionPane.showConfirmDialog(null, "Deseja comprar mais itens?", "Continuar Compras", JOptionPane.YES_NO_OPTION);
 	        if (opcaoContinuar != JOptionPane.YES_OPTION) {
 	            break;
