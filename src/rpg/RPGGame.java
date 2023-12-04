@@ -13,7 +13,7 @@ public class RPGGame {
         String playerName = JOptionPane.showInputDialog(null, "Bem-vindo ao Jogo RPG!\nDigite o nome do jogador:");
         Player player = new Player(playerName);
         
-        String[] classOptions = {"Escudeiro", "Lanceiro"};
+        String[] classOptions = {"Escudeiro", "Lanceiro", "Arqueiro", "Espadachim"};
         String chosenClass = (String) JOptionPane.showInputDialog(
                 null,
                 "Escolha a classe do seu personagem:",
@@ -23,14 +23,6 @@ public class RPGGame {
                 classOptions,
                 classOptions[0]);
         player.chooseClass(chosenClass);
-        
-        Consumivel bread = new Consumivel("Pão", 2, 3, 10);
-        Item cellphone = new Item("Celular", 15, 1, "Vendível");
-        Item watch = new Item("Relógio", 12, 1, "Vendível");
-
-        player.getInventory().add(bread);
-        player.getInventory().add(cellphone);
-        player.getInventory().add(watch);
 
         showPlayerInfo(player);
         showInventory(player);
@@ -193,7 +185,8 @@ public class RPGGame {
     }
     
     private static void showPlayerInfo(Player player) {
-        JOptionPane.showMessageDialog(null, "Jogador: " + player.getName() + "\nVida: " + player.getHealth() + "\nAtaque: " + player.getAttack() + "\nDefesa: " + player.getDefense());
+        JOptionPane.showMessageDialog(null, "Jogador: " + player.getName() + "\nClasse: " + player.getPlayerClass()
+                + "\nVida: " + player.getHealth() + "\nAtaque: " + player.getAttack() + "\nDefesa: " + player.getDefense());
     }
 
     private static void showInventory(Player player) {
