@@ -8,6 +8,7 @@ public class Historia {
 	
 	public static void eventosMontanhasSombrias(Player player) {
 		player.marcarPassagemPorParteDaHistoria("IgnoraCave");
+		player.marcarPassagemPorParteDaHistoria("Caverna");
 		player.marcarPassagemPorParteDaHistoria("ForaCave");
         JOptionPane.showMessageDialog(null, "Ao se aproximar das Montanhas Sombrias, " + player.getName() + " percebe uma sensação familiar, e continua seguindo a trilha."
                 + "\nA trilha íngreme leva a uma clareira onde destroços de uma estrutura desconhecida estão espalhados."
