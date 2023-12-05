@@ -1,7 +1,5 @@
 package rpg;
 
-import java.util.Random;
-
 import javax.swing.JOptionPane;
 
 public class Historia {
@@ -136,46 +134,60 @@ public class Historia {
 	            + "\nEle dispara outra flecha, mas, com sorte, você consegue se esquivar no último momento.");
 	    JOptionPane.showMessageDialog(null, "Para sua surpresa, você reconhece o monstro como sendo o antigo senhor da vila, corrompido pela escuridão."
 	            + "\nAgora ele se tornou uma ameaça, atacando com flechas espectrais mágicas.");
-	    String escolhaConversar = JOptionPane.showInputDialog(null, "Deseja tentar conversar com o antigo senhor corrompido? (Digite 'sim' ou 'não')");
-	    if ("sim".equalsIgnoreCase(escolhaConversar)) {
+	    
+	    int opcaoConversar = JOptionPane.showConfirmDialog(null, "Deseja tentar conversar com o antigo senhor corrompido?", "Escolha", JOptionPane.YES_NO_OPTION);
+	    if (opcaoConversar == JOptionPane.YES_OPTION) {
 	        JOptionPane.showMessageDialog(null, "Você chama pelo nome do antigo senhor, tentando trazer à tona suas memórias da vila pacífica que um dia existiu."
 	                + "\nNo início, parece que ele hesita, como se lutasse contra a escuridão que o consome.");
-	        boolean transformacao = new Random().nextBoolean();
-	        if (transformacao) {
+	        
+	        boolean transformacao = (Math.random() < 0.5);
+	        if (transformacao == true) {
 	            JOptionPane.showMessageDialog(null, "No entanto, a escuridão prevalece, e o antigo senhor começa a se transformar diante de seus olhos."
 	                    + "\nSua forma torna-se distorcida e grotesca, e ele não parece mais capaz de compreender suas palavras.");
+	            Monstro monstro = eventos.escolherMonstroAleatorioEpic();
+	            Batalha batalha = new Batalha(game, player, monstro);
+	            batalha.executarBatalhaEstendida(player, monstro);
+	            
+	            continuaHistoriaForaCave(false, player);
 	        } else {
 	            JOptionPane.showMessageDialog(null, "Por um breve momento, parece que suas palavras tocaram o coração do antigo senhor."
 	                    + "\nA escuridão recua momentaneamente, mas não por muito tempo.");
-	        }
-	    } else {
-	        int escolhaSalvar = JOptionPane.showConfirmDialog(null,
-	                "Você vê que o antigo senhor está prestes a sucumbir à escuridão. Deseja tributar 50% de seus status para tentar salvá-lo?",
-	                "Escolha",
-	                JOptionPane.YES_NO_OPTION);
-
-	        if (escolhaSalvar == JOptionPane.YES_OPTION) {
-	            player.setAttack(player.getAttack() / 2);
-	            player.setDefense(player.getDefense() / 2);
-	            player.setTempDefense(player.getTempDefense() / 2);
-	            player.setHealth(player.getHealth() / 20);
-	            player.setMaxHealth(player.getMaxHealth() / 2);
-	            JOptionPane.showMessageDialog(null, "Você decide tributar 50% de seus status para tentar salvar o antigo senhor."
-	                    + "\nSua força é reduzida pela metade, mas o senhor parece momentaneamente aliviado da escuridão.");
-	            JOptionPane.showMessageDialog(null, "Aliviado agora pelo bem estar do senhor, você ouve seu nome vindo do alto da montanha. Intrigado,"
-	            		+ "\n" + player.getName() + " segue em direção a montanha e a fumaça que consegue ver.");
-	            player.gainExperience(75);
 	            
-	        } else {
-	            JOptionPane.showMessageDialog(null, "Você decide não arriscar sacrificar seus status para salvar o antigo senhor."
-	                    + "\nEle se transforma diante de seus olhos, agora completamente corrompido pela escuridão.");
-	        }
-	    }
-	    Monstro monstro = eventos.escolherMonstroAleatorioEpic();
-        Batalha batalha = new Batalha(game, player, monstro);
-        batalha.executarBatalhaEstendida(player, monstro);
-        
-        continuaHistoriaForaCave(false, player);
+	            int escolhaSalvar = JOptionPane.showConfirmDialog(null,
+		                "Você vê que o antigo senhor está prestes a sucumbir à escuridão. Deseja tributar 50% de seus status para tentar salvá-lo?",
+		                "Escolha",
+		                JOptionPane.YES_NO_OPTION);
+		        if (escolhaSalvar == JOptionPane.YES_OPTION) {
+		            player.setAttack(player.getAttack() / 2);
+		            player.setDefense(player.getDefense() / 2);
+		            player.setTempDefense(player.getTempDefense() / 2);
+		            player.setHealth(player.getHealth() / 20);
+		            player.setMaxHealth(player.getMaxHealth() / 2);
+		            JOptionPane.showMessageDialog(null, "Você decide tributar 50% de seus status para tentar salvar o antigo senhor."
+		                    + "\nSua força é reduzida pela metade, mas o senhor parece momentaneamente aliviado da escuridão.");
+		            JOptionPane.showMessageDialog(null, "Aliviado agora pelo bem estar do senhor, você ouve seu nome vindo do alto da montanha. Intrigado,"
+		            		+ "\n" + player.getName() + " segue em direção a montanha e a fumaça que consegue ver.");
+		            player.gainExperience(75);
+		            continuaHistoriaForaCave(false, player);
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Você decide não arriscar sacrificar seus status para salvar o antigo senhor."
+		                    + "\nEle se transforma diante de seus olhos, agora completamente corrompido pela escuridão.");
+		            Monstro monstro = eventos.escolherMonstroAleatorioEpic();
+		            Batalha batalha = new Batalha(game, player, monstro);
+		            batalha.executarBatalhaEstendida(player, monstro);
+		            
+		            continuaHistoriaForaCave(false, player);
+		        }
+	        }	        
+	    } else {
+            JOptionPane.showMessageDialog(null, "Você decide não arriscar sacrificar seus status para salvar o antigo senhor."
+                    + "\nEle se transforma diante de seus olhos, agora completamente corrompido pela escuridão.");            
+            Monstro monstro = eventos.escolherMonstroAleatorioEpic();
+            Batalha batalha = new Batalha(game, player, monstro);
+            batalha.executarBatalhaEstendida(player, monstro);
+            
+            continuaHistoriaForaCave(false, player);
+	    }	    
 	}
 	
 	public static void continuaHistoriaForaCave(boolean vitoria, Player player) {	    

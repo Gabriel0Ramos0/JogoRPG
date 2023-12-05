@@ -41,8 +41,8 @@ public class Monstro {
     }
 
     // Epic
-    public static Monstro DragaoDeGelo() {
-        return new Monstro("Dragão de Gelo", 40, 5, 15, 35);
+    public static Monstro Zumbi() {
+        return new Monstro("Zumbi Sombrio", 40, 5, 15, 35);
     }
 
     //Epic
@@ -51,8 +51,8 @@ public class Monstro {
     }
 
     //Epic
-    public static Monstro Ogro() {
-        return new Monstro("Ogro Gigante", 30, 10, 5, 20);
+    public static Monstro Gigante() {
+        return new Monstro("Gigante Sombrio", 30, 10, 5, 20);
     }
 
     // Boss

@@ -342,9 +342,9 @@ public class Eventos {
             case 0:
                 return Monstro.Esqueleto();
             case 1:
-                return Monstro.Ogro();
+                return Monstro.Gigante();
             case 2:
-            	return Monstro.DragaoDeGelo();
+            	return Monstro.Zumbi();
             default:
                 throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
         }
