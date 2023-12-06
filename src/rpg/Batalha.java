@@ -51,6 +51,7 @@ public class Batalha extends Eventos {
                         JOptionPane.showMessageDialog(null, player.getName() + " derrotou o " +monstro.getNome() +" e ganhou a batalha!");
                         vitoria = true;
                         player.regenerarEscudo();
+                        player.resetConsumableEffects();
                         player.gainExperience(monstro.getXP());
                         showPlayerInfo(player);
                         
@@ -115,7 +116,7 @@ public class Batalha extends Eventos {
                     break;
 
                 case 1:
-                    useItemDuringBattle(player);
+                    useItemDuringBattle(player, monstro);
                     break;
 
                 case 2:
@@ -123,6 +124,7 @@ public class Batalha extends Eventos {
                         JOptionPane.showMessageDialog(null, "Ao ver o tamanho de " + monstro.getNome() + ", o herói teme seu poder e tenta fugir o mais rápido possível...");
                         setTentouFugir(true);
                         vitoria = false;
+                        player.resetConsumableEffects();
                         if (!player.jaPassouPorParteDaHistoria("Prólogo")) {
                         	player.marcarPassagemPorParteDaHistoria("Prólogo");
                             RPGGame.showNextChapterOptions(vitoria, player);
@@ -154,31 +156,42 @@ public class Batalha extends Eventos {
         JOptionPane.showMessageDialog(null, "Status do Monstro:\nNome: " + monstro.getNome() + "\nVida: " + monstro.getVida() + "\nAtaque: " + monstro.getAtaque() + "\nDefesa: " + monstro.getDefesa());
     }
 
-    public void useItemDuringBattle(Player player) {
+    public void useItemDuringBattle(Player player, Monstro monstro) {
         StringBuilder itemOptions = new StringBuilder("Escolha um item para usar:");
-        
         for (int i = 0; i < player.getInventory().size(); i++) {
             Item item = player.getInventory().get(i);
             if (item instanceof Consumivel) {
-                Consumivel consumivel = (Consumivel) item;
-                int regeneracaoVida = consumivel.getRegeneracaoVida();
-                itemOptions.append("\n").append(i + 1).append(". ").append(item.getName())
-                           .append(" - Recuperação de Vida: ").append(regeneracaoVida);
+                itemOptions.append("\n").append(i + 1).append(". ").append(item.getName());
             }
         }
-        
         int itemChoice = Integer.parseInt(JOptionPane.showInputDialog(null, itemOptions.toString()));
-
         if (itemChoice >= 1 && itemChoice <= player.getInventory().size()) {
             Item selectedItem = player.getInventory().get(itemChoice - 1);
-
             if (selectedItem instanceof Consumivel) {
                 Consumivel consumivel = (Consumivel) selectedItem;
                 int regeneracaoVida = consumivel.getRegeneracaoVida();
                 player.heal(regeneracaoVida);
                 JOptionPane.showMessageDialog(null, player.getName() + " usou " + consumivel.getName() + " e recuperou " + regeneracaoVida + " de vida!");
+                
+                if (selectedItem.getName().equals("Pergaminho de Teletransporte")) {
+                    JOptionPane.showMessageDialog(null, player.getName() + " usa seu pergaminho caro de teleporte, um brilho envolve " + player.getName() + " e num clarão o deixa no mesmo lugar. "
+                    		+ "\nAparentemente, aquele vendedor te tapeou.");
+                } else if (selectedItem.getName().equals("Elixir de Resistência")) {
+                    JOptionPane.showMessageDialog(null, "Ao tomar o Elixir de Resistência, pedras e pedaços de terra são atraídos a " + player.getName() + ", aumentando seu poder de defesa. "
+                    		+ "\n ||+50 de armadura||");
+                    player.setDefense(player.getDefense() + 50);
+                } else if (selectedItem.getName().equals("Poção de Invisibilidade")) {
+                    JOptionPane.showMessageDialog(null, "Ao beber a Poção de Invisibilidade, " + player.getName() + " não consegue mais se ver, mas o monstro ainda consegue. "
+                    		+ "\nParece que " + player.getName() + " foi tapeado.");
+                } else if (selectedItem.getName().equals("Elixir de Força")) {
+                    JOptionPane.showMessageDialog(null, "Ao beber o Elixir de Força, a força de " + player.getName() + " aumenta em 3.");
+                    player.setAttack(player.getAttack() + 3);
+                } else if (selectedItem.getName().equals("Poção de Velocidade")) {
+                    JOptionPane.showMessageDialog(null, "Bebendo a Poção de Velocidade, " + player.getName() + " se sente muito rápido e vê tudo em câmera lenta. " 
+                    		+ "\n" + player.getName() + " ganhou 2 turnos de pressa e ataca o " + monstro.getNome() + ".");
+                    monstro.takeDamage(player.getAttack() * 2);
+                }
                 consumivel.reduceQuantity(1);
-
                 if (consumivel.getQuantity() == 0) {
                     player.getInventory().remove(selectedItem);
                     JOptionPane.showMessageDialog(null, consumivel.getName() + " acabou. O item foi removido do inventário.");
@@ -186,6 +199,7 @@ public class Batalha extends Eventos {
             }
         }
     }
+
 
 
     public static int calculateDamage(int attack, int defense) {

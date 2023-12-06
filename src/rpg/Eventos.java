@@ -22,19 +22,19 @@ public class Eventos {
 	    Equipavel itemAVenda4 = new Equipavel("Espada de Luz", 47, 1, 4, 0, 0);
 	    Equipavel itemAVenda5 = new Equipavel("Botas para neve (com cristal)", 75, 1, 0, 15, 5);
 	    Equipavel itemAVenda6 = new Equipavel("Arco da Floresta", 60, 1, 5, 0, 0);
-	    Consumivel itemAVenda7 = new Consumivel("Pergaminho de Teletransporte", 250, 6, 40);
+	    Consumivel itemAVenda7 = new Consumivel("Pergaminho de Teletransporte", 250, 1, 20);
 	    Item itemAVenda8 = new Item("Pó de Estrela", 38, 2, "Vendível");
 	    Equipavel itemAVenda9 = new Equipavel("Martelo Trovejante", 79, 1, 8, 0, 0);
-	    Consumivel itemAVenda10 = new Consumivel("Elixir de Resistência", 55, 12, 80);
+	    Consumivel itemAVenda10 = new Consumivel("Elixir de Resistência", 55, 3, 0);
 	    Equipavel itemAVenda11 = new Equipavel("Cajado Arcano", 55, 1, 2, 10, 0);
 	    Item itemAVenda12 = new Item("Gema Reluzente", 40, 3, "Vendível");
-	    Consumivel itemAVenda13 = new Consumivel("Poção de Invisibilidade", 35, 8, 60);
+	    Consumivel itemAVenda13 = new Consumivel("Poção de Invisibilidade", 35, 1, 5);
 	    Equipavel itemAVenda14 = new Equipavel("Luvas de Destreza", 30, 1, 0, 8, 4);
-	    Consumivel itemAVenda15 = new Consumivel("Elixir de Força", 45, 10, 70);
+	    Consumivel itemAVenda15 = new Consumivel("Elixir de Força", 45, 2, 0);
 	    Equipavel itemAVenda16 = new Equipavel("Escudo Rúnico", 50, 1, 0, 15, 7);
 	    Item itemAVenda17 = new Item("Flor da Noite", 25, 4, "Vendível");
 	    Equipavel itemAVenda18 = new Equipavel("Lança de Gelo", 65, 1, 6, 0, 0);
-	    Consumivel itemAVenda19 = new Consumivel("Poção de Velocidade", 40, 5, 45);
+	    Consumivel itemAVenda19 = new Consumivel("Poção de Velocidade", 40, 1, 15);
 	    Equipavel itemAVenda20 = new Equipavel("Elmo de Sabedoria", 55, 1, 0, 10, 5);
 
 	    List<Item> itensDisponiveis = new ArrayList<>();

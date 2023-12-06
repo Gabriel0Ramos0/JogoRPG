@@ -12,6 +12,7 @@ class Player {
     private int health;
     private int maxHealth;
     private int attack;
+    private int tempAtt;
     private int defense;
     private int level;
     private int experience;
@@ -35,6 +36,7 @@ class Player {
         this.health = 100;
         this.maxHealth = 100;
         this.attack = 5;
+        this.tempAtt = attack;
         this.defense = 10;
         this.tempDefense = defense;
         this.level = 1;
@@ -193,6 +195,12 @@ class Player {
         }
     }
     
+    public void resetConsumableEffects() {
+    	JOptionPane.showMessageDialog(null, "O Efeito das poções se dissipa");
+        setDefense(getTempDefense());
+        setAttack(getTempAtt());
+    }
+    
     public void curaAnelRegenerativo() {
         for (Item item : inventory) {
             if (item.getName().equals("anelRegenerativo") && health < 100) {
@@ -258,6 +266,14 @@ class Player {
     
     public void setAttack(int attack) {
 		this.attack = attack;
+	}
+
+	public int getTempAtt() {
+		return tempAtt;
+	}
+
+	public void setTempAtt(int tempAtt) {
+		this.tempAtt = tempAtt;
 	}
 
 	public boolean isAlive() {
