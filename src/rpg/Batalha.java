@@ -156,21 +156,29 @@ public class Batalha extends Eventos {
 
     public void useItemDuringBattle(Player player) {
         StringBuilder itemOptions = new StringBuilder("Escolha um item para usar:");
+        
         for (int i = 0; i < player.getInventory().size(); i++) {
             Item item = player.getInventory().get(i);
             if (item instanceof Consumivel) {
-                itemOptions.append("\n").append(i + 1).append(". ").append(item.getName());
+                Consumivel consumivel = (Consumivel) item;
+                int regeneracaoVida = consumivel.getRegeneracaoVida();
+                itemOptions.append("\n").append(i + 1).append(". ").append(item.getName())
+                           .append(" - Recuperação de Vida: ").append(regeneracaoVida);
             }
         }
+        
         int itemChoice = Integer.parseInt(JOptionPane.showInputDialog(null, itemOptions.toString()));
+
         if (itemChoice >= 1 && itemChoice <= player.getInventory().size()) {
             Item selectedItem = player.getInventory().get(itemChoice - 1);
+
             if (selectedItem instanceof Consumivel) {
                 Consumivel consumivel = (Consumivel) selectedItem;
                 int regeneracaoVida = consumivel.getRegeneracaoVida();
                 player.heal(regeneracaoVida);
                 JOptionPane.showMessageDialog(null, player.getName() + " usou " + consumivel.getName() + " e recuperou " + regeneracaoVida + " de vida!");
                 consumivel.reduceQuantity(1);
+
                 if (consumivel.getQuantity() == 0) {
                     player.getInventory().remove(selectedItem);
                     JOptionPane.showMessageDialog(null, consumivel.getName() + " acabou. O item foi removido do inventário.");
@@ -178,6 +186,7 @@ public class Batalha extends Eventos {
             }
         }
     }
+
 
     public static int calculateDamage(int attack, int defense) {
         int damage = Math.max(0, attack - defense);
