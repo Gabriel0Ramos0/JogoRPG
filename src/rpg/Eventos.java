@@ -103,6 +103,7 @@ public class Eventos {
 	                        }
 	                    } else {
 	                        player.getInventory().add(itemEscolhido);
+	                        player.applyItemEffects(itemEscolhido);
 	                    }
 	                    if (!(itemEscolhido instanceof Consumivel) || itemEscolhido.getQuantity() >= 1) {
 	                        itemEscolhido.decrementQuantity();

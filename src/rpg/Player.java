@@ -196,7 +196,7 @@ class Player {
     }
     
     public void resetConsumableEffects() {
-    	JOptionPane.showMessageDialog(null, "O Efeito das poções se dissipa");
+    	JOptionPane.showMessageDialog(null, "O Efeito das poções se dissipam...");
         setDefense(getTempDefense());
         setAttack(getTempAtt());
     }
@@ -206,6 +206,31 @@ class Player {
             if (item.getName().equals("anelRegenerativo") && health < 100) {
                 heal(1);
                 JOptionPane.showMessageDialog(null, "O Anel Regenerativo curou 1 de vida!");
+            }
+        }
+    }
+    
+    public void applyItemEffects(Item item) {
+        if (item instanceof Equipavel) {
+        } else if (item instanceof Consumivel) {
+        } else {
+            if (item.getName().equals("Minério de Ametista")) {
+                setAttack(getAttack() + 1);
+                JOptionPane.showMessageDialog(null, getName() + " absorve o poder da joia, ganhando +1 de ataque!");
+            } else if (item.getName().equals("Pó de Estrela")) {
+                setDefense(getDefense() + 2);
+                setTempDefense(getTempDefense() + 2);
+                JOptionPane.showMessageDialog(null, getName() + " ganha +2 de defesa!");
+            } else if (item.getName().equals("Gema Reluzente")) {
+            	setAttack(getAttack() - 1);
+            	setDefense(getDefense() - 2);
+                setTempDefense(getTempDefense() - 2);
+                setMaxHealth(getMaxHealth() - 2);
+                JOptionPane.showMessageDialog(null, getName() + " sente uma energia maligna se espalhando em seus itens e drenando seu poder."
+                		+ "\n|| - 1 Ataque || - 2 Defesa || - 2 Vida Máxima ||");
+            } else if (item.getName().equals("Flor da Noite")) {
+                setMaxHealth(getMaxHealth() + 2);
+                JOptionPane.showMessageDialog(null, getName() + " ganha +2 de vida máxima!");
             }
         }
     }
