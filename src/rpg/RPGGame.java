@@ -34,19 +34,26 @@ public class RPGGame {
         showPlayerInfo(player);
         showInventory(player);
 
-        JOptionPane.showMessageDialog(null, "Prólogo: Você foi teleportado a um mundo desconhecido, carregando apenas os pertences que tinha consigo..."
-                + "\nAo explorar a vastidão da floresta, tentando compreender a natureza deste lugar, seus olhos se fixam em uma cabana solitária."
-                + "\nÀ medida que se aproxima, uma silhueta enrugada de um homem idoso se destaca contra a penumbra do interior da cabana."
-                + "\nA luz intensa do sol obscurece sua visão, impedindo-o de discernir se o velho senhor representa perigo ou sabedoria.");
+        JOptionPane.showMessageDialog(null, "Prólogo: Você foi teleportado a um mundo desconhecido, sentindo-se perdido e desorientado, carregando apenas os pertences que tinha consigo..."
+        	    + "\nÀ medida que seus olhos se ajustam à nova paisagem, você se encontra em uma vasta e misteriosa floresta, onde árvores altas e exóticas se entrelaçam formando uma cúpula verdejante.");
+        	        
+        JOptionPane.showMessageDialog(null, "Enquanto explora a natureza desconhecida à sua volta, seu caminho o leva a uma clareira onde uma cabana solitária se destaca contra a paisagem."
+        	    + "\nA madeira envelhecida da cabana parece conter histórias antigas, e a porta entreaberta convida à curiosidade."
+        	    + "\nAo se aproximar, uma silhueta enrugada de um homem idoso se desenha contra a penumbra do interior da cabana."
+        	    + "\nA luz intensa do sol obscurece sua visão, criando um jogo de sombras que impede você de discernir se o velho senhor representa perigo ou sabedoria.");
 
         String[] options = {"Conversar", "Ignorar o velho senhor e continuar a jornada"};
         int choice = JOptionPane.showOptionDialog(null, "Escolha uma opção:", "Escolha", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
         switch (choice) {
-            case 0:
-                JOptionPane.showMessageDialog(null, "O velho revelou ser um sábio e gostaria de te contar a história deste mundo.");
+        case 0:
+            JOptionPane.showMessageDialog(null, "O velho revela-se como um sábio de aparência enigmática. Seus olhos, profundos e repletos de sabedoria, parecem esconder segredos milenares."
+                    + "\nCom uma voz grave, ele convida você a entrar em sua humilde cabana, dizendo: 'Vejo em seus olhos a sede por conhecimento. "
+                    + "\nPor favor, entre e compartilharei a história deste mundo com você.'");
+            JOptionPane.showMessageDialog(null, "Curioso e intrigado, " + player.getName() + " aceita o convite do sábio e adentra a cabana."
+                    + "\nÀ medida que a porta se fecha, uma aura mágica parece envolver o local, aumentando ainda mais o mistério.");
 
-                String[] opções = {"Ouvir hitória", "Estou com pressa"};
+            String[] opções = {"Perguntar sobre a história", "Expressar gratidão e sair"};
                 int escolha = JOptionPane.showOptionDialog(null, "Escolha uma opção:", "Escolha", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opções, opções[0]);
 
                 switch (escolha) {
@@ -84,11 +91,14 @@ public class RPGGame {
                         break;
 
                     case 1:
-                        JOptionPane.showMessageDialog(null, player.getName() + " decide ignorar o sábio. Ao fixar seus olhos nele, nota a expressão de desapontamento em seu rosto enrugado."
-                            + "\nO sábio murmura com uma voz serena, 'Os boatos correm como o vento por estas terras... Cuidado com o que você escolhe ignorar, jovem aventureiro.'"
-                            + "\nApesar da sensação incômoda, " + player.getName() + " continua sua jornada, sentindo o peso das palavras do sábio ecoando em sua mente.");
+                    	player.jaPassouPorParteDaHistoria("NãoOuvirHistoria");
+                        JOptionPane.showMessageDialog(null, player.getName() + " decide não ouvir a história do sábio. Ao fixar seus olhos nele, nota a expressão de desapontamento em seu rosto enrugado."
+                                + "\nO sábio, com um suspiro, diz com uma voz serena, 'Cada escolha molda nosso destino, e o caminho que você escolheu pode ter consequências imprevisíveis.'"
+                                + "\nApesar da sensação incômoda, " + player.getName() + " continua sua jornada, sentindo o peso das palavras do sábio ecoando em sua mente.");
+                        JOptionPane.showMessageDialog(null, "À medida que você se afasta da cabana, uma sensação estranha paira no ar, como se os sussurros das árvores comentassem sua decisão."
+                                + "\nAs sombras ao seu redor parecem mais densas, e o vento carrega ecos misteriosos. "
+                                + "\nSerá que a escolha de não ouvir a história terá impactos mais profundos do que " + player.getName() + " imagina?");
                         break;
-
                     default:
                         JOptionPane.showMessageDialog(null, "Opção inválida. Você fica indeciso.");
                 }

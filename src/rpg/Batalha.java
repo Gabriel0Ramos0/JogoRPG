@@ -85,8 +85,8 @@ public class Batalha extends Eventos {
             	    	JOptionPane.showMessageDialog(null, player.getName() + " é derrotado pelo poder avassalador do " + monstro.getNome() +"."
             	    			+ "\nA escuridão consome você enquanto desmaia na trilha.");
             	    	JOptionPane.showMessageDialog(null, "---GAME OVER---");
-            	   }                    
-
+            	    	System.exit(0);
+            	   }                
                     showMonsterStatus(monstro);
                     
                     //Monstro ataca player
