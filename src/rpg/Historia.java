@@ -37,6 +37,8 @@ public class Historia {
                 		+ "\nGanhou 2 espetinho!");
                 Consumivel espetinho = new Consumivel("Espetinho", 3, 2, 10);
                 player.getInventory().add(espetinho);
+                JOptionPane.showMessageDialog(null, "Antes de você sair do acampamento");
+                Eventos.venderItens(player);
                 JOptionPane.showMessageDialog(null, "Com os suprimentos e boas vibrações dos guerreiros, " + player.getName() + " parte determinado para explorar mais desse mundo misterioso.");
                 break;
 
@@ -165,6 +167,7 @@ public class Historia {
 		            player.setMaxHealth(player.getMaxHealth() / 2);
 		            JOptionPane.showMessageDialog(null, "Você decide tributar 50% de seus status para tentar salvar o antigo senhor."
 		                    + "\nSua força é reduzida pela metade, mas o senhor parece momentaneamente aliviado da escuridão.");
+		            RPGGame.showPlayerInfo(player);
 		            JOptionPane.showMessageDialog(null, "Aliviado agora pelo bem estar do senhor, você ouve seu nome vindo do alto da montanha. Intrigado,"
 		            		+ "\n" + player.getName() + " segue em direção a montanha e a fumaça que consegue ver.");
 		            player.gainExperience(75);

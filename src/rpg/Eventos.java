@@ -11,45 +11,83 @@ import java.util.Random;
 public class Eventos {
 
 	public static void comprarItens(Player player) {
-		JOptionPane.showMessageDialog(null, "Para comprar ou vender mais de um item, basta colocar uma vírgula (,) depois de cada item escolhido!");
 	    JOptionPane.showMessageDialog(null, "Você encontra um comerciante amigável que está disposto a vender itens para você.");
+	    JOptionPane.showMessageDialog(null, "Para comprar ou vender mais de um item, basta colocar uma vírgula (,) depois de cada item escolhido!");
 	    JOptionPane.showMessageDialog(null, "Itens_Consumíveis pode ser comprado na mesma venda. Exemplo: 1,1"
 	    		+ "\nItens_Equipáveis devem ser comprados separadamente em cada transação. Exemplo: somente o item 4");
 	    
-	    // Pensar em uma maneira de deixar 20 itens aqui e mostrar 5 aleatórios para comprar
-	        Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 7, 25);
-	        Consumivel itemAVenda2 = new Consumivel("Poção de Cura Grande", 25, 9, 50);
-	        Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");
-	        Equipavel itemAVenda4 = new Equipavel("Espada Misteriosa", 47, 1, 4, 0, 0);
-	        Equipavel itemAVenda5 = new Equipavel("Botas para neve (com cristal)", 75, 1, 0, 15, 5);
+	    Consumivel itemAVenda1 = new Consumivel("Poção de Cura", 15, 7, 25);
+	    Consumivel itemAVenda2 = new Consumivel("Poção de Cura Grande", 25, 9, 50);
+	    Item itemAVenda3 = new Item("Minério de Ametista", 32, 2, "Vendível");
+	    Equipavel itemAVenda4 = new Equipavel("Espada de Luz", 47, 1, 4, 0, 0);
+	    Equipavel itemAVenda5 = new Equipavel("Botas para neve (com cristal)", 75, 1, 0, 15, 5);
+	    Equipavel itemAVenda6 = new Equipavel("Arco da Floresta", 60, 1, 5, 0, 0);
+	    Consumivel itemAVenda7 = new Consumivel("Pergaminho de Teletransporte", 250, 6, 40);
+	    Item itemAVenda8 = new Item("Pó de Estrela", 38, 2, "Vendível");
+	    Equipavel itemAVenda9 = new Equipavel("Martelo Trovejante", 79, 1, 8, 0, 0);
+	    Consumivel itemAVenda10 = new Consumivel("Elixir de Resistência", 55, 12, 80);
+	    Equipavel itemAVenda11 = new Equipavel("Cajado Arcano", 55, 1, 2, 10, 0);
+	    Item itemAVenda12 = new Item("Gema Reluzente", 40, 3, "Vendível");
+	    Consumivel itemAVenda13 = new Consumivel("Poção de Invisibilidade", 35, 8, 60);
+	    Equipavel itemAVenda14 = new Equipavel("Luvas de Destreza", 30, 1, 0, 8, 4);
+	    Consumivel itemAVenda15 = new Consumivel("Elixir de Força", 45, 10, 70);
+	    Equipavel itemAVenda16 = new Equipavel("Escudo Rúnico", 50, 1, 0, 15, 7);
+	    Item itemAVenda17 = new Item("Flor da Noite", 25, 4, "Vendível");
+	    Equipavel itemAVenda18 = new Equipavel("Lança de Gelo", 65, 1, 6, 0, 0);
+	    Consumivel itemAVenda19 = new Consumivel("Poção de Velocidade", 40, 5, 45);
+	    Equipavel itemAVenda20 = new Equipavel("Elmo de Sabedoria", 55, 1, 0, 10, 5);
 
-	        List<Item> itensDisponiveis = new ArrayList<>();
-	        itensDisponiveis.add(itemAVenda1);
-	        itensDisponiveis.add(itemAVenda2);
-	        itensDisponiveis.add(itemAVenda3);
-	        itensDisponiveis.add(itemAVenda4);
-	        itensDisponiveis.add(itemAVenda5);
+	    List<Item> itensDisponiveis = new ArrayList<>();
+	    itensDisponiveis.add(itemAVenda1);
+	    itensDisponiveis.add(itemAVenda2);
+	    itensDisponiveis.add(itemAVenda3);
+	    itensDisponiveis.add(itemAVenda4);
+	    itensDisponiveis.add(itemAVenda5);
+	    itensDisponiveis.add(itemAVenda6);
+		itensDisponiveis.add(itemAVenda7);
+		itensDisponiveis.add(itemAVenda8);
+		itensDisponiveis.add(itemAVenda9);
+		itensDisponiveis.add(itemAVenda10);
+	    itensDisponiveis.add(itemAVenda11);
+	    itensDisponiveis.add(itemAVenda12);
+	    itensDisponiveis.add(itemAVenda13);
+	    itensDisponiveis.add(itemAVenda14);
+	    itensDisponiveis.add(itemAVenda15);
+	    itensDisponiveis.add(itemAVenda16);
+	    itensDisponiveis.add(itemAVenda17);
+	    itensDisponiveis.add(itemAVenda18);
+	    itensDisponiveis.add(itemAVenda19);
+	    itensDisponiveis.add(itemAVenda20);
+	    
+        List<Item> itensParaVenda = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < 5; i++) {
+            int indiceAleatorio = random.nextInt(itensDisponiveis.size());
+            Item itemSelecionado = itensDisponiveis.remove(indiceAleatorio);
+            itensParaVenda.add(itemSelecionado);
+        }
+
 	    do {
 	        StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja comprar:\n");
 	        escolhaItens.append("Ouro disponível: ").append(player.getCoins()).append("\n");
 
-	        for (int i = 0; i < itensDisponiveis.size(); i++) {
-	            Item item = itensDisponiveis.get(i);
+	        for (int i = 0; i < itensParaVenda.size(); i++) {
+	            Item item = itensParaVenda.get(i);
 	            escolhaItens.append(i + 1).append(". ").append(item.getName())
 	                        .append(" - Valor: ").append(item.getValue())
 	                        .append(" - Disponível: ").append(item.getQuantity()).append("\n");
 	        }
 
-	        int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensDisponiveis.size());
-	        int custoTotal = calcularCustoTotal(itensDisponiveis, indicesEscolhidos);
+	        int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensParaVenda.size());
+	        int custoTotal = calcularCustoTotal(itensParaVenda, indicesEscolhidos);
 	        Map<String, Integer> quantidadePorItem = new HashMap<>();
 
 	        if (player.getCoins() >= custoTotal) {
 	            for (int indice : indicesEscolhidos) {
-	                Item itemEscolhido = itensDisponiveis.get(indice);
+	                Item itemEscolhido = itensParaVenda.get(indice);
 	                if (itemEscolhido instanceof Equipavel) {
 	                    player.equipItem(itemEscolhido);
-	                    itensDisponiveis.remove(itemEscolhido);
+	                    itensParaVenda.remove(itemEscolhido);
 	                } else {
 	                    if (itemEscolhido instanceof Consumivel) {
 	                        Consumivel consumivelExistente = player.getInventory().stream()
@@ -69,7 +107,7 @@ public class Eventos {
 	                    if (!(itemEscolhido instanceof Consumivel) || itemEscolhido.getQuantity() >= 1) {
 	                        itemEscolhido.decrementQuantity();
 	                    } else {
-	                        itensDisponiveis.remove(itemEscolhido);
+	                    	itensParaVenda.remove(itemEscolhido);
 	                    }
 	                    quantidadePorItem.put(itemEscolhido.getName(), quantidadePorItem.getOrDefault(itemEscolhido.getName(), 0) + 1);
 	                }

@@ -93,7 +93,7 @@ public class RPGGame {
 
         Monstro monstro = eventos.escolherMonstroAleatorioComum();
 
-        JOptionPane.showMessageDialog(null, "Você se depara com um(a) " + monstro.getNome() + "! Ele(a) emerge com olhos faiscantes e presas afiadas, pronto(a) para atacar.");
+        JOptionPane.showMessageDialog(null, "Você se depara com um " + monstro.getNome() + "! Ele emerge com olhos faiscantes e presas afiadas, pronto para atacar.");
         JOptionPane.showMessageDialog(null, "Prepare-se para a batalha!");
 
         Batalha batalha = new Batalha(this, player, monstro);
@@ -198,7 +198,7 @@ public class RPGGame {
         }
     }
     
-    private static void showPlayerInfo(Player player) {
+    public static void showPlayerInfo(Player player) {
         JOptionPane.showMessageDialog(null, "Jogador: " + player.getName() + "\nClasse: " + player.getPlayerClass()
                 + "\nVida: " + player.getHealth() + "\nAtaque: " + player.getAttack() + "\nDefesa: " + player.getDefense());
     }
