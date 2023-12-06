@@ -54,15 +54,15 @@ public class Monstro {
     public static Monstro Gigante() {
         return new Monstro("Gigante Sombrio", 30, 10, 5, 20);
     }
+    
+    // Mini Boss
+    public static Monstro Mercador() {
+        return new Monstro("Mercador Sombrio", 40, 12, 8, 75);
+    }
 
     // Boss
     public static Monstro DragaoNegro() {
         return new Monstro("Dragão Negro", 100, 15, 40, 100);
-    }
-    
-    // Boss
-    public static Monstro Mercador() {
-        return new Monstro("Mercador Sombrio", 40, 12, 8, 75);
     }
     
     //Boss Final

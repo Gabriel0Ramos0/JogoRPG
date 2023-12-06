@@ -10,8 +10,15 @@ public class RPGGame {
 
     public void startGame() {
         Eventos eventos = new Eventos();
-        String playerName = JOptionPane.showInputDialog(null, "Bem-vindo ao Jogo RPG!\nDigite o nome do jogador:");
+        JOptionPane.showMessageDialog(null, "Bem-vindo à Terra de Melromarc, um reino cheio de magia e mistérios!"
+        		+ "\nVocê, nobre aventureiro, está prestes a embarcar em uma jornada épica repleta de desafios e descobertas."
+        		+ "\nAntes de entrar nessa incrível aventura, precisamos saber quem é você...");
+        String playerName = JOptionPane.showInputDialog(null, "Digite o seu nome, destemido herói:");
         Player player = new Player(playerName);
+        JOptionPane.showMessageDialog(null, "Bem-vindo, " + player.getName() + "! Que seus passos guiem os destinos desta história."
+        		+ "\nPrepare-se para enfrentar perigos, desvendar enigmas e se tornar uma lenda em Melromarc!");
+        JOptionPane.showMessageDialog(null, "Antes de começar sua jornada, é hora de decidir o caminho que moldará seu destino em Melromarc."
+        		+ "\nEscolha com sabedoria a classe que melhor se alinha com sua personalidade e estilo de combate.");
         
         String[] classOptions = {"Escudeiro", "Lanceiro", "Arqueiro", "Espadachim"};
         String chosenClass = (String) JOptionPane.showInputDialog(
@@ -27,9 +34,10 @@ public class RPGGame {
         showPlayerInfo(player);
         showInventory(player);
 
-        JOptionPane.showMessageDialog(null, "Prólogo: Você foi teleportado a um mundo desconhecido portando somente seus bens que carregava na hora..."
-                + "\nEnquanto caminhava pela floresta tentando descobrir que mundo era aquele, você encontra uma cabana. Nela havia uma silhueta de um homem."
-                + "\nDevido a luz ofuscante do sol, você não consegue identificar se o velho senhor era perigoso!");
+        JOptionPane.showMessageDialog(null, "Prólogo: Você foi teleportado a um mundo desconhecido, carregando apenas os pertences que tinha consigo..."
+                + "\nAo explorar a vastidão da floresta, tentando compreender a natureza deste lugar, seus olhos se fixam em uma cabana solitária."
+                + "\nÀ medida que se aproxima, uma silhueta enrugada de um homem idoso se destaca contra a penumbra do interior da cabana."
+                + "\nA luz intensa do sol obscurece sua visão, impedindo-o de discernir se o velho senhor representa perigo ou sabedoria.");
 
         String[] options = {"Conversar", "Ignorar o velho senhor e continuar a jornada"};
         int choice = JOptionPane.showOptionDialog(null, "Escolha uma opção:", "Escolha", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -46,13 +54,13 @@ public class RPGGame {
                         JOptionPane.showMessageDialog(null, player.getName() + " decide ouvir a história do mundo.");
                         JOptionPane.showMessageDialog(null, "Percebendo sua humildade, o sábio lhe entrega um amuleto e começa a contar a história do mundo.");
 
-                        JOptionPane.showMessageDialog(null, "Há séculos atrás, este mundo era governado por uma força maligna conhecida como 'As Trevas Insondáveis'.\n"
-                                        + "As Trevas Insondáveis espalharam caos e destruição por todo o reino, mergulhando-o em uma era de trevas.\n"
-                                        + "Nesse período sombrio, heróis de diversas origens se uniram para enfrentar o mal.\n"
-                                        + "Uma batalha épica aconteceu entre as forças do bem e as Trevas Insondáveis.\n"
-                                        + "Com grande sacrifício, os heróis conseguiram selar o mal em uma dimensão paralela, trazendo paz ao reino.\n"
-                                        + "O sábio, que é um dos últimos sobreviventes dessa época, revela que as Trevas Insondáveis estão tentando retornar.\n"
-                                        + "O amuleto mágico que ele lhe deu é uma relíquia antiga que canaliza poderes para enfrentar essa ameaça.");
+                        JOptionPane.showMessageDialog(null, "Há séculos atrás, este mundo era governado por uma força maligna conhecida como 'As Trevas Insondáveis'."
+                                        + "\nAs Trevas Insondáveis espalharam caos e destruição por todo o reino, mergulhando-o em uma era de trevas."
+                                        + "\nNesse período sombrio, heróis de diversas origens se uniram para enfrentar o mal."
+                                        + "\nUma batalha épica aconteceu entre as forças do bem e as Trevas Insondáveis."
+                                        + "\nCom grande sacrifício, os heróis conseguiram selar o mal em uma dimensão paralela, trazendo paz ao reino."
+                                        + "\nO sábio, que é um dos últimos sobreviventes dessa época, revela que as Trevas Insondáveis estão tentando retornar."
+                                        + "\nO amuleto mágico que ele lhe deu é uma relíquia antiga que canaliza poderes para enfrentar essa ameaça.");
 
                         JOptionPane.showMessageDialog(null, "Ele pede a você para continuar a jornada, fortalecer-se e reunir aliados para evitar que as Trevas Insondáveis retornem e mergulhem o mundo novamente na escuridão.");
                         JOptionPane.showMessageDialog(null, "Com o amuleto em mãos, você agradece ao sábio e parte em sua jornada, ciente da responsabilidade que recai sobre seus ombros.");
@@ -60,16 +68,25 @@ public class RPGGame {
                         Equipavel magicAmulet = new Equipavel("Amuleto Mágico", 12, 1, 1, 5, 0);
                         JOptionPane.showMessageDialog(null, "Você ganhou um novo item: " + magicAmulet.getName());
                         player.equipItem(magicAmulet);
-                        JOptionPane.showMessageDialog(null, "Ao equipar o amuleto, " + player.getName() + " Absorve o poder daquela joia!"
-                                + "\n\nDefesa + 5 || Ataque + 1");
+                        if ("Escudeiro".equals(player.getPlayerClass())) {
+                        	JOptionPane.showMessageDialog(null, "Ao equipar o amuleto, " + player.getName() + " Absorve o poder daquela joia!"
+                        			+ "\nSeu escudo reage ao poder da joia e aprimora ainda mais seus efeitos!"
+                        			+ "\n\nDefesa de 5 para + 7 || Ataque de 1 para + 2");
+                        	player.setAttack(player.getAttack() + 1);
+                        	player.setDefense(player.getDefense() + 2);
+                        	player.setTempDefense(player.getTempDefense() + 2);
+                        } else {
+                        	JOptionPane.showMessageDialog(null, "Ao equipar o amuleto, " + player.getName() + " Absorve o poder daquela joia!"
+                                    + "\n\nDefesa + 5 || Ataque + 1");
+                        }
                         showPlayerInfo(player);
                         player.setTempDefense(player.getTempDefense() + 5);
                         break;
 
                     case 1:
-                        JOptionPane.showMessageDialog(null, player.getName() + " decide ignorar o sábio. Ao olhar para ele, percebe que deixou frustado!"
-                                + "\nCom cara de desaprovação, diz que os boatos se espalham rápido nesta terra."
-                                + "\nSem desconfiar, " + player.getName() + " continuar sua jornada.");
+                        JOptionPane.showMessageDialog(null, player.getName() + " decide ignorar o sábio. Ao fixar seus olhos nele, nota a expressão de desapontamento em seu rosto enrugado."
+                            + "\nO sábio murmura com uma voz serena, 'Os boatos correm como o vento por estas terras... Cuidado com o que você escolhe ignorar, jovem aventureiro.'"
+                            + "\nApesar da sensação incômoda, " + player.getName() + " continua sua jornada, sentindo o peso das palavras do sábio ecoando em sua mente.");
                         break;
 
                     default:
@@ -87,9 +104,11 @@ public class RPGGame {
 
         Eventos.coletarItensAleatoriosComHistorias(player);
 
-        // Simulação de batalha
+     // Simulação de batalha
         JOptionPane.showMessageDialog(null, "Enquanto você atravessa densas florestas, os sons da natureza criam uma melodia serena."
-                + "\nSubitamente, um arrepio percorre sua espinha, e você percebe que não está sozinho. Um monstro surge das sombras!");
+            + "\nSubitamente, um arrepio percorre sua espinha, e você percebe que não está sozinho. "
+            + "\nA atmosfera ao redor parece se tornar densa, e sombras começam a dançar entre as árvores."
+            + "\nDe repente, um rugido ecoa, e um par de olhos amarelos brilha na escuridão. Um monstro surge das sombras!");
 
         Monstro monstro = eventos.escolherMonstroAleatorioComum();
 

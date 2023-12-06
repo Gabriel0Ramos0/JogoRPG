@@ -164,8 +164,8 @@ class Player {
         Equipavel sword = new Equipavel("Espada Longa", 50, 1, 0, 0, 0);
         Equipavel helmet = new Equipavel("Elmo Resistente", 25, 1, 0, 0, 0);
         Consumivel meatPie = new Consumivel("Torta de Carne", 15, 1, 35);
-        Item notebook = new Item("Notebook", 75, 1, "Vendível");
-        Item remoteControl = new Item("Controle Remoto", 52, 1, "Vendível");
+        Item notebook = new Item("Notebook", 47, 1, "Vendível");
+        Item remoteControl = new Item("Controle Remoto", 12, 1, "Vendível");
         
         equipItem(sword);
         equipItem(helmet);
