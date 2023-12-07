@@ -12,7 +12,6 @@ class Player {
     private int health;
     private int maxHealth;
     private int attack;
-    private int tempAtt;
     private int defense;
     private int level;
     private int experience;
@@ -25,7 +24,7 @@ class Player {
     private static final int XP_INCREASE_PER_LEVEL = 10;
     private Map<String, Boolean> partesHistoria;
     private boolean hasArmourAncestral = false;
-
+    private boolean elixirConsumido;
 
     public Player(String name) {
     	if (name == null || name.trim().isEmpty()) {
@@ -36,7 +35,6 @@ class Player {
         this.health = 100;
         this.maxHealth = 100;
         this.attack = 5;
-        this.tempAtt = attack;
         this.defense = 10;
         this.tempDefense = defense;
         this.level = 1;
@@ -215,9 +213,20 @@ class Player {
     }
     
     public void resetConsumableEffects() {
-    	JOptionPane.showMessageDialog(null, "O Efeito das poções se dissipam...");
+        JOptionPane.showMessageDialog(null, "O Efeito das poções se dissipam...");
         setDefense(getTempDefense());
-        setAttack(getTempAtt());
+        if (isElixirConsumido()) {
+            setAttack(getAttack() - 3);
+            setElixirConsumido(false);
+        }
+    }
+    
+    public boolean isElixirConsumido() {
+        return elixirConsumido;
+    }
+
+    public void setElixirConsumido(boolean elixirConsumido) {
+        this.elixirConsumido = elixirConsumido;
     }
     
     public void curaAnelRegenerativo() {
@@ -310,14 +319,6 @@ class Player {
     
     public void setAttack(int attack) {
 		this.attack = attack;
-	}
-
-	public int getTempAtt() {
-		return tempAtt;
-	}
-
-	public void setTempAtt(int tempAtt) {
-		this.tempAtt = tempAtt;
 	}
 
 	public boolean isAlive() {

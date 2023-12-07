@@ -222,7 +222,7 @@ public class RPGGame {
 	            new RPGGame().startGame();
 	        } else {
 	            JOptionPane.showMessageDialog(null, "Obrigado por jogar! Até a próxima.");
-	            System.exit(0);
+	            Historia.jogarNovamente();
 	        }
         }
     }

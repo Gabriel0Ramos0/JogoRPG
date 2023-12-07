@@ -35,7 +35,7 @@ public class Eventos {
 	    Item itemAVenda17 = new Item("Flor da Noite", 25, 4, "Vendível");
 	    Equipavel itemAVenda18 = new Equipavel("Lança de Gelo", 65, 1, 6, 0, 0);
 	    Consumivel itemAVenda19 = new Consumivel("Poção de Velocidade", 40, 1, 15);
-	    Equipavel itemAVenda20 = new Equipavel("Elmo de Sabedoria", 55, 1, 0, 10, 5);
+	    Equipavel itemAVenda20 = new Equipavel("Bracelete da Natureza", 55, 1, 0, 10, 5);
 
 	    List<Item> itensDisponiveis = new ArrayList<>();
 	    itensDisponiveis.add(itemAVenda1);
@@ -105,7 +105,7 @@ public class Eventos {
 	                        player.getInventory().add(itemEscolhido);
 	                        player.applyItemEffects(itemEscolhido);
 	                    }
-	                    if (!(itemEscolhido instanceof Consumivel) || itemEscolhido.getQuantity() >= 1) {
+	                    if (itemEscolhido.getQuantity() >= 2) {
 	                        itemEscolhido.decrementQuantity();
 	                    } else {
 	                    	itensParaVenda.remove(itemEscolhido);

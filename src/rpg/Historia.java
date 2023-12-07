@@ -49,7 +49,7 @@ public class Historia {
                             + "\nA queda é rápida e fatal, e você percebe tarde demais que suas escolhas tiveram consequências irreversíveis.");
                     JOptionPane.showMessageDialog(null, "O corpo de " + player.getName() + " se choca contra as rochas lá embaixo, marcando o fim de sua jornada.");
                     JOptionPane.showMessageDialog(null, "Final Ruim. Sua aventura chegou a um fim prematuro. Melhore suas escolhas na próxima vez.");
-                    System.exit(0);
+                    jogarNovamente();
                 }
             } else {
             	JOptionPane.showMessageDialog(null, "Não querendo gastar seu dinheiro" + player.getName() + " não aceita pagar pelo tratamento.");
@@ -59,7 +59,7 @@ public class Historia {
                         + "\nA queda é rápida e fatal, e você percebe tarde demais que suas escolhas tiveram consequências irreversíveis.");
                 JOptionPane.showMessageDialog(null, "O corpo de " + player.getName() + " se choca contra as rochas lá embaixo, marcando o fim de sua jornada.");
                 JOptionPane.showMessageDialog(null, "Final Ruim. Sua aventura chegou a um fim prematuro. Melhore suas escolhas na próxima vez.");
-                System.exit(0);
+                jogarNovamente();
             }
         }
 	    JOptionPane.showMessageDialog(null, "Sem deixar tempo para pensar, o mestre ofereçe ao "+ player.getName()+ ", se juntar aos treinos");
@@ -301,7 +301,7 @@ public class Historia {
         	player.setDefense(player.getDefense() + 4);
         	player.setTempDefense(player.getTempDefense() + 4);
         } else {
-        	JOptionPane.showMessageDialog(null, "Ao equipar a armadura, " + player.getName() + " o brilho do seu globo se intensifica!"
+        	JOptionPane.showMessageDialog(null, "Ao equipar a armadura, " + player.getName() + " se rente mais forte!"
                     + "\n\nDefesa + 1");
         }        
 		JOptionPane.showMessageDialog(null, "Com sua nova armadura e sabedoria adquirida, você avança para as profundezas das Montanhas Sombrias."
@@ -342,6 +342,7 @@ public class Historia {
 	    } else {
 	        JOptionPane.showMessageDialog(null, "Infelizmente, você foi derrotado pela Sombra Devoradora. A escuridão consome o reino...");
 	        JOptionPane.showMessageDialog(null, "---GAME OVER---");
+	        jogarNovamente();
 	    }
 	}
 	
@@ -365,7 +366,11 @@ public class Historia {
 				+ "\nA sala secreta torna-se um local de reflexão, onde você se conecta com as raízes profundas da história e do heroísmo."
 				+ "\nVocê se sente honrado por seguir os passos de Naofumi Iwatani, e sua presença é adicionada ao mural dos heróis, ao lado dos grandes defensores do reino.");
 	    
-	    int opcaoJogarNovamente = JOptionPane.showConfirmDialog(null, "Deseja jogar novamente?", "Jogar Novamente", JOptionPane.YES_NO_OPTION);
+	    jogarNovamente();
+	}
+	
+	public static void jogarNovamente() {
+		int opcaoJogarNovamente = JOptionPane.showConfirmDialog(null, "Deseja jogar novamente?", "Jogar Novamente", JOptionPane.YES_NO_OPTION);
 	    if (opcaoJogarNovamente == JOptionPane.YES_OPTION) {
 	        new RPGGame().startGame();
 	    } else {
@@ -373,7 +378,6 @@ public class Historia {
 	        System.exit(0);
 	    }
 	}
-
 }
 
 

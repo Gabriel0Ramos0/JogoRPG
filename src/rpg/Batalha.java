@@ -86,7 +86,7 @@ public class Batalha extends Eventos {
             	    	JOptionPane.showMessageDialog(null, player.getName() + " é derrotado pelo poder avassalador do " + monstro.getNome() +"."
             	    			+ "\nA escuridão consome você enquanto desmaia na trilha.");
             	    	JOptionPane.showMessageDialog(null, "---GAME OVER---");
-            	    	System.exit(0);
+            	    	Historia.jogarNovamente();
             	   }                
                     showMonsterStatus(monstro);
                     
@@ -162,7 +162,9 @@ public class Batalha extends Eventos {
         for (int i = 0; i < player.getInventory().size(); i++) {
             Item item = player.getInventory().get(i);
             if (item instanceof Consumivel) {
-                itemOptions.append("\n").append(i + 1).append(". ").append(item.getName());
+                Consumivel consumivel = (Consumivel) item;
+                itemOptions.append("\n").append(i + 1).append(". ").append(item.getName())
+                        .append(" (+").append(consumivel.getRegeneracaoVida()).append(" de regeneração de vida)");
             }
         }
         int itemChoice = Integer.parseInt(JOptionPane.showInputDialog(null, itemOptions.toString()));
@@ -185,11 +187,16 @@ public class Batalha extends Eventos {
                     JOptionPane.showMessageDialog(null, "Ao beber a Poção de Invisibilidade, " + player.getName() + " não consegue mais se ver, mas o monstro ainda consegue. "
                     		+ "\nParece que " + player.getName() + " foi tapeado.");
                 } else if (selectedItem.getName().equals("Elixir de Força")) {
-                    JOptionPane.showMessageDialog(null, "Ao beber o Elixir de Força, a força de " + player.getName() + " aumenta em 3.");
-                    player.setAttack(player.getAttack() + 3);
+                    if (!player.isElixirConsumido()) {
+                        JOptionPane.showMessageDialog(null, "Ao beber o Elixir de Força, a força de " + player.getName() + " aumenta em 3.");
+                        player.setAttack(player.getAttack() + 3);
+                        player.setElixirConsumido(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, player.getName() + " já consumiu o Elixir de Força e não tem efeito adicional.");
+                    }
                 } else if (selectedItem.getName().equals("Poção de Velocidade")) {
                     JOptionPane.showMessageDialog(null, "Bebendo a Poção de Velocidade, " + player.getName() + " se sente muito rápido e vê tudo em câmera lenta. " 
-                    		+ "\n" + player.getName() + " ganhou 2 turnos de pressa e ataca o " + monstro.getNome() + ".");
+                    		+ "\n" + player.getName() + " ganhou 2 turnos de pressa e ataca diretamente a vida do " + monstro.getNome() + ".");
                     monstro.takeDamage(player.getAttack() * 2);
                 }
                 consumivel.reduceQuantity(1);
