@@ -10,6 +10,8 @@ public class RPGGame {
 
     public void startGame() {
         Eventos eventos = new Eventos();
+        JOptionPane.showMessageDialog(null, "*.*.*Mundo Perdido: Despertar das Sombras*.*.*"
+        		+ "\n        *.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*");
         JOptionPane.showMessageDialog(null, "Bem-vindo à Terra de Melromarc, um reino cheio de magia e mistérios!"
         		+ "\nVocê, nobre aventureiro, está prestes a embarcar em uma jornada épica repleta de desafios e descobertas."
         		+ "\nAntes de entrar nessa incrível aventura, precisamos saber quem é você...");
