@@ -91,7 +91,7 @@ public class RPGGame {
                         break;
 
                     case 1:
-                    	player.jaPassouPorParteDaHistoria("NãoOuvirHistoria");
+                    	player.marcarPassagemPorParteDaHistoria("NãoOuvirHistoria");
                         JOptionPane.showMessageDialog(null, player.getName() + " decide não ouvir a história do sábio. Ao fixar seus olhos nele, nota a expressão de desapontamento em seu rosto enrugado."
                                 + "\nO sábio, com um suspiro, diz com uma voz serena, 'Cada escolha molda nosso destino, e o caminho que você escolheu pode ter consequências imprevisíveis.'"
                                 + "\nApesar da sensação incômoda, " + player.getName() + " continua sua jornada, sentindo o peso das palavras do sábio ecoando em sua mente.");

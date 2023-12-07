@@ -15,63 +15,87 @@ public class Historia {
                 + "\nInvestigando os destroços, " + player.getName() + " encontra pistas que sugerem um ritual mágico interrompido.");
         Eventos.coletarItensAleatoriosComHistorias(player);
         JOptionPane.showMessageDialog(null, "Seguindo adiante, " + player.getName() + " descobre um acampamento de treino, a fumaça era proveniente de uma fogueira com chamas altas."
-                + "\nGuerreiros habilidosos estão treinando suas técnicas de combate, e um mestre de treinamento se aproxima de você.");
+                + "\nGuerreiros habilidosos estão treinando suas técnicas de combate, e alguns mercadores se aproximam de você.");
+        Eventos.venderItens(player);
+        Eventos.comprarItens(player);
+        JOptionPane.showMessageDialog(null, "Após conhecer os mercadores, o mestre de treinamento do acampamento se aproxima de você.");
         JOptionPane.showMessageDialog(null, "Sem pensar muito " + player.getName() + " pergunta sobre o grande estrondo que escutou perto daqui."
         		+ "\nO mestre conta não ter ouvido nada, mas menciona que aqueles destroços foram de um ritual antigo realizado pelos hérois anteriores."
         		+ "\nNa tentativa de acabar de uma vez com o mau que habita neste mundo. Conta também, que o herói de escudo conseguiu aprisionar as trevas"
-        		+ "\nNo interior desta montanha, mas ninguém sabe o que aconteceu de fato!.");
-        // Adicionar consequencia do sábio
+        		+ "\nNo interior desta montanha, mas ninguém sabe o ouve depois disso.");
+
         if (player.jaPassouPorParteDaHistoria("NãoOuvirHistoria")) {
-        	JOptionPane.showMessageDialog(null, "Ao mencionar os destroços do ritual, você sente que há algo importante que você deveria saber, mas a informação escapa à sua memória."
-                    + "\nA decisão de não ouvir a história do sábio anteriormente pode ter custado informações cruciais para entender o que está acontecendo.");
-        	JOptionPane.showMessageDialog(null, "Desorientado e confuso, você deixa o acampamento sem rumo, esquecendo-se de tudo o que aprendeu."
-                    + "\nSua memória está tão comprometida que nem mesmo as paisagens familiares ao seu redor fazem sentido.");
-            JOptionPane.showMessageDialog(null, "Sem cuidado, você se aproxima demais da borda da montanha. Um passo em falso e você começa a cair."
-                    + "\nA queda é rápida e fatal, e você percebe tarde demais que suas escolhas tiveram consequências irreversíveis.");
-            JOptionPane.showMessageDialog(null, "O corpo de " + player.getName() + " se choca contra as rochas lá embaixo, marcando o fim de sua jornada.");
-            JOptionPane.showMessageDialog(null, "Final Ruim. Sua aventura chegou a um fim prematuro. Melhore suas escolhas na próxima vez.");
-            System.exit(0);
-        } else {
-	        JOptionPane.showMessageDialog(null, "Sem deixar tempo para pensar, o mestre ofereçe ao "+ player.getName()+ ", se juntar aos treinos");
-	        String[] opcoesTreino = {"Juntar-se ao treinamento", "Continuar a jornada"};
+        	JOptionPane.showMessageDialog(null, "Enquanto conversa com o mestre, seus pensamentos importantes começam a sumir, deixando um vazio em sua mente."
+        	        + "\nDe repente, a figura do velho sábio surge como uma imagem nítida. "
+        	        + "\nVocê lembra de suas palavras sábias e da barreira mágica que envolvia a casa em que havia entrado anteriormente.");
+            int escolhaArrependimento = JOptionPane.showConfirmDialog(null,
+                    "Você sente um arrependimento profundo por não ter ouvido a história do sábio. "
+                    + "\nPercebendo seu estado, o mestre oferece ajuda: 'Vejo que você está em apuros, amigo. "
+                    + "\nEu posso chamar os curandeiros para te ajudar, mas isso custará 100 moedas.",
+                    "Deseja Aceitar a ajuda?",
+                    JOptionPane.YES_NO_OPTION);
+            if (escolhaArrependimento == JOptionPane.YES_OPTION) {
+                if (player.getCoins() >= 100) {
+                    player.setCoins(player.getCoins() - 100);
+                    player.setHealth(player.getMaxHealth());
+                    JOptionPane.showMessageDialog(null, "Você decide pagar 100 moedas para o mestre chamar os curandeiros e te curar."
+                            + "\nVocê se sente revigorado e pronto para continuar sua jornada.");
+                    JOptionPane.showMessageDialog(null, "Agora curado e pronto para partir, o mestre interrompe seus preparativos e");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Você não tem moedas suficientes para pagar pelo tratamento. Sua jornada continua comprometida pela falta de cuidados.");
+                    JOptionPane.showMessageDialog(null, "Desorientado e confuso, você deixa o acampamento sem rumo, esquecendo-se de tudo o que aprendeu."
+                            + "\nSua memória está tão comprometida que nem mesmo as paisagens familiares ao seu redor fazem sentido.");
+                    JOptionPane.showMessageDialog(null, "Sem cuidado, você se aproxima demais da borda da montanha. Um passo em falso e você começa a cair."
+                            + "\nA queda é rápida e fatal, e você percebe tarde demais que suas escolhas tiveram consequências irreversíveis.");
+                    JOptionPane.showMessageDialog(null, "O corpo de " + player.getName() + " se choca contra as rochas lá embaixo, marcando o fim de sua jornada.");
+                    JOptionPane.showMessageDialog(null, "Final Ruim. Sua aventura chegou a um fim prematuro. Melhore suas escolhas na próxima vez.");
+                    System.exit(0);
+                }
+            } else {
+            	JOptionPane.showMessageDialog(null, "Não querendo gastar seu dinheiro" + player.getName() + " não aceita pagar pelo tratamento.");
+            	JOptionPane.showMessageDialog(null, "Desorientado e confuso, você deixa o acampamento sem rumo, esquecendo-se de tudo o que aprendeu."
+                        + "\nSua memória está tão comprometida que nem mesmo as paisagens familiares ao seu redor fazem sentido.");
+                JOptionPane.showMessageDialog(null, "Sem cuidado, você se aproxima demais da borda da montanha. Um passo em falso e você começa a cair."
+                        + "\nA queda é rápida e fatal, e você percebe tarde demais que suas escolhas tiveram consequências irreversíveis.");
+                JOptionPane.showMessageDialog(null, "O corpo de " + player.getName() + " se choca contra as rochas lá embaixo, marcando o fim de sua jornada.");
+                JOptionPane.showMessageDialog(null, "Final Ruim. Sua aventura chegou a um fim prematuro. Melhore suas escolhas na próxima vez.");
+                System.exit(0);
+            }
+        }
+	    JOptionPane.showMessageDialog(null, "Sem deixar tempo para pensar, o mestre ofereçe ao "+ player.getName()+ ", se juntar aos treinos");
+	    String[] opcoesTreino = {"Juntar-se ao treinamento", "Continuar a jornada"};
 	        
-	        int escolhaTreino = JOptionPane.showOptionDialog(null, "O que você deseja fazer?", "Acampamento de Treino", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesTreino, opcoesTreino[0]);
-	        switch (escolhaTreino) {
-	            case 0:
-	                JOptionPane.showMessageDialog(null, player.getName() + " decide juntar-se ao treinamento."
-	                        + "\nO mestre de treinamento elogia sua coragem e concede a você uma técnica especial aprendida durante o treinamento."
-	                        + "\n Ataque +1 || Exeperiência +25");
-	                player.setAttack(player.getAttack() + 1);
-	                player.gainExperience(25);
-	                JOptionPane.showMessageDialog(null, "Com novas habilidades adquiridas, " + player.getName() + " agradece ao mestre e parte em sua jornada, "
-	                		+ "\nagora mais preparado para os desafios que o aguardam."
-	                		+ "\nOs guerreiros ali presentem, lhe entregam uma comida típica para ajudar em sua aventura!"
-	                		+ "\nGanhou 2 espetinho!");
-	                Consumivel espetinho = new Consumivel("Espetinho", 3, 2, 10);
-	                player.getInventory().add(espetinho);
-	                JOptionPane.showMessageDialog(null, "Antes de você sair do acampamento");
-	                Eventos.venderItens(player);
-	                JOptionPane.showMessageDialog(null, "Com os suprimentos e boas vibrações dos guerreiros, " + player.getName() + " parte determinado para explorar mais desse mundo misterioso.");
-	                break;
-	
-	            case 1:
-	                JOptionPane.showMessageDialog(null, player.getName() + " decide continuar sua jornada, agradecendo pelo acolhimento no acampamento de treino."
-	                        + "\nOs guerreiros desejam boa sorte em sua jornada e oferecem suprimentos para a viagem."
-	                        + "\nGanhou 2 espetinho!");
-	                Consumivel espetinhos = new Consumivel("Espetinho", 3, 2, 10);
-	                player.getInventory().add(espetinhos);
-	                
-	                JOptionPane.showMessageDialog(null, "Com os suprimentos e boas vibrações dos guerreiros, " + player.getName() + " parte determinado para explorar mais desse mundo misterioso.");
-	                break;
-	
-	            default:
-	                JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como interagir com o acampamento de treino.");
-	        }
-	        JOptionPane.showMessageDialog(null, "Pensando no que o mestre disse sobre as histórias passadas, "
-	        	    + player.getName() +" procura um meio de investigar mais a fundo sobre o ocorrido na montanha!");
-	        ContinuaHistoriaParte3(player);
+	    int escolhaTreino = JOptionPane.showOptionDialog(null, "O que você deseja fazer?", "Acampamento de Treino", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesTreino, opcoesTreino[0]);
+	    switch (escolhaTreino) {
+		    case 0:
+		    JOptionPane.showMessageDialog(null, player.getName() + " decide juntar-se ao treinamento."
+			    + "\nO mestre de treinamento elogia sua coragem e concede a você uma técnica especial aprendida durante o treinamento."
+			    + "\n Ataque +1 || Exeperiência +25");
+		    player.setAttack(player.getAttack() + 1);
+		    player.gainExperience(25);
+		    JOptionPane.showMessageDialog(null, "Com novas habilidades adquiridas, " + player.getName() + " agradece ao mestre e parte em sua jornada, "
+			    + "\nagora mais preparado para os desafios que o aguardam."
+			    + "\nOs guerreiros ali presentem, lhe entregam uma comida típica para ajudar em sua aventura!"
+			    + "\nGanhou 2 espetinho!");
+		    Consumivel espetinho = new Consumivel("Espetinho", 3, 2, 10);
+		    player.getInventory().add(espetinho);
+		    JOptionPane.showMessageDialog(null, "Com os suprimentos e boas vibrações dos guerreiros, " + player.getName() + " parte determinado para explorar mais desse mundo misterioso.");
+		    break;		
+			    case 1:
+			    JOptionPane.showMessageDialog(null, player.getName() + " decide continuar sua jornada, agradecendo pelo acolhimento no acampamento de treino."
+				    + "\nOs guerreiros desejam boa sorte em sua jornada e oferecem suprimentos para a viagem."
+				    + "\nGanhou 2 espetinho!");
+			    Consumivel espetinhos = new Consumivel("Espetinho", 3, 2, 10);
+			    player.getInventory().add(espetinhos);			                
+			    JOptionPane.showMessageDialog(null, "Com os suprimentos e boas vibrações dos guerreiros, " + player.getName() + " parte determinado para explorar mais desse mundo misterioso.");
+			    break;		
+		    default:
+		    JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como interagir com o acampamento de treino.");
+		}
+	    JOptionPane.showMessageDialog(null, "Pensando no que o mestre disse sobre as histórias passadas, "
+	    		+ player.getName() +" procura um meio de investigar mais a fundo sobre o ocorrido na montanha!");
+	    ContinuaHistoriaParte3(player);
 	    }
-	}
 	
 	public static void eventosCavernaDaPerdicao (Player player) {
 		JOptionPane.showMessageDialog(null, player.getName() + " escolhe explorar mais a Caverna das Luminescências."
