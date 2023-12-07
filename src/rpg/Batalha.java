@@ -53,6 +53,7 @@ public class Batalha extends Eventos {
                         player.regenerarEscudo();
                         player.resetConsumableEffects();
                         player.gainExperience(monstro.getXP());
+                        player.setCoins(player.getCoins() + monstro.getOuro());
                         showPlayerInfo(player);
                         
                         if (player.hasArmourAncestral()) {

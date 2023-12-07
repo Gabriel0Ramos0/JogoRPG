@@ -6,13 +6,15 @@ public class Monstro {
     private int ataque;
     private int defesa;
     private int xp;
+    private int ouro;
 
-    public Monstro(String nome, int vida, int ataque, int defesa, int xp) {
+    public Monstro(String nome, int vida, int ataque, int defesa, int xp, int ouro) {
         this.nome = nome;
         this.vida = vida;
         this.ataque = ataque;
         this.defesa = defesa;
         this.xp = xp;
+        this.ouro = ouro;
     }
     
     public void takeDamage(int damage) {
@@ -22,56 +24,60 @@ public class Monstro {
     
     //Comum
     public static Monstro besta() {
-        return new Monstro("Besta", 12, 5, 5, 5);
+        return new Monstro("Besta", 12, 5, 5, 5, 7);
     }
     
     //Comum
     public static Monstro Lobo() {
-        return new Monstro("Lobo Feroz", 21, 8, 2, 10);
+        return new Monstro("Lobo Feroz", 21, 8, 2, 10, 7);
     }
     
 	// Comum
     public static Monstro Cão() {
-        return new Monstro("Cão Infernal", 25, 7, 5, 15);
+        return new Monstro("Cão Infernal", 25, 7, 5, 15, 7);
     }
 
     // Comum
     public static Monstro Goblin() {
-        return new Monstro("Goblin", 18, 6, 3, 12);
+        return new Monstro("Goblin", 18, 6, 3, 12, 7);
     }
 
     // Epic
     public static Monstro Zumbi() {
-        return new Monstro("Zumbi Sombrio", 40, 5, 15, 35);
+        return new Monstro("Zumbi Sombrio", 40, 5, 15, 35, 15);
     }
 
     //Epic
     public static Monstro Esqueleto() {
-        return new Monstro("Esqueleto Sombrio", 35, 6, 20, 25);
+        return new Monstro("Esqueleto Sombrio", 35, 6, 20, 25, 15);
     }
 
     //Epic
     public static Monstro Gigante() {
-        return new Monstro("Gigante Sombrio", 30, 10, 5, 20);
+        return new Monstro("Gigante Sombrio", 30, 10, 5, 20, 15);
     }
     
     // Mini Boss
     public static Monstro Mercador() {
-        return new Monstro("Mercador Sombrio", 40, 12, 8, 75);
+        return new Monstro("Mercador Sombrio", 40, 12, 8, 75, 35);
     }
 
     // Boss
     public static Monstro DragaoNegro() {
-        return new Monstro("Dragão Negro", 100, 15, 40, 100);
+        return new Monstro("Dragão Negro", 100, 15, 40, 100, 50);
     }
     
     //Boss Final
     public static Monstro Sombras() {
-    	return new Monstro("Sombra Devoradora", 174, 35, 52, 200);
+    	return new Monstro("Sombra Devoradora", 174, 35, 52, 200, 65);
     }
 
     public int getXP() {
         return xp;
+    }
+    
+    public int getOuro() {
+    	return ouro;
     }
 
     public String getNome() {
