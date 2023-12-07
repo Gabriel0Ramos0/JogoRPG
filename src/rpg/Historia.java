@@ -69,10 +69,20 @@ public class Historia {
 	    switch (escolhaTreino) {
 		    case 0:
 		    JOptionPane.showMessageDialog(null, player.getName() + " decide juntar-se ao treinamento."
-			    + "\nO mestre de treinamento elogia sua coragem e concede a você uma técnica especial aprendida durante o treinamento."
-			    + "\n Ataque +1 || Exeperiência +25");
-		    player.setAttack(player.getAttack() + 1);
-		    player.gainExperience(25);
+			    + "\nO mestre de treinamento elogia sua coragem e concede a você uma técnica especial aprendida durante o treinamento.");
+		    if ("Lanceiro".equals(player.getPlayerClass())) {
+		        JOptionPane.showMessageDialog(null, "Ao finalizar o treinamento, você sente uma energia pulsante vindo da sua lança."
+		                + "\nEla reage ao intenso treinamento e brilha intensamente, como se estivesse ganhando vida própria."
+		                + "\nSua lança foi aprimorada pelo treinamento!"
+		                + "\n + 3 Ataque + 40 XP!");
+		        player.setAttack(player.getAttack() + 3);
+		        player.gainExperience(40);
+		    } else {
+		    	JOptionPane.showMessageDialog(null, " + 1 Ataque + 25 XP!");
+		        player.setAttack(player.getAttack() + 1);
+		        player.gainExperience(25);
+		    }
+   
 		    JOptionPane.showMessageDialog(null, "Com novas habilidades adquiridas, " + player.getName() + " agradece ao mestre e parte em sua jornada, "
 			    + "\nagora mais preparado para os desafios que o aguardam."
 			    + "\nOs guerreiros ali presentem, lhe entregam uma comida típica para ajudar em sua aventura!"
@@ -284,7 +294,16 @@ public class Historia {
         		+ "\nEle fala sobre a tradição de fortalecer a armadura a cada batalha, uma herança dos heróis que enfrentaram as sombras que agora se erguem novamente.");
         Equipavel armaduraAncestral = new Equipavel("Armadura Ancestral", 10, 1, 0, 0, 1);
         player.equipItem(armaduraAncestral);
-        
+        if ("Mago Arcano".equals(player.getPlayerClass())) {
+        	JOptionPane.showMessageDialog(null, "Ao equipar a armadura, " + player.getName() + " o brilho do seu globo se intensifica!"
+        			+ "\nSeu Grimório reage ao poder da armadura e aprimora ainda mais seus efeitos!"
+        			+ "\n\nDefesa de 1 para + 5");
+        	player.setDefense(player.getDefense() + 4);
+        	player.setTempDefense(player.getTempDefense() + 4);
+        } else {
+        	JOptionPane.showMessageDialog(null, "Ao equipar a armadura, " + player.getName() + " o brilho do seu globo se intensifica!"
+                    + "\n\nDefesa + 1");
+        }        
 		JOptionPane.showMessageDialog(null, "Com sua nova armadura e sabedoria adquirida, você avança para as profundezas das Montanhas Sombrias."
 		        + "\nÀ medida que avança, a escuridão se intensifica, e você descobre o terrível segredo por trás da ameaça crescente."
 		        + "\nOs heróis antigos falharam em conter a Sombra Devoradora, uma entidade que ressurge para consumir tudo em seu caminho."
