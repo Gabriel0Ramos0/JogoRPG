@@ -20,7 +20,7 @@ public class RPGGame {
         JOptionPane.showMessageDialog(null, "Antes de começar sua jornada, é hora de decidir o caminho que moldará seu destino em Melromarc."
         		+ "\nEscolha com sabedoria a classe que melhor se alinha com sua personalidade e estilo de combate.");
         
-        String[] classOptions = {"Escudeiro", "Lanceiro", "Arqueiro", "Espadachim"};
+        String[] classOptions = {"Escudeiro", "Lanceiro", "Arqueiro", "Mago Arcano", "Espadachim"};
         String chosenClass = (String) JOptionPane.showInputDialog(
                 null,
                 "Escolha a classe do seu personagem:",

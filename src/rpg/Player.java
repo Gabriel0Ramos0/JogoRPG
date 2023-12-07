@@ -91,6 +91,10 @@ class Player {
             	this.playerClass = className;
             	activateAqueiro();
                 break;
+            case "Mago Arcano":
+            	this.playerClass = className;
+            	activateMago();
+                break;
             case "Espadachim":
             	this.playerClass = className;
             	activateCavaleirodaEspada();
@@ -110,8 +114,8 @@ class Player {
     	setHealth(getHealth()  + 10);
     	setMaxHealth(getMaxHealth() + 10);
         setAttack(getAttack() - 4);
-        setDefense(getDefense() + 10);
-        setTempDefense(getTempDefense() + 10);
+        setDefense(getDefense() + 15);
+        setTempDefense(getTempDefense() + 15);
         
         Equipavel shield = new Equipavel("Escudo", 15, 1, 0, 0, 0);
         Consumivel bread = new Consumivel("Pão", 2, 3, 10);
@@ -153,6 +157,21 @@ class Player {
         equipItem(armor);
         getInventory().add(spicyFood);
         getInventory().add(pepper);        
+    }
+    private void activateMago() {
+    	setHealth(getHealth()  + 20);
+    	setMaxHealth(getMaxHealth() + 20);
+        setAttack(getAttack() - 2);
+        setDefense(getDefense() + 3);
+        setTempDefense(getTempDefense() + 3);
+        
+        Equipavel book = new Equipavel("Grimório", 27, 1, 0, 0, 0);
+        Equipavel globo = new Equipavel("Globo mágico", 38, 1, 0, 0, 0);
+        Consumivel enlatado = new Consumivel("Salsicha Enlatada", 12, 5, 10);
+        
+        equipItem(book);
+        equipItem(globo);
+        getInventory().add(enlatado);     
     }
     private void activateCavaleirodaEspada() {
     	setHealth(getHealth()  - 50);
