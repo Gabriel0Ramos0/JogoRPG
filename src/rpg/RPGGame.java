@@ -10,8 +10,9 @@ public class RPGGame {
 
     public void startGame() {
         Eventos eventos = new Eventos();
-        JOptionPane.showMessageDialog(null, "*.*.*Mundo Perdido: Despertar das Sombras*.*.*"
-        		+ "\n        *.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*");
+        									//Mundo Perdido: Despertar das Sombras
+        JOptionPane.showMessageDialog(null, "*.*.*Lost World: Awakening Shadows*.*.*"
+        		+ "\n        *.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*");
         JOptionPane.showMessageDialog(null, "Bem-vindo à Terra de Melromarc, um reino cheio de magia e mistérios!"
         		+ "\nVocê, nobre aventureiro, está prestes a embarcar em uma jornada épica repleta de desafios e descobertas."
         		+ "\nAntes de entrar nessa incrível aventura, precisamos saber quem é você...");
@@ -133,13 +134,22 @@ public class RPGGame {
 
     public static void showNextChapterOptions(boolean vitoria, Player player) {
     	if (vitoria) {
-            JOptionPane.showMessageDialog(null, "Com um golpe final, você derrota o monstro, e ele se desfaz em uma poeira dourada, deixando um item para trás."
-                    + "\n" + player.getName() + " coleta o estranho objeto em formato de amuleto, incapaz de identificar seu propósito, mas ele parece valioso!");
-
-            Item amuletoDesconhecido = new Item("Amuleto Desconhecido", 54, 1, "Vendível");
-            player.getInventory().add(amuletoDesconhecido);
-            JOptionPane.showMessageDialog(null, "Você encontrou um novo item: " + amuletoDesconhecido.getName());
-            JOptionPane.showMessageDialog(null, "Enquanto você examina o amuleto, percebe que ele emite um leve brilho. Curioso(a) com o que isso pode significar, você decide explorar mais a floresta."
+    		if ("Arqueiro".equals(player.getPlayerClass())) {
+    			JOptionPane.showMessageDialog(null, "Com um golpe final, você derrota o monstro, e ele se desfaz em uma poeira dourada, deixando um item para trás."
+                        + "\n" + player.getName() + " coleta o estranho objeto em formato de amuleto, incapaz de identificar seu propósito, mas ele parece valioso!");
+    			JOptionPane.showMessageDialog(null, "Derrepente seu arco brilha, e a ponta da flexa absorve o poder da joia, desvendando o seu significado."
+    					+ "\nO medalhão revela inscrições mencionando a família real de Melromarc. O medalhão é muito valioso!!");
+                Item amuletoDesconhecido = new Item("Medação de Melromarc", 100, 1, "Vendível");
+                player.getInventory().add(amuletoDesconhecido);
+                JOptionPane.showMessageDialog(null, "Você encontrou um novo item: " + amuletoDesconhecido.getName());
+            } else {
+            	JOptionPane.showMessageDialog(null, "Com um golpe final, você derrota o monstro, e ele se desfaz em uma poeira dourada, deixando um item para trás."
+                        + "\n" + player.getName() + " coleta o estranho objeto em formato de amuleto, incapaz de identificar seu propósito, mas ele parece valioso!");
+                Item amuletoDesconhecido = new Item("Amuleto Desconhecido", 54, 1, "Vendível");
+                player.getInventory().add(amuletoDesconhecido);
+                JOptionPane.showMessageDialog(null, "Você encontrou um novo item: " + amuletoDesconhecido.getName());
+            }
+            JOptionPane.showMessageDialog(null, "Enquanto você examina melhor o amuleto, percebe que ele emite um leve brilho. Curioso(a) com o que isso pode significar, você decide explorar mais a floresta."
             		+ "\nCaminhando pela densa floresta, você avista uma trilha que se desvia do caminho principal. "
             		+ "\nDecidindo seguir a trilha, você se encontra imerso na natureza, ouvindo os sons dos pássaros e sentindo o cheiro das árvores."
             		+ "\nA trilha leva você a uma clareira oculta, revelando uma vista deslumbrante do horizonte. "

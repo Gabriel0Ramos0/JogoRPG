@@ -13,7 +13,6 @@ public class Batalha extends Eventos {
     
 	public void executarBatalhaEstendida(Player player, Monstro monstro) {
         boolean vitoria = false;
-        int monstroArmor = monstro.getDefesa();
         
         while (monstro.getVida() > 0 && player.isAlive()) {
             player.curaAnelRegenerativo();        	
@@ -30,11 +29,11 @@ public class Batalha extends Eventos {
                     if (monstro.getDefesa() > 0) {
                         if (playerAttack >= monstro.getDefesa()) {
                             int excessDamage = playerAttack - monstro.getDefesa();
-                            monstro.takeDamage(excessDamage);
                             
                             JOptionPane.showMessageDialog(null, player.getName() + " ataca o " +monstro.getNome() +" e causa " + playerDamage +
                                     " de dano! \n(O " +monstro.getNome() +" perde a defesa e " + excessDamage + " de vida.)");
                             monstro.setDefesa(0);
+                            monstro.setVida(monstro.getVida() - excessDamage);
                         } else {
                         	int defenseRemaining = Math.max(0, monstro.getDefesa() - playerAttack);
                         	monstro.setDefesa(defenseRemaining);
@@ -98,11 +97,11 @@ public class Batalha extends Eventos {
                     if (player.getDefense() > 0) {
                         if (monstroAttack >= player.getDefense()) {
                             int excessDamage = monstroAttack - player.getDefense();
-                            player.takeDamage(excessDamage);
-
+                            
                             JOptionPane.showMessageDialog(null, monstro.getNome() + " ataca você e causa " + monstroDamage +
                                     " de dano! \n(" + player.getName() + " perde a defesa e " + excessDamage + " de vida.)");
                             player.setDefense(0);
+                            player.setHealth(player.getHealth() - excessDamage);
                         } else {
                         	int defesaRestante = Math.max(0, player.getDefense() - monstroAttack);
                         	player.setDefense(defesaRestante);
@@ -195,9 +194,28 @@ public class Batalha extends Eventos {
                         JOptionPane.showMessageDialog(null, player.getName() + " já consumiu o Elixir de Força e não tem efeito adicional.");
                     }
                 } else if (selectedItem.getName().equals("Poção de Velocidade")) {
+                	int playerAttack = player.getAttack() * 2;
+                    int playerDamage = calculateDamage(playerAttack, monstro.getDefesa());
                     JOptionPane.showMessageDialog(null, "Bebendo a Poção de Velocidade, " + player.getName() + " se sente muito rápido e vê tudo em câmera lenta. " 
-                    		+ "\n" + player.getName() + " ganhou 2 turnos de pressa e ataca diretamente a vida do " + monstro.getNome() + ".");
-                    monstro.takeDamage(player.getAttack() * 2);
+                    		+ "\n" + player.getName() + " ganhou 2 turnos de pressa e ataca o(a) " + monstro.getNome() + ".");
+                    if (monstro.getDefesa() > 0) {
+                        if (playerAttack >= monstro.getDefesa()) {
+                            int excessDamage = playerAttack - monstro.getDefesa();                                                       
+                            JOptionPane.showMessageDialog(null, player.getName() + " ataca o " +monstro.getNome() +" e causa " + playerDamage +
+                                    " de dano! \n(O " +monstro.getNome() +" perde a defesa e " + excessDamage + " de vida.)");
+                            monstro.setDefesa(0);
+                            monstro.setVida(monstro.getVida() - excessDamage);
+                        } else {
+                        	int defenseRemaining = Math.max(0, monstro.getDefesa() - playerAttack);
+                        	monstro.setDefesa(defenseRemaining);
+                            JOptionPane.showMessageDialog(null, player.getName() + " ataca o " +monstro.getNome() +" e causa " + playerDamage +
+                                    " de dano! \n(A defesa do " +monstro.getNome() +" absorve o dano!)");
+                        }
+                    } else {
+                        monstro.takeDamage(playerDamage);
+                        JOptionPane.showMessageDialog(null, player.getName() + " ataca o " +monstro.getNome() +" e causa " + playerDamage +
+                                " de dano! \n(O " +monstro.getNome() +" perde " + playerAttack + " de vida.)");
+                    }
                 }
                 consumivel.reduceQuantity(1);
                 if (consumivel.getQuantity() == 0) {
