@@ -151,17 +151,14 @@ public class Historia {
 	public static void continuaHistoriaCave(boolean vitoria, Player player) {	    
 	    if (vitoria) {
 	        JOptionPane.showMessageDialog(null, player.getName() + " derrota o Mercador Sombrio, dissipando a aura sinistra que envolvia a caverna."
-	                + "\nA luz roxa dos cristais volta ao seu brilho normal.");
-	        
+	                + "\nA luz roxa dos cristais volta ao seu brilho normal.");	        
 	        JOptionPane.showMessageDialog(null, "Você encontra alguns itens deixados pelo Mercador Sombrio:"
 	                + "\n- Chapéu de Mercador Corrompido (Aumenta a Vida em 5)"
-	                + "\n- Bife (Regenera 40 de Vida)");
-	        
+	                + "\n- Bife (Regenera 40 de Vida)");	        
 	        Equipavel chapeuDeMercador = new Equipavel("Chapéu do Mercador", 10, 1, 0, 0, 5);
 	        player.equipItem(chapeuDeMercador);
 	        Consumivel bife = new Consumivel("Bife", 10, 1, 40);
-	        player.getInventory().add(bife);
-	        
+	        player.getInventory().add(bife);	        
 	        JOptionPane.showMessageDialog(null, player.getName() + " sai da caverna e avista uma montanha à distância."
 	                + "\nIntrigado pela montanha e pelo barulho que tinha feito, " + player.getName() + " decide explorar e se aproximar dela.");
 	        eventosMontanhasSombrias(player);
@@ -175,22 +172,19 @@ public class Historia {
 	            + "\nA dor é intensa, e " + player.getName() + " se vê enfraquecido pela energia mágica da flexa.");
 	    JOptionPane.showMessageDialog(null, player.getName() + " perde 20 de vida!");
 	    player.setHealth(player.getHealth() - 20);
-
 	    JOptionPane.showMessageDialog(null, "Você se sente apreensivo, como se algo maligno estivesse observando cada movimento seu."
 	            + "\nMesmo ferido, " + player.getName() + " decide continuar sua jornada, agora com um fardo adicional a carregar e com medo do terreno ao redor.");
 
 	    JOptionPane.showMessageDialog(null, "De repente, uma sombra gigante emerge das Montanhas Sombrias, um monstro épico de olhos flamejantes."
 	            + "\nEle dispara outra flecha, mas, com sorte, você consegue se esquivar no último momento.");
 	    JOptionPane.showMessageDialog(null, "Para sua surpresa, você reconhece o monstro como sendo o antigo senhor da vila, corrompido pela escuridão."
-	            + "\nAgora ele se tornou uma ameaça, atacando com flechas espectrais mágicas.");
-	    
+	            + "\nAgora ele se tornou uma ameaça, atacando com flechas espectrais mágicas.");	    
 	    int opcaoConversar = JOptionPane.showConfirmDialog(null, "Deseja tentar conversar com o antigo senhor corrompido?", "Escolha", JOptionPane.YES_NO_OPTION);
 	    if (opcaoConversar == JOptionPane.YES_OPTION) {
 	        JOptionPane.showMessageDialog(null, "Você chama pelo nome do antigo senhor, tentando trazer à tona suas memórias da vila pacífica que um dia existiu."
 	                + "\nNo início, parece que ele hesita, como se lutasse contra a escuridão que o consome.");
 	        
-	        boolean transformacao = (Math.random() < 0.5);
-	        
+	        boolean transformacao = (Math.random() < 0.5);	        
 	        if (player.jaPassouPorParteDaHistoria("NãoOuvirHistoria")) {
 	            transformacao = true;
 	        }	        
@@ -204,8 +198,7 @@ public class Historia {
 	            continuaHistoriaForaCave(false, player);
 	        } else {
 	            JOptionPane.showMessageDialog(null, "Por um breve momento, parece que suas palavras tocaram o coração do antigo senhor."
-	                    + "\nA escuridão recua momentaneamente, mas não por muito tempo.");
-	            
+	                    + "\nA escuridão recua momentaneamente, mas não por muito tempo.");	            
 	            int escolhaSalvar = JOptionPane.showConfirmDialog(null,
 		                "Você vê que o antigo senhor está prestes a sucumbir à escuridão. Deseja tributar 50% de seus status para tentar salvá-lo?",
 		                "Escolha",
@@ -360,8 +353,8 @@ public class Historia {
 				+ "\nEm um gesto de respeito e reconhecimento, você decide honrar essa herança, tornando-se o portador da armadura ancestral e continuando a tradição do Escudeiro Lendário."
 				+ "\nA sala secreta torna-se um local de reflexão, onde você se conecta com as raízes profundas da história e do heroísmo."
 				+ "\nVocê se sente honrado por seguir os passos de Naofumi Iwatani, e sua presença é adicionada ao mural dos heróis, ao lado dos grandes defensores do reino.");
-	    
-	    jogarNovamente();
+		player.marcarPassagemPorParteDaHistoria("AchouEgg");
+		H_Situacional.Sequestro(player);
 	}
 	
 	public static void jogarNovamente() {

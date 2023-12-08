@@ -80,6 +80,17 @@ class Player {
         }
     }
     
+    public void resetExperience() {
+        this.level = 1;
+        this.experience = 0;
+        this.maxHealth = 100;
+        this.health = maxHealth;
+        this.attack = 5;
+        this.defense = 10;
+        this.tempDefense = defense;
+        this.coins = 25;
+    }
+    
     public void chooseClass(String className) {
         switch (className) {
             case "Escudeiro":
@@ -316,7 +327,7 @@ class Player {
             } else if (item.getName().equals("Pó de Estrela")) {
                 setDefense(getDefense() + 2);
                 setTempDefense(getTempDefense() + 2);
-                JOptionPane.showMessageDialog(null, getName() + " ganha +2 de defesa!");
+                JOptionPane.showMessageDialog(null, getName() + " ganha +5 de defesa!");
             } else if (item.getName().equals("Gema Reluzente")) {
             	setAttack(getAttack() - 1);
             	setDefense(getDefense() - 2);
@@ -325,8 +336,8 @@ class Player {
                 JOptionPane.showMessageDialog(null, getName() + " sente uma energia maligna se espalhando em seus itens e drenando seu poder."
                 		+ "\n|| - 1 Ataque || - 2 Defesa || - 2 Vida Máxima ||");
             } else if (item.getName().equals("Flor da Noite")) {
-                setMaxHealth(getMaxHealth() + 2);
-                JOptionPane.showMessageDialog(null, getName() + " ganha +2 de vida máxima!");
+                setMaxHealth(getMaxHealth() + 10);
+                JOptionPane.showMessageDialog(null, getName() + " ganha +10 de vida máxima!");
             }
         }
     }

@@ -84,6 +84,7 @@ public class Eventos {
 	            for (int indice : indicesEscolhidos) {
 	                Item itemEscolhido = itensParaVenda.get(indice);
 	                if (itemEscolhido instanceof Equipavel) {
+	                	itemEscolhido.setValue(0);
 	                    player.equipItem(itemEscolhido);
 	                    itensParaVenda.remove(itemEscolhido);
 	                } else {
