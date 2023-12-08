@@ -34,7 +34,7 @@ public class Eventos {
 	    Equipavel itemAVenda16 = new Equipavel("Escudo Rúnico", 50, 1, 0, 15, 7);
 	    Item itemAVenda17 = new Item("Flor da Noite", 25, 4, "Vendível");
 	    Equipavel itemAVenda18 = new Equipavel("Lança de Gelo", 65, 1, 6, 0, 0);
-	    Consumivel itemAVenda19 = new Consumivel("Poção de Velocidade", 40, 1, 15);
+	    Consumivel itemAVenda19 = new Consumivel("Pena de Asa Veloz", 40, 1, 15);
 	    Equipavel itemAVenda20 = new Equipavel("Bracelete da Natureza", 55, 1, 0, 10, 5);
 
 	    List<Item> itensDisponiveis = new ArrayList<>();
@@ -66,7 +66,6 @@ public class Eventos {
             Item itemSelecionado = itensDisponiveis.remove(indiceAleatorio);
             itensParaVenda.add(itemSelecionado);
         }
-
 	    do {
 	        StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja comprar:\n");
 	        escolhaItens.append("Ouro disponível: ").append(player.getCoins()).append("\n");
@@ -77,7 +76,6 @@ public class Eventos {
 	                        .append(" - Valor: ").append(item.getValue())
 	                        .append(" - Disponível: ").append(item.getQuantity()).append("\n");
 	        }
-
 	        int[] indicesEscolhidos = obterIndicesItens(escolhaItens.toString(), itensParaVenda.size());
 	        int custoTotal = calcularCustoTotal(itensParaVenda, indicesEscolhidos);
 	        Map<String, Integer> quantidadePorItem = new HashMap<>();
@@ -189,20 +187,6 @@ public class Eventos {
 	    } while (true);
 	}
 
-
-    private static String obterNomesItens(int[] indicesEscolhidos, List<Item> itens) {
-        StringBuilder nomesItens = new StringBuilder();
-        for (int indice : indicesEscolhidos) {
-            if (indice >= 0 && indice < itens.size()) {
-                nomesItens.append(itens.get(indice).getName()).append(", ");
-            }
-        }
-        if (nomesItens.length() > 0) {
-            nomesItens.setLength(nomesItens.length() - 2);
-        }
-        return nomesItens.toString();
-    }
-
     private static int[] obterIndicesItens(String escolhaItens, int tamanho) {
         String input = JOptionPane.showInputDialog(null, escolhaItens);
         if (input == null || input.isEmpty()) {
@@ -240,20 +224,6 @@ public class Eventos {
             custoTotal += item.getValue();
         }
         return custoTotal;
-    }
-
-    private static List<Item> obterItensPorIndices(List<Item> itens, int[] indicesEscolhidos) {
-        List<Item> itensEscolhidos = new ArrayList<>();
-        for (int indice : indicesEscolhidos) {
-            itensEscolhidos.add(itens.get(indice));
-        }
-        return itensEscolhidos;
-    }
-    
-    private static Item escolherItemAleatorio(List<Item> inventory) {
-        Random random = new Random();
-        int indiceAleatorio = random.nextInt(inventory.size());
-        return inventory.get(indiceAleatorio);
     }
     
     // Método para simular a coleta de itens aleatórios com histórias e efeitos

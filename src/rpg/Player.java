@@ -1,10 +1,15 @@
 package rpg;
 
+import java.awt.BorderLayout;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 class Player {
@@ -115,7 +120,7 @@ class Player {
         setDefense(getDefense() + 15);
         setTempDefense(getTempDefense() + 15);
         
-        Equipavel shield = new Equipavel("Escudo", 15, 1, 0, 0, 0);
+        Equipavel shield = new Equipavel("Escudo", 0, 1, 0, 0, 0);
         Consumivel bread = new Consumivel("Pão", 2, 3, 10);
         Item cellphone = new Item("Celular", 15, 1, "Vendível");
         Item watch = new Item("Relógio", 12, 1, "Vendível");
@@ -124,6 +129,19 @@ class Player {
         getInventory().add(bread);
         getInventory().add(cellphone);
         getInventory().add(watch);
+        
+        // Adicione aqui a imagem que deseja visualizar do personagem
+        String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Escudeiro.jpg";
+        int preferredWidth = 355;
+        int preferredHeight = 432;
+
+        ImageIcon magoImage = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(preferredWidth, preferredHeight, Image.SCALE_DEFAULT));
+        JFrame frame = new JFrame("Imagem do Escudeiro");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel label = new JLabel(magoImage);
+        frame.getContentPane().add(label, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
     }
     private void activateLanceiro() {
     	setHealth(getHealth()  + 5);
@@ -132,13 +150,25 @@ class Player {
         setDefense(getDefense() - 10);
         setTempDefense(getTempDefense() - 10);
         
-        Equipavel lance = new Equipavel("Lança", 15, 1, 0, 0, 0);
+        Equipavel lance = new Equipavel("Lança", 0, 1, 0, 0, 0);
         Consumivel energyDrink = new Consumivel("Bebida Energética", 5, 3, 15);
         Item map = new Item("Mapa Antigo", 20, 1, "Vendível");
 
         equipItem(lance);
         getInventory().add(energyDrink);
         getInventory().add(map);
+        
+        String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Lanceiro.jpeg";
+        int preferredWidth = 355;
+        int preferredHeight = 432;
+
+        ImageIcon magoImage = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(preferredWidth, preferredHeight, Image.SCALE_DEFAULT));
+        JFrame frame = new JFrame("Imagem do Lanceiro");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel label = new JLabel(magoImage);
+        frame.getContentPane().add(label, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
         
     }
     private void activateAqueiro() {
@@ -148,28 +178,54 @@ class Player {
         setDefense(getDefense() - 9);
         setTempDefense(getTempDefense() - 9);
         
-        Equipavel armor = new Equipavel("Armadura de Fogo", 30, 1, 0, 0, 0);
+        Equipavel armor = new Equipavel("Armadura Reluzente", 0, 1, 0, 0, 0);
+        Equipavel arco = new Equipavel("Arco de Luz", 0, 1, 0, 0, 0);
         Consumivel spicyFood = new Consumivel("Prato Apimentado", 12, 1, 20);
         Consumivel pepper = new Consumivel("Pimenta", 3, 2, 8);
         
         equipItem(armor);
+        equipItem(arco);
         getInventory().add(spicyFood);
-        getInventory().add(pepper);        
+        getInventory().add(pepper);
+        
+        String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Arqueiro.jpeg";
+        int preferredWidth = 355;
+        int preferredHeight = 432;
+
+        ImageIcon magoImage = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(preferredWidth, preferredHeight, Image.SCALE_DEFAULT));
+        JFrame frame = new JFrame("Imagem do Arqueiro");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel label = new JLabel(magoImage);
+        frame.getContentPane().add(label, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
     }
     private void activateMago() {
-    	setHealth(getHealth()  + 20);
-    	setMaxHealth(getMaxHealth() + 20);
+        setHealth(getHealth() + 20);
+        setMaxHealth(getMaxHealth() + 20);
         setAttack(getAttack() - 2);
         setDefense(getDefense() + 3);
         setTempDefense(getTempDefense() + 3);
-        
-        Equipavel book = new Equipavel("Grimório", 27, 1, 0, 0, 0);
-        Equipavel globo = new Equipavel("Globo mágico", 38, 1, 0, 0, 0);
+
+        Equipavel book = new Equipavel("Grimório", 0, 1, 0, 0, 0);
+        Equipavel globo = new Equipavel("Globo mágico", 0, 1, 0, 0, 0);
         Consumivel enlatado = new Consumivel("Salsicha Enlatada", 12, 5, 10);
-        
+
         equipItem(book);
         equipItem(globo);
-        getInventory().add(enlatado);     
+        getInventory().add(enlatado);
+
+        String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Mago Arcano.png";
+        int preferredWidth = 355;
+        int preferredHeight = 432;
+
+        ImageIcon magoImage = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(preferredWidth, preferredHeight, Image.SCALE_DEFAULT));
+        JFrame frame = new JFrame("Imagem do Mago");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel label = new JLabel(magoImage);
+        frame.getContentPane().add(label, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
     }
     private void activateCavaleirodaEspada() {
     	setHealth(getHealth()  - 50);
@@ -178,8 +234,8 @@ class Player {
         setDefense(getDefense() + 5);
         setTempDefense(getTempDefense() + 5);
         
-        Equipavel sword = new Equipavel("Espada Longa", 50, 1, 0, 0, 0);
-        Equipavel helmet = new Equipavel("Elmo Resistente", 25, 1, 0, 0, 0);
+        Equipavel sword = new Equipavel("Espada Longa", 0, 1, 0, 0, 0);
+        Equipavel helmet = new Equipavel("Elmo Resistente", 0, 1, 0, 0, 0);
         Consumivel meatPie = new Consumivel("Torta de Carne", 15, 1, 35);
         Item notebook = new Item("Notebook", 47, 1, "Vendível");
         Item remoteControl = new Item("Controle Remoto", 12, 1, "Vendível");
@@ -189,6 +245,18 @@ class Player {
         getInventory().add(meatPie);
         getInventory().add(notebook);
         getInventory().add(remoteControl);
+        
+        String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Espadachim.jpg";
+        int preferredWidth = 355;
+        int preferredHeight = 432;
+
+        ImageIcon magoImage = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(preferredWidth, preferredHeight, Image.SCALE_DEFAULT));
+        JFrame frame = new JFrame("Imagem do Espadachim");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel label = new JLabel(magoImage);
+        frame.getContentPane().add(label, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
     }
     private void initializeDefaultPlayer() {
         setAttack(5);
@@ -213,7 +281,7 @@ class Player {
     }
     
     public void resetConsumableEffects() {
-        JOptionPane.showMessageDialog(null, "O Efeito das poções se dissipam...");
+        JOptionPane.showMessageDialog(null, "Os Efeitos se dissipam...");
         setDefense(getTempDefense());
         if (isElixirConsumido()) {
             setAttack(getAttack() - 3);

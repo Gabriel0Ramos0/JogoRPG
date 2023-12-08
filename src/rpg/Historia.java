@@ -272,18 +272,13 @@ public class Historia {
 	    if (escolhaDesafio == JOptionPane.YES_OPTION) {
 	        JOptionPane.showMessageDialog(null, "Você aceita o desafio e é envolvido por uma luz intensa."
 	                + "\nQuando a luz se dissipa, você se encontra em um local totalmente diferente, pronto para enfrentar o desafio do Guardião.");
-
-	        Monstro monstro = eventos.bossDragao();
-	        Batalha batalha = new Batalha(game, player, monstro);
-	        
 	    } else {
 	        JOptionPane.showMessageDialog(null, "Ao recusar o desafio, o guardião agora enfurecido, avisa que você não está pronto!"
 	        		+ "\n Sem perder tempo, o guardião lhe teleporta e quando a luz se dissipa, "
 	        		+ "\n você se encontra em um local totalmente diferente, enfurecido por tal situação.");
-	        
-	        Monstro monstro = eventos.bossDragao();
-	        Batalha batalha = new Batalha(game, player, monstro);
 	    }
+	    Monstro monstro = eventos.bossDragao();
+        Batalha batalha = new Batalha(game, player, monstro);	    
 	    Historia.destinoFinal(player);
 	}
 

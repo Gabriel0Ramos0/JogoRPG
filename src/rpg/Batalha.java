@@ -193,10 +193,10 @@ public class Batalha extends Eventos {
                     } else {
                         JOptionPane.showMessageDialog(null, player.getName() + " já consumiu o Elixir de Força e não tem efeito adicional.");
                     }
-                } else if (selectedItem.getName().equals("Poção de Velocidade")) {
+                } else if (selectedItem.getName().equals("Pena de Asa Veloz")) {
                 	int playerAttack = player.getAttack() * 2;
                     int playerDamage = calculateDamage(playerAttack, monstro.getDefesa());
-                    JOptionPane.showMessageDialog(null, "Bebendo a Poção de Velocidade, " + player.getName() + " se sente muito rápido e vê tudo em câmera lenta. " 
+                    JOptionPane.showMessageDialog(null, "Ao utilizar a pena, " + player.getName() + " se sente muito rápido e vê tudo em câmera lenta. " 
                     		+ "\n" + player.getName() + " ganhou 2 turnos de pressa e ataca o(a) " + monstro.getNome() + ".");
                     if (monstro.getDefesa() > 0) {
                         if (playerAttack >= monstro.getDefesa()) {
@@ -226,8 +226,6 @@ public class Batalha extends Eventos {
         }
     }
 
-
-
     public static int calculateDamage(int attack, int defense) {
         int damage = Math.max(0, attack - defense);
         return damage;
@@ -239,6 +237,5 @@ public class Batalha extends Eventos {
 
 	public void setTentouFugir(boolean tentouFugir) {
 		this.tentouFugir = tentouFugir;
-	}
-    
+	}    
 }
