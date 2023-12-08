@@ -132,8 +132,8 @@ class Player {
         
         // Adicione aqui a imagem que deseja visualizar do personagem
         String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Escudeiro.jpg";
-        int preferredWidth = 355;
-        int preferredHeight = 432;
+        int preferredWidth = 300;
+        int preferredHeight = 400;
 
         ImageIcon magoImage = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(preferredWidth, preferredHeight, Image.SCALE_DEFAULT));
         JFrame frame = new JFrame("Imagem do Escudeiro");
@@ -159,8 +159,8 @@ class Player {
         getInventory().add(map);
         
         String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Lanceiro.jpeg";
-        int preferredWidth = 355;
-        int preferredHeight = 432;
+        int preferredWidth = 300;
+        int preferredHeight = 400;
 
         ImageIcon magoImage = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(preferredWidth, preferredHeight, Image.SCALE_DEFAULT));
         JFrame frame = new JFrame("Imagem do Lanceiro");
@@ -189,8 +189,8 @@ class Player {
         getInventory().add(pepper);
         
         String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Arqueiro.jpeg";
-        int preferredWidth = 355;
-        int preferredHeight = 432;
+        int preferredWidth = 300;
+        int preferredHeight = 400;
 
         ImageIcon magoImage = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(preferredWidth, preferredHeight, Image.SCALE_DEFAULT));
         JFrame frame = new JFrame("Imagem do Arqueiro");
@@ -216,8 +216,8 @@ class Player {
         getInventory().add(enlatado);
 
         String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Mago Arcano.png";
-        int preferredWidth = 355;
-        int preferredHeight = 432;
+        int preferredWidth = 300;
+        int preferredHeight = 400;
 
         ImageIcon magoImage = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(preferredWidth, preferredHeight, Image.SCALE_DEFAULT));
         JFrame frame = new JFrame("Imagem do Mago");
@@ -247,8 +247,8 @@ class Player {
         getInventory().add(remoteControl);
         
         String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Espadachim.jpg";
-        int preferredWidth = 355;
-        int preferredHeight = 432;
+        int preferredWidth = 300;
+        int preferredHeight = 400;
 
         ImageIcon magoImage = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(preferredWidth, preferredHeight, Image.SCALE_DEFAULT));
         JFrame frame = new JFrame("Imagem do Espadachim");

@@ -139,9 +139,9 @@ public class RPGGame {
                         + "\n" + player.getName() + " coleta o estranho objeto em formato de amuleto, incapaz de identificar seu propósito, mas ele parece valioso!");
     			JOptionPane.showMessageDialog(null, "Derrepente seu arco brilha, e a ponta da flexa absorve o poder da joia, desvendando o seu significado."
     					+ "\nO medalhão revela inscrições mencionando a família real de Melromarc. O medalhão é muito valioso!!");
-                Item amuletoDesconhecido = new Item("Medação de Melromarc", 100, 1, "Vendível");
-                player.getInventory().add(amuletoDesconhecido);
-                JOptionPane.showMessageDialog(null, "Você encontrou um novo item: " + amuletoDesconhecido.getName());
+                Item medalhão = new Item("Medalhão de Melromarc", 100, 1, "Vendível");
+                player.getInventory().add(medalhão);
+                JOptionPane.showMessageDialog(null, "Você encontrou um novo item: " + medalhão.getName());
             } else {
             	JOptionPane.showMessageDialog(null, "Com um golpe final, você derrota o monstro, e ele se desfaz em uma poeira dourada, deixando um item para trás."
                         + "\n" + player.getName() + " coleta o estranho objeto em formato de amuleto, incapaz de identificar seu propósito, mas ele parece valioso!");
@@ -228,14 +228,7 @@ public class RPGGame {
         if ("Naofumi".equalsIgnoreCase(EasterEgg) && "Escudeiro".equals(player.getPlayerClass())) {
         	Historia.EasterEgg(player);
         } else {
-        	JOptionPane.showMessageDialog(null, "Nome ou Classe Incorreto!!");
-	        int opcaoJogarNovamente = JOptionPane.showConfirmDialog(null, "Deseja jogar novamente?", "Jogar Novamente", JOptionPane.YES_NO_OPTION);
-	        if (opcaoJogarNovamente == JOptionPane.YES_OPTION) {
-	            new RPGGame().startGame();
-	        } else {
-	            JOptionPane.showMessageDialog(null, "Obrigado por jogar! Até a próxima.");
-	            Historia.jogarNovamente();
-	        }
+        	Historia.jogarNovamente();
         }
     }
     
@@ -244,7 +237,7 @@ public class RPGGame {
                 + "\nVida: " + player.getHealth() + "\nAtaque: " + player.getAttack() + "\nDefesa: " + player.getDefense());
     }
 
-    private static void showInventory(Player player) {
+    public static void showInventory(Player player) {
         StringBuilder inventoryMessage = new StringBuilder("Inventário:");
         for (Item item : player.getInventory()) {
             inventoryMessage.append("\n").append(item.getName());
