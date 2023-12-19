@@ -91,6 +91,19 @@ class Player {
         this.coins = 25;
     }
     
+    public static void resetarItensEStatus(Player player) {
+    	player.resetExperience();
+        player.setAttack(5);
+        player.setDefense(10);
+        player.setTempDefense(10);
+        player.setHealth(100);
+        player.setMaxHealth(100);
+        player.setCoins(0);
+        player.getInventory().clear();
+        Consumivel bread = new Consumivel("Pão", 2, 3, 10);
+        player.getInventory().add(bread);
+    }
+    
     public void chooseClass(String className) {
         switch (className) {
             case "Escudeiro":
@@ -498,6 +511,14 @@ class Player {
         	inventory.add(item);
         }
     }
+    
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
 	public void setCoins(int coins) {
 		this.coins = coins;

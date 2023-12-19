@@ -337,7 +337,7 @@ public class Historia {
 	public static void EasterEgg(Player player) {
 		JOptionPane.showMessageDialog(null, "Enquanto você explora Melromarc, descobre uma sala secreta escondida no Palácio Real."
 				+ "\nAo entrar na sala, encontra um antigo mural decorado com inscrições e ilustrações que contam a história dos heróis lendários."
-				+ "\nEntre as figuras ilustres, uma inscrição chama a sua atenção. Ela descreve as ações e feitos heroicos de um antigo herói invocado em tempos sombrios."
+				+ "\nEntre as figuras ilustres, uma inscrição chama a sua atenção. Ela descreve as ações e feitos heroicos de um antigo herói cardinal invocado em tempos sombrios."
 				+ "\nO nome desse herói, cujas ações inspiraram gerações futuras, é mencionado como 'Naofumi Iwatani, o Escudeiro Lendário'."
 				+ "\nSegundo as lendas, Naofumi enfrentou desafios imensuráveis, sendo o principal defensor do reino contra as Ondas Catastróficas."
 				+ "\nSua habilidade única de invocar e fortalecer escudos tornou-se uma fonte de esperança em tempos de desespero."
