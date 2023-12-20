@@ -280,17 +280,17 @@ public class Historia {
 		JOptionPane.showMessageDialog(null, "Você emerge vitorioso da caverna, onde as paredes ecoam com o rugido dos monstros derrotados. "
         		+ "\nO guardião, admirando sua coragem, entrega-lhe uma armadura ancestral e uma poção grande (regenera 70 de vida) como reconhecimento por sua vitória. "
         		+ "\nEle fala sobre a tradição de fortalecer a armadura a cada batalha, uma herança dos heróis que enfrentaram as sombras que agora se erguem novamente.");
-        Equipavel armaduraAncestral = new Equipavel("Armadura Ancestral", 10, 1, 0, 0, 1);
+        Equipavel armaduraAncestral = new Equipavel("Armadura Ancestral", 10, 1, 0, 0, 25);
         player.equipItem(armaduraAncestral);
         if ("Mago Arcano".equals(player.getPlayerClass())) {
         	JOptionPane.showMessageDialog(null, "Ao equipar a armadura, " + player.getName() + " o brilho do seu globo se intensifica!"
         			+ "\nSeu Grimório reage ao poder da armadura e aprimora ainda mais seus efeitos!"
-        			+ "\n\nDefesa de 1 para + 5");
-        	player.setDefense(player.getDefense() + 4);
-        	player.setTempDefense(player.getTempDefense() + 4);
+        			+ "\n\nDefesa de 25 para + 30");
+        	player.setDefense(player.getDefense() + 5);
+        	player.setTempDefense(player.getTempDefense() + 5);
         } else {
         	JOptionPane.showMessageDialog(null, "Ao equipar a armadura, " + player.getName() + " se rente mais forte!"
-                    + "\n\nDefesa + 1");
+                    + "\n\nDefesa + 25");
         }        
 		JOptionPane.showMessageDialog(null, "Com sua nova armadura e sabedoria adquirida, você avança para as profundezas das Montanhas Sombrias."
 		        + "\nÀ medida que avança, a escuridão se intensifica, e você descobre o terrível segredo por trás da ameaça crescente."

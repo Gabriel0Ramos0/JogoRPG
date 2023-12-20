@@ -204,8 +204,8 @@ class Player {
         
         Equipavel armor = new Equipavel("Armadura Reluzente", 0, 1, 0, 0, 0);
         Equipavel arco = new Equipavel("Arco de Luz", 0, 1, 0, 0, 0);
-        Consumivel spicyFood = new Consumivel("Prato Apimentado", 12, 1, 20);
-        Consumivel pepper = new Consumivel("Pimenta", 3, 2, 8);
+        Consumivel spicyFood = new Consumivel("Prato Apimentado", 12, 3, 20);
+        Consumivel pepper = new Consumivel("Pimenta", 3, 1, 8);
         
         equipItem(armor);
         equipItem(arco);

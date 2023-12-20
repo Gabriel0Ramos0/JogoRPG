@@ -78,7 +78,10 @@ public class Batalha extends Eventos {
                         	Historia.destinoFinal(player);
                         } else if (!player.jaPassouPorParteDaHistoria("Final")) {
                         	player.marcarPassagemPorParteDaHistoria("Final");
-                        	Historia.finalBatalhaFinal(vitoria, player);
+                        	Historia.finalBatalhaFinal(vitoria, player);                        	
+                        } else if (!player.jaPassouPorParteDaHistoria("PósFinal")) {
+                        	player.marcarPassagemPorParteDaHistoria("PósFinal");
+                        	H_Situacional.continuaLiberdade(vitoria, player);
                         }
                         return;
                     } else if (player.getHealth() <=0){

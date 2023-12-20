@@ -344,6 +344,10 @@ public class Eventos {
         return Monstro.Sombras();
     }
     
+    public Monstro guarda() {
+        return Monstro.Guarda();
+    }
+    
     public Monstro escolherMonstroAleatorioEpic() {
         Random random = new Random();
         int numeroMonstro = random.nextInt(3);

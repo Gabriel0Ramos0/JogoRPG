@@ -57,6 +57,11 @@ public class Monstro {
         return new Monstro("Gigante Sombrio", 30, 10, 5, 20, 15);
     }
     
+  //Epic
+    public static Monstro Guarda() {
+        return new Monstro("Guarda", 50, 10, 15, 55, 25);
+    }
+    
     // Mini Boss
     public static Monstro Mercador() {
         return new Monstro("Mercador Sombrio", 40, 12, 8, 75, 35);

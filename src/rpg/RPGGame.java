@@ -38,6 +38,13 @@ public class RPGGame {
         showInventory(player);
         
         //player.setCoins(150);
+        //player.gainExperience(60);
+        //player.marcarPassagemPorParteDaHistoria("Prólogo");
+        //player.marcarPassagemPorParteDaHistoria("Caverna");
+        //player.marcarPassagemPorParteDaHistoria("IgnoraCave");
+        //player.marcarPassagemPorParteDaHistoria("ForaCave");
+        //player.marcarPassagemPorParteDaHistoria("Préluta");
+        //player.marcarPassagemPorParteDaHistoria("Final");
         //H_Situacional.Sequestro(player);
         //System.exit(0);
 
