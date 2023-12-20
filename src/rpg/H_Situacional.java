@@ -1,5 +1,8 @@
 package rpg;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 public class H_Situacional {
@@ -7,6 +10,7 @@ public class H_Situacional {
 	private static RPGGame game;
 	static int levelantes = 0;
 	static boolean marca = false;
+	private static List<Item> itensPerdidos = new ArrayList<>();
 	
 	public static void Sequestro(Player player) {		
 	    if (player.getCoins() >= 150 || hasMedalhaoMelromarc(player)) {
@@ -44,6 +48,8 @@ public class H_Situacional {
 	    			+ "\nAntes de apagar novamente, a voz malévola dos capangas ressoa: "
 	    			+ "\n'Agora, ex-herói, você está despojado de seus poderes. Melromarc está condenada e nada pode detê-la. Aguarde que a desgraça que virá!'");
 	    	
+	    	List<Item> itensAntes = new ArrayList<>(player.getInventory());
+	    	salvarItensAntesDePerder(itensAntes);
 	    	levelantes = (player.getLevel() - 1) * (10 + (player.getLevel() - 1) * 10) / 2;
 	        Player.resetarItensEStatus(player);
 	        RPGGame.showPlayerInfo(player);
@@ -206,33 +212,56 @@ public class H_Situacional {
 		    return;
 	    	}
 	    }
-	    //-----------------------------------------------------------------------------------------------------------------
-        JOptionPane.showMessageDialog(null, "Você se aventura pelos corredores escuros, tentando encontrar uma rota segura.");
+	    
+	    JOptionPane.showMessageDialog(null, "Enquanto você se aventura pelos corredores escuros, ouve vozes distantes e passos ecoando nas paredes úmidas. "
+	            + "\nOs guardas estão alertas, e cada movimento deve ser calculado para evitar ser detectado.");
+	    JOptionPane.showMessageDialog(null, "Durante sua fuga, você avista uma sala guardada por sentinelas onde alguns de seus pertences estão sendo mantidos, "
+	            + "\nmas o local está repleto de armadilhas. Uma luz fraca revela barris de óleo espalhados pelo chão, uma vela tremeluzindo, e sombras dançando pelas paredes.");
 
-        // Descrição da tentativa de recuperar itens
-        JOptionPane.showMessageDialog(null, "Durante sua fuga, você avista uma sala cheia de guardas onde alguns de seus pertences estão sendo mantidos.");
-        Object[] opcoesItens = {"Tentar recuperar itens", "Deixar para trás"};
-        int escolhaItens = JOptionPane.showOptionDialog(null, "Você avistou uma sala com seus pertences. O que deseja fazer?", "DECISÃO RÁPIDA", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesItens, opcoesItens[0]);
+	    Object[] opcoesItens = {"Tentar recuperar itens", "Deixar para trás"};
+	    int escolhaItens = JOptionPane.showOptionDialog(null, "Você avistou uma sala com seus pertences, mas a atmosfera tensa alerta para a presença de armadilhas. O que deseja fazer?", 
+	            "DECISÃO RÁPIDA", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesItens, opcoesItens[0]);
 
-        if (escolhaItens == 0) {
-            JOptionPane.showMessageDialog(null, "Você decide tentar recuperar seus itens, mesmo com o risco de chamar a atenção dos guardas.");
+	    if (escolhaItens == 0) {
+	        JOptionPane.showMessageDialog(null, "Você decide tentar recuperar seus itens, ciente dos perigos iminentes.");
+	        double chanceSucesso = Math.random();
+	        if (chanceSucesso < 0.3) {
+	            JOptionPane.showMessageDialog(null, "Com destreza, você evita as armadilhas e recupera seus pertences sem ser detectado pelos guardas.");
+	            recuperarItensPerdidos(player);
+	            RPGGame.showInventory(player);	            
+	        } else if (chanceSucesso < 0.7) {
+	            JOptionPane.showMessageDialog(null, "Você consegue recuperar seus pertences, mas ativa uma armadilha no processo, alertando os guardas.");
+	            // Adicionar consequências narrativas, como perda de tempo, aumento da vigilância, etc.
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Infelizmente, sua tentativa de recuperar os itens ativa várias armadilhas, chamando a atenção dos guardas.");
+	            // Adicionar consequências narrativas mais severas, como perda de itens, aumento da vigilância, etc.
+	        }
+	    } else {
+	        JOptionPane.showMessageDialog(null, "Você decide deixar seus pertences para trás, evitando os riscos associados à sala guardada.");
+	        // Adicionar consequências narrativas, se necessário
+	    }
 
-            // Adicionando aleatoriedade para determinar o sucesso na recuperação dos itens
-            if (Math.random() < 0.5) {
-                JOptionPane.showMessageDialog(null, "Com habilidade furtiva, você consegue recuperar seus pertences sem chamar a atenção dos guardas.");
-                // Adicionando os itens de volta ao inventário do jogador
-                // Exemplo: player.getInventory().add(itemRecuperado);
-            } else {
-                JOptionPane.showMessageDialog(null, "Infelizmente, sua tentativa de recuperar os itens chama a atenção dos guardas.");
-                // Adicionar consequências narrativas, como perda de tempo, aumento da vigilância, etc.
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Você decide deixar seus pertences para trás, evitando o risco de chamar a atenção dos guardas.");
-            // Adicionar consequências narrativas, se necessário
-        }
-
-        // Descrição do cenário escuro após a tentativa de recuperar itens
-        JOptionPane.showMessageDialog(null, "Continuando sua fuga, você se encontra em um corredor escuro e estreito. Apenas sua determinação guia você.");
+	    // Descrição do cenário escuro após a tentativa de recuperar itens
+	    JOptionPane.showMessageDialog(null, "Continuando sua fuga, você se encontra em um corredor ainda mais estreito e sombrio. "
+	    		+ "\nCada sombra parece esconder um novo desafio, e a adrenalina corre em suas veias.");
     }
-
+    
+    
+    public static void salvarItensAntesDePerder(List<Item> itens) {
+        itensPerdidos.addAll(itens);
+    }
+    
+    public static void recuperarItensPerdidos(Player player) {
+        for (Item item : itensPerdidos) {
+            if (item instanceof Equipavel) {
+                Equipavel equipavel = (Equipavel) item;
+                player.equipItem(equipavel);
+            } else {
+                player.getInventory().add(item);
+            }
+        }
+        itensPerdidos.clear();
+        JOptionPane.showMessageDialog(null, "Você recuperou todos os seus itens perdidos!");
+    }
+    
 }
