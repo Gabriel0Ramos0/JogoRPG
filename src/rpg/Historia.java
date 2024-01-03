@@ -271,12 +271,11 @@ public class Historia {
 	        		+ "\n você se encontra em um local totalmente diferente, enfurecido por tal situação.");
 	    }
 	    Monstro monstro = eventos.bossDragao();
-        Batalha batalha = new Batalha(game, player, monstro);	    
+        new Batalha(game, player, monstro);	    
 	    Historia.destinoFinal(player);
 	}
 
-	public static void destinoFinal(Player player) {
-		
+	public static void destinoFinal(Player player) {		
 		JOptionPane.showMessageDialog(null, "Você emerge vitorioso da caverna, onde as paredes ecoam com o rugido dos monstros derrotados. "
         		+ "\nO guardião, admirando sua coragem, entrega-lhe uma armadura ancestral e uma poção grande (regenera 70 de vida) como reconhecimento por sua vitória. "
         		+ "\nEle fala sobre a tradição de fortalecer a armadura a cada batalha, uma herança dos heróis que enfrentaram as sombras que agora se erguem novamente.");
@@ -314,9 +313,9 @@ public class Historia {
 		Eventos eventos = new Eventos();
 		
 	    Monstro monstro = eventos.bossFinal();
-	    player.setHealth(player.getMaxHealth() / 2);
-	    player.setDefense(player.getDefense() / 2);	    
-	    Batalha batalha = new Batalha(game, player, monstro);
+	    player.setHealth(player.getMaxHealth() - player.getMaxHealth() / 3);
+	    player.setDefense(player.getDefense() - player.getDefense() / 3);	    
+	    new Batalha(game, player, monstro);
 	    Historia.finalBatalhaFinal(false, player);
 	}
 	

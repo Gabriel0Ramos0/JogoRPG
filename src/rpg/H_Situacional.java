@@ -13,7 +13,7 @@ public class H_Situacional {
 	private static List<Item> itensPerdidos = new ArrayList<>();
 	
 	public static void Sequestro(Player player) {		
-	    if (player.getCoins() >= 150 || hasMedalhaoMelromarc(player)) {
+	    if (player.getCoins() >= 100 || hasMedalhaoMelromarc(player)) {
 	    	if (player.jaPassouPorParteDaHistoria("AchouEgg")) {
 	    	    JOptionPane.showMessageDialog(null, "Passou-se algum tempo desde que você encontrou a sala do mural dos heróis, e Melromarc floresceu sob sua proteção."
 	    	    		+ "\nUm dia, ao caminhar pelas ruas da cidade, você é abordado por um mensageiro real. Seu semblante carrega a urgência de uma mensagem importante."
@@ -26,14 +26,15 @@ public class H_Situacional {
 	    	    		+ "\nSeu ataque é rápido e feroz, e antes que você possa reagir completamente, eles conseguem te capturar."
 	    	    		+ "\nVocê é levado para um local desconhecido pelos capangas da guilda rival, cujos olhos ardilosos sugerem planos maiores. "
 	    	    		+ "\nEles pretendem desestabilizar Melromarc, lançando a cidade em caos e temor.");
-	    	    JOptionPane.showMessageDialog(null, "Sem deixar você raciocinar, te apagam...");
+	    	    JOptionPane.showMessageDialog(null, "Sem deixar você raciocinar, te apagam e saqueiam...");
 	    	} else {
-	            JOptionPane.showMessageDialog(null, "Depois de derrotar o mal que ameaçava Melromarc, o reino desfruta de um período de paz graças aos seus esforços heróicos."
-	                    + "\nEntretanto, a paz é interrompida quando você é surpreendido por capangas da Guilda dos Espectros do Véu, uma guilda rival notória."
-	                    + "\nEles conseguem te capturar e levam você para um local desconhecido, planejando desestabilizar Melromarc.");
-	            JOptionPane.showMessageDialog(null, "Sem deixar você raciocinar, te apagam...");
-	        }
-	    	
+	    		JOptionPane.showMessageDialog(null, "Após a vitória sobre as trevas que assolavam Melromarc, a paz finalmente reina no reino, graças aos seus esforços heróicos."
+	                    + "\nNo entanto, essa tranquilidade é abruptamente interrompida quando sombras se aproximam. "
+	                    + "\nCapangas da Guilda dos Espectros do Véu, uma notória guilda rival, surgem sorrateiramente."
+	                    + "\nSem dar tempo para reação, você é capturado por esses misteriosos inimigos, que o arrastam para um local desconhecido. Seu plano sinistro é desestabilizar Melromarc."
+	                    + "\nEnquanto está indefeso diante dos capangas, você percebe que o líder deles possui uma insígnia estranha, revelando uma conexão com um passado desconhecido.");
+	    		JOptionPane.showMessageDialog(null, "Te apagam e saqueiam, deixando você sem recursos em um destino incerto...");
+	        }	    	
 	    	JOptionPane.showMessageDialog(null, "Ao recobrar a consciência, você se encontra em uma cela escura, desorientado e sem saber exatamente onde está. "
 	    			+ "\nA atmosfera úmida e sufocante sugere que este lugar é um esconderijo subterrâneo sombrio, pertencente à nefasta Guilda dos Espectros do Véu."
 	    			+ "\nEnquanto seus olhos se ajustam à penumbra, percebe seus pertences espalhados em uma mesa próxima. "
@@ -81,8 +82,8 @@ public class H_Situacional {
                 + "\nEm um canto empoeirado, há uma mensagem rabiscada: 'A sombra não consome aquele que persiste. A esperança é nossa luz e o medo nosso inimigo.'");
         JOptionPane.showMessageDialog(null, "Essa descoberta, por mais singela que seja, reaviva sua determinação. "
                 + "\nVocê se dá conta de que a fuga não é apenas uma questão de força, mas de engenho e paciência. "
-                + "\nO desafio está diante de você, e a Guilda dos Espectros do Véu subestimou a resiliência de um verdadeiro herói."
-                + "\n\nEnquanto examina os detalhes da cela, seus olhos se fixam em algo peculiar: há um pequeno enigma desenhado discretamente na parede."
+                + "\nO desafio está diante de você, e a Guilda dos Espectros do Véu subestimou a resiliência de um verdadeiro herói.");
+        JOptionPane.showMessageDialog(null, "Enquanto examina os detalhes da cela, seus olhos se fixam em algo peculiar: há um pequeno enigma desenhado discretamente na parede."
                 + "\nAs letras formam uma mensagem codificada: 'Quem olha para as trevas, encontra o caminho para a luz.'"
                 + "\nSerá este o caminho para escapar do cativeiro? A escolha é sua: continuar enfraquecendo as grades ou decifrar o enigma e explorar a passagem secreta.");
         
@@ -200,52 +201,54 @@ public class H_Situacional {
     }
             
     public static void continuaLiberdade(boolean vitoria, Player player) {
-	    if (vitoria == true) {
-	    	JOptionPane.showMessageDialog(null, "Você derrotou o guarda.");
-	    } else if (vitoria == false){		
-	    	if (marca) {	
-	    		
-	    	} else {
-	    	JOptionPane.showMessageDialog(null, "Infelizmente, o guarda o captura durante a batalha. Sua tentativa de fuga foi em vão.");
-		    JOptionPane.showMessageDialog(null, "---GAME OVER---");
-		    Historia.jogarNovamente();
-		    return;
-	    	}
-	    }
-	    
-	    JOptionPane.showMessageDialog(null, "Enquanto você se aventura pelos corredores escuros, ouve vozes distantes e passos ecoando nas paredes úmidas. "
-	            + "\nOs guardas estão alertas, e cada movimento deve ser calculado para evitar ser detectado.");
-	    JOptionPane.showMessageDialog(null, "Durante sua fuga, você avista uma sala guardada por sentinelas onde alguns de seus pertences estão sendo mantidos, "
-	            + "\nmas o local está repleto de armadilhas. Uma luz fraca revela barris de óleo espalhados pelo chão, uma vela tremeluzindo, e sombras dançando pelas paredes.");
+        if (!vitoria) {
+            JOptionPane.showMessageDialog(null, "Infelizmente, o guarda o captura durante a batalha. Sua tentativa de fuga foi em vão.");
+            JOptionPane.showMessageDialog(null, "---GAME OVER---");
+            Historia.jogarNovamente();
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "Enquanto você se aventura pelos corredores escuros, ouve vozes distantes e passos ecoando nas paredes úmidas. "
+                + "\nOs guardas estão alertas, cada movimento deve ser calculado para evitar ser detectado."
+                + "\nEm meio às sombras, avista uma sala guardada por sentinelas onde seus pertences estão sendo mantidos. "
+                + "\nO local está repleto de sombras devido às tochas nas paredes, o que revela as formas dos supostos sentinelas."
+                + "\n\nCom base nesta situação, você tem uma escolha:");
 
-	    Object[] opcoesItens = {"Tentar recuperar itens", "Deixar para trás"};
-	    int escolhaItens = JOptionPane.showOptionDialog(null, "Você avistou uma sala com seus pertences, mas a atmosfera tensa alerta para a presença de armadilhas. O que deseja fazer?", 
-	            "DECISÃO RÁPIDA", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesItens, opcoesItens[0]);
+        Object[] opcoesItens = {"Aproximar-se para recuperar itens", "Continuar a fuga sem seus pertences"};
+        int escolhaItens = JOptionPane.showOptionDialog(null, "Você avistou uma sala com seus pertences, mas a atmosfera tensa alerta para a presença de sombras (possíveis sentinelas). O que deseja fazer?",
+                "DECISÃO RÁPIDA", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesItens, opcoesItens[0]);
 
-	    if (escolhaItens == 0) {
-	        JOptionPane.showMessageDialog(null, "Você decide tentar recuperar seus itens, ciente dos perigos iminentes.");
-	        double chanceSucesso = Math.random();
-	        if (chanceSucesso < 0.3) {
-	            JOptionPane.showMessageDialog(null, "Com destreza, você evita as armadilhas e recupera seus pertences sem ser detectado pelos guardas.");
-	            recuperarItensPerdidos(player);
-	            RPGGame.showInventory(player);	            
-	        } else if (chanceSucesso < 0.7) {
-	            JOptionPane.showMessageDialog(null, "Você consegue recuperar seus pertences, mas ativa uma armadilha no processo, alertando os guardas.");
-	            // Adicionar consequências narrativas, como perda de tempo, aumento da vigilância, etc.
-	        } else {
-	            JOptionPane.showMessageDialog(null, "Infelizmente, sua tentativa de recuperar os itens ativa várias armadilhas, chamando a atenção dos guardas.");
-	            // Adicionar consequências narrativas mais severas, como perda de itens, aumento da vigilância, etc.
-	        }
-	    } else {
-	        JOptionPane.showMessageDialog(null, "Você decide deixar seus pertences para trás, evitando os riscos associados à sala guardada.");
-	        // Adicionar consequências narrativas, se necessário
-	    }
-
-	    // Descrição do cenário escuro após a tentativa de recuperar itens
-	    JOptionPane.showMessageDialog(null, "Continuando sua fuga, você se encontra em um corredor ainda mais estreito e sombrio. "
-	    		+ "\nCada sombra parece esconder um novo desafio, e a adrenalina corre em suas veias.");
+        if (escolhaItens == 0) {
+            JOptionPane.showMessageDialog(null, "Você decide se aproximar para recuperar seus itens, observando as sombras atentamente.");
+            if (Math.random() < 0.5) {
+                JOptionPane.showMessageDialog(null, "Ao se aproximar, as sombras revelam ser apenas uma ilusão criada por plantas mágicas na sala. Você recupera seus itens sem problemas.");
+                recuperarItensPerdidos(player);
+                RPGGame.showPlayerInfo(player);
+                RPGGame.showInventory(player);
+            } else {
+                JOptionPane.showMessageDialog(null, "Ao se aproximar, você percebe que as sombras eram apenas uma ilusão. No entanto, a sala está cheia de artefatos mágicos. "
+                        + "\nVocê decide interagir com eles e descobre informações valiosas sobre os planos da Guilda dos Espectros do Véu.");
+                recuperarItensPerdidos(player);
+                RPGGame.showPlayerInfo(player);
+                RPGGame.showInventory(player);
+                
+                JOptionPane.showMessageDialog(null, "Ao vasculhar os amuletos, pergaminhos e as magias, " + player.getName() + " tem um vislumbre da grande conspiração."
+                        + "\nEsses artefatos mágicos revelam um plano complexo para espalhar magia corrupta por todo o reino, enfraquecendo gradualmente a população e preparando o terreno para uma invasão."
+                        + "\nDecidido a impedir esses planos nefastos, você se prepara para continuar sua jornada contra a guilda rival.");
+                JOptionPane.showMessageDialog(null, "Enquanto avança pelos corredores sombrios, você encontra sinais de magia negra e armadilhas mágicas deixadas pelos seguidores da Guilda dos Espectros do Véu."
+                        + "\nCada passo exige cautela, pois o perigo espreita em cada sombra. A batalha contra as forças das trevas está apenas começando.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Você decide deixar seus pertences para trás, evitando os riscos associados à sala guardada.");
+        }        
+        JOptionPane.showMessageDialog(null, "Continuando sua fuga, você se encontra em um corredor ainda mais estreito e sombrio. "
+                + "\nCada sombra parece esconder um novo desafio, e a adrenalina corre em suas veias.");
+        fimDemoTeste();
     }
     
+    public static void fimDemoTeste() {
+    	JOptionPane.showMessageDialog(null, "Fim do DEMO do jogo, este foi um teste para me aperfeiçoar cada vez mais.");
+    	Historia.jogarNovamente();
+    }
     
     public static void salvarItensAntesDePerder(List<Item> itens) {
         itensPerdidos.addAll(itens);
@@ -261,7 +264,7 @@ public class H_Situacional {
             }
         }
         itensPerdidos.clear();
-        JOptionPane.showMessageDialog(null, "Você recuperou todos os seus itens perdidos!");
+        JOptionPane.showMessageDialog(null, "Você recuperou todos os seus itens com sucesso!");
     }
     
 }

@@ -36,17 +36,6 @@ public class RPGGame {
 
         showPlayerInfo(player);
         showInventory(player);
-        
-        player.setCoins(150);
-        player.gainExperience(60);
-        player.marcarPassagemPorParteDaHistoria("Prólogo");
-        player.marcarPassagemPorParteDaHistoria("Caverna");
-        player.marcarPassagemPorParteDaHistoria("IgnoraCave");
-        player.marcarPassagemPorParteDaHistoria("ForaCave");
-        player.marcarPassagemPorParteDaHistoria("Préluta");
-        player.marcarPassagemPorParteDaHistoria("Final");
-        H_Situacional.Sequestro(player);
-        System.exit(0);
 
         JOptionPane.showMessageDialog(null, "Prólogo: Você foi teleportado a um mundo desconhecido, sentindo-se perdido e desorientado, carregando apenas os pertences que tinha consigo..."
         	    + "\nÀ medida que seus olhos se ajustam à nova paisagem, você se encontra em uma vasta e misteriosa floresta, onde árvores altas e exóticas se entrelaçam formando uma cúpula verdejante.");
@@ -138,9 +127,7 @@ public class RPGGame {
 
         JOptionPane.showMessageDialog(null, "Você se depara com um " + monstro.getNome() + "! Ele emerge com olhos faiscantes e presas afiadas, pronto para atacar.");
         JOptionPane.showMessageDialog(null, "Prepare-se para a batalha!");
-
-        Batalha batalha = new Batalha(this, player, monstro);
-
+        new Batalha(this, player, monstro);
     }
 
     public static void showNextChapterOptions(boolean vitoria, Player player) {

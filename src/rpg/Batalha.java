@@ -55,11 +55,6 @@ public class Batalha extends Eventos {
                         player.setCoins(player.getCoins() + monstro.getOuro());
                         showPlayerInfo(player);
                         
-                        if (player.hasArmourAncestral()) {
-                        	player.ganhaEscudoAdicional();
-                            JOptionPane.showMessageDialog(null, "A Armadura Ancestral concedeu 1 de escudo adicional!");
-                        }
-                        
                         //Verifica Progresso de História
                         if (!player.jaPassouPorParteDaHistoria("Prólogo")) {
                         	player.marcarPassagemPorParteDaHistoria("Prólogo");

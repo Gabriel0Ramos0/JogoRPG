@@ -28,7 +28,6 @@ class Player {
     private static final int BASE_XP_PER_LEVEL = 10;
     private static final int XP_INCREASE_PER_LEVEL = 10;
     private Map<String, Boolean> partesHistoria;
-    private boolean hasArmourAncestral = false;
     private boolean elixirConsumido;
 
     public Player(String name) {
@@ -48,7 +47,6 @@ class Player {
         this.coins = 25;
         this.partesHistoria = new HashMap<>();
         this.danoRecebidoExtra = 0;
-        this.ganhaEscudoAdicional();
     }
     
     private static int calculateXPPerLevel(int level) {
@@ -154,8 +152,10 @@ class Player {
         getInventory().add(cellphone);
         getInventory().add(watch);
         
-        // Adicione aqui a imagem que deseja visualizar do personagem
-        String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Escudeiro.jpg";
+        // Adicione aqui e nas demais, a imagem que deseja visualizar do personagem
+        // Baixe a imagem, copie o caminho da imagem e cole na imagePath
+        // Atenção, a imagem deve ser na horizontal, no formato .jpg
+        String imagePath = "";
         int preferredWidth = 300;
         int preferredHeight = 400;
 
@@ -182,7 +182,7 @@ class Player {
         getInventory().add(energyDrink);
         getInventory().add(map);
         
-        String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Lanceiro.jpeg";
+        String imagePath = "";
         int preferredWidth = 300;
         int preferredHeight = 400;
 
@@ -212,7 +212,7 @@ class Player {
         getInventory().add(spicyFood);
         getInventory().add(pepper);
         
-        String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Arqueiro.jpeg";
+        String imagePath = "";
         int preferredWidth = 300;
         int preferredHeight = 400;
 
@@ -239,7 +239,7 @@ class Player {
         equipItem(globo);
         getInventory().add(enlatado);
 
-        String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Mago Arcano.png";
+        String imagePath = "";
         int preferredWidth = 300;
         int preferredHeight = 400;
 
@@ -270,7 +270,7 @@ class Player {
         getInventory().add(notebook);
         getInventory().add(remoteControl);
         
-        String imagePath = "C:\\Users\\gabri\\OneDrive\\Imagens\\Espadachim.jpg";
+        String imagePath = "";
         int preferredWidth = 300;
         int preferredHeight = 400;
 
@@ -352,16 +352,6 @@ class Player {
                 setMaxHealth(getMaxHealth() + 10);
                 JOptionPane.showMessageDialog(null, getName() + " ganha +10 de vida máxima!");
             }
-        }
-    }
-    
-    public boolean hasArmourAncestral() {
-        return hasArmourAncestral;
-    }
-    
-    void ganhaEscudoAdicional() {
-        if (hasArmourAncestral) {
-            setDefense(getDefense() + 1);
         }
     }
     
@@ -500,11 +490,7 @@ class Player {
     public void equipItem(Item item) {
     	if (item instanceof Equipavel) {
             Equipavel equipavel = (Equipavel) item;
-            applyEquipavelStats(equipavel);
-            
-            if ("armaduraAncestral".equals(item.getName())) {
-                hasArmourAncestral = true;
-            }            
+            applyEquipavelStats(equipavel);        
             inventory.add(item);
             JOptionPane.showMessageDialog(null, "Você equipou: " + item.getName());
         } else {
