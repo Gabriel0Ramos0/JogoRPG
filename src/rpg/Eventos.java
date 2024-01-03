@@ -298,7 +298,7 @@ public class Eventos {
                 break;
             case 6:
                 JOptionPane.showMessageDialog(null, player.getName() + " encontra um objeto misterioso em seu caminho."
-                        + "\nO objeto emana uma aura sombria, mas parece poderoso.");
+                        + "\nO objeto, parecendo um anel, emana uma aura sombria, mas parece poderoso.");
 
                 String[] opcoesItem = {"Equipar o objeto", "Ignorar o objeto"};
                 int escolhaItem = JOptionPane.showOptionDialog(null, "O que você deseja fazer?", "Objeto Misterioso", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesItem, opcoesItem[0]);
