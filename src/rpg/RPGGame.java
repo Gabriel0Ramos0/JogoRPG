@@ -36,7 +36,7 @@ public class RPGGame {
 
         showPlayerInfo(player);
         showInventory(player);
-
+        
         JOptionPane.showMessageDialog(null, "Prólogo: Você foi teleportado a um mundo desconhecido, sentindo-se perdido e desorientado, carregando apenas os pertences que tinha consigo..."
         	    + "\nÀ medida que seus olhos se ajustam à nova paisagem, você se encontra em uma vasta e misteriosa floresta, onde árvores altas e exóticas se entrelaçam formando uma cúpula verdejante.");
         	        

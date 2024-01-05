@@ -68,7 +68,7 @@ public class Eventos {
         }
 	    do {
 	        StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja comprar:\n");
-	        escolhaItens.append("Ouro disponível: ").append(player.getCoins()).append("\n");
+	        escolhaItens.append("Gomucs disponível: ").append(player.getCoins()).append("\n");
 
 	        for (int i = 0; i < itensParaVenda.size(); i++) {
 	            Item item = itensParaVenda.get(i);
@@ -142,7 +142,7 @@ public class Eventos {
 	    do {
 	        List<Item> itensParaVender = player.getInventory();
 	        StringBuilder escolhaItens = new StringBuilder("Escolha os itens que deseja vender:\n");
-	        escolhaItens.append("Ouro disponível: ").append(player.getCoins()).append("\n");
+	        escolhaItens.append("Gomucs disponível: ").append(player.getCoins()).append("\n");
 
 	        for (int i = 0; i < itensParaVender.size(); i++) {
 	            Item item = itensParaVender.get(i);
@@ -238,14 +238,13 @@ public class Eventos {
                 JOptionPane.showMessageDialog(null, "Você tropeça e encontra um anel mágico!");
                 Item anelRegenerativo = new Item("anelRegenerativo", 20, 1, "Vendível");
                 player.equipItem(anelRegenerativo);
-                JOptionPane.showMessageDialog(null, "Ao colocar o anel, "+ player.getName() +" não sentiu nenhuma difença!");
+                JOptionPane.showMessageDialog(null, "Ao colocar o anel, "+ player.getName() +" sente que seus ferimentos estão se curando lentamente!");
                 
                 break;
             case 2:
                 JOptionPane.showMessageDialog(null, "Distraído, você é atingido por uma maçã, causando 3 de dano.");
                 player.setHealth(player.getHealth() - 3);
-                Consumivel maca = new Consumivel("Maçã", 2, 1, 2);
-                
+                Consumivel maca = new Consumivel("Maçã", 2, 1, 8);                
                 JOptionPane.showMessageDialog(null, "A maçã não causa muito dano, mas pode ser útil de alguma forma. " + player.getName() + " coletou Maçã!");
                 player.getInventory().add(maca);
                 
@@ -263,7 +262,7 @@ public class Eventos {
                 break;
             case 4:
                 JOptionPane.showMessageDialog(null, player.getName() + " pensa que as plantas em volta podem ser úteis mais a frente, então decide cata-lás.");
-                Item item4 = new Item("Folha", 1, 12, "Vendível");
+                Item item4 = new Item("Folhas", 2, 12, "Vendível");
                 Consumivel item5 = new Consumivel("Planta Medicinal", 3, 2, 3);
                 Item item6 = new Item("Folha de télia", 19, 1, "Vendível");
 
@@ -274,9 +273,9 @@ public class Eventos {
                 break;
             case 5:
             	JOptionPane.showMessageDialog(null, player.getName() + " encontra uma poção estranha em uma encruzilhada."
-                        + "\nA poção emite um brilho peculiar e exala um aroma misterioso.");
+                        + "\nA poção emite um brilho peculiar e exala um aroma doce e misterioso.");
 
-                String[] opcoesPocao = {"Beber a poção", "Ignorar a poção"};
+                String[] opcoesPocao = {"Beber a poção", "Ignorar a poção", "Guardar a poção"};
                 int escolhaPocao = JOptionPane.showOptionDialog(null, "O que você deseja fazer?", "Poção Estranha", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesPocao, opcoesPocao[0]);
 
                 switch (escolhaPocao) {
@@ -291,6 +290,12 @@ public class Eventos {
                     case 1:
                         JOptionPane.showMessageDialog(null, player.getName() + " opta por ignorar a poção, com receio de seus efeitos desconhecidos.");
                         break;
+                        
+                    case 2:
+                        JOptionPane.showMessageDialog(null, player.getName() + " pensa que vale mais a pena guardar a poção do que simplesmente deixá-la ou bebê-la.");
+                        Consumivel pocao = new Consumivel("Poção Misteriosa", 25, 1, -50);
+                        player.getInventory().add(pocao);
+                        break;
 
                     default:
                         JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como lidar com a poção estranha.");
@@ -300,7 +305,7 @@ public class Eventos {
                 JOptionPane.showMessageDialog(null, player.getName() + " encontra um objeto misterioso em seu caminho."
                         + "\nO objeto, parecendo um anel, emana uma aura sombria, mas parece poderoso.");
 
-                String[] opcoesItem = {"Equipar o objeto", "Ignorar o objeto"};
+                String[] opcoesItem = {"Equipar objeto", "Ignorar objeto", "Guardar Objeto"};
                 int escolhaItem = JOptionPane.showOptionDialog(null, "O que você deseja fazer?", "Objeto Misterioso", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoesItem, opcoesItem[0]);
 
                 switch (escolhaItem) {
@@ -313,9 +318,17 @@ public class Eventos {
                         		+ "tornando-o mais vulnerável em batalhas."
                         		+ player.getName() + " agora recebe mais 3 de danos dos monstros!");
                         break;
+                        
                     case 1:
                         JOptionPane.showMessageDialog(null, player.getName() + " opta por ignorar o objeto, temendo seus efeitos sombrios.");
+                        break; 
+                        
+                    case 2:
+                        JOptionPane.showMessageDialog(null, player.getName() + " decide que é melhor guardar objeto para vende-lô.");
+                        Item anelMisterioso = new Item("AnelMisterioso", 25, 1, "Vendível");
+                        player.getInventory().add(anelMisterioso);
                         break;
+                        
                     default:
                         JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " fica indeciso sobre como lidar com o objeto misterioso.");
                 }
@@ -332,8 +345,62 @@ public class Eventos {
         JOptionPane.showMessageDialog(null, mensagemItens.toString());
     }
     
+    public static void eventoUnicoComProbabilidade(Player player) {
+        Random random = new Random();
+        int chanceEventoUnico = random.nextInt(100) + 1;
+        if (chanceEventoUnico <= 5) {
+            JOptionPane.showMessageDialog(null, "Enquanto caminha pelo vasto campo em direção à montanha, " + player.getName() + " avista uma bola flamejante penetrando o céu azulado.");
+            JOptionPane.showMessageDialog(null, "Após alguns minutos, a terra começa a tremer e uma explosão no céu revela algo flutuante.");
+
+            String historia = "Curioso, você se aproxima e descobre que é a lendária espada Aesir, conhecida por seus poderes extraordinários. Ao se aproximar, a espada começa a falar em uma voz sábia e ancestral.\n\n" +
+                    "\"Você, " + player.getName() + ", foi escolhido para ser o portador desta espada vasala. Seu destino está entrelaçado com o destino da terra. O que você deseja fazer?\"\n\n" +
+                    "1. Aceitar o destino e empunhar a espada.\n" +
+                    "2. Perguntar à espada sobre seu propósito.\n" +
+                    "3. Recusar o chamado e continuar a jornada sem a espada.";
+
+            int escolhaEventoUnico = JOptionPane.showOptionDialog(null, historia, "A Descoberta da Espada Aesir", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            switch (escolhaEventoUnico) {
+                case 0:
+                    JOptionPane.showMessageDialog(null, "Você aceita o chamado e empunha a espada Aesir. A energia da espada se funde com a sua, e você sente um poder inigualável.");
+                    Equipavel espadaAesir = new Equipavel("Espada Aesir", 150, 1, 100, 15, 20);
+                    player.equipItem(espadaAesir);
+                    JOptionPane.showMessageDialog(null, "A espada Aesir agora é sua! Você se torna o portador escolhido e sente uma conexão profunda com o destino.");
+                    break;
+
+                case 1:
+                    JOptionPane.showMessageDialog(null, "Você decide perguntar à espada sobre seu propósito. A espada responde: \"Sua jornada é a de restaurar o equilíbrio na terra. Siga seu coração, " +
+                            "e a espada Aesir será sua aliada na busca pela harmonia.\"");
+                    int escolhaAdicional = JOptionPane.showOptionDialog(null, "Como você deseja proceder agora?", "Escolha Adicional", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Recusar Oferta", "Aceitar o Destino"}, null);
+                    if (escolhaAdicional == 0) {
+                        JOptionPane.showMessageDialog(null, "Você recusa o chamado, hesitando em aceitar um destino desconhecido. A espada Aesir respeita sua escolha e permanece flutuando, aguardando o momento certo.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Você decide finalizar a conversa com a espada, seguindo seu caminho com novos conhecimentos.");
+                    }
+                    break;
+
+                case 2:
+                    JOptionPane.showMessageDialog(null, "Você recusa o chamado, hesitando em aceitar um destino desconhecido. A espada Aesir respeita sua escolha e permanece flutuando, aguardando o momento certo.");
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Você decide não se aproximar da espada neste momento.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Enquanto caminha pelo vasto campo em direção à montanha, nada fora do comum acontece.");
+        }
+    }
+    
     public Monstro bossMercador() {
         return Monstro.Mercador();
+    }
+    
+    public Monstro bossSombra() {
+        return Monstro.SombraV();
+    }
+    
+    public Monstro bossObsidea() {
+        return Monstro.Guardião();
     }
     
     public Monstro bossDragao() {
@@ -359,6 +426,20 @@ public class Eventos {
                 return Monstro.Gigante();
             case 2:
             	return Monstro.Zumbi();
+            default:
+                throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
+        }
+    }
+    
+    public Monstro escolherMonstroAleatorioEpicSide() {
+        Random random = new Random();
+        int numeroMonstro = random.nextInt(2);
+
+        switch (numeroMonstro) {
+            case 0:
+                return Monstro.ZumbiA();
+            case 1:
+                return Monstro.ZumbiR();
             default:
                 throw new IllegalStateException("Número de monstro inválido: " + numeroMonstro);
         }

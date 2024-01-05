@@ -13,7 +13,7 @@ public class H_Situacional {
 	private static List<Item> itensPerdidos = new ArrayList<>();
 	
 	public static void Sequestro(Player player) {		
-	    if (player.getCoins() >= 100 || hasMedalhaoMelromarc(player)) {
+	    if (player.getCoins() >= 120 || hasMedalhaoMelromarc(player)) {
 	    	if (player.jaPassouPorParteDaHistoria("AchouEgg")) {
 	    	    JOptionPane.showMessageDialog(null, "Passou-se algum tempo desde que você encontrou a sala do mural dos heróis, e Melromarc floresceu sob sua proteção."
 	    	    		+ "\nUm dia, ao caminhar pelas ruas da cidade, você é abordado por um mensageiro real. Seu semblante carrega a urgência de uma mensagem importante."
@@ -151,7 +151,7 @@ public class H_Situacional {
         }
         JOptionPane.showMessageDialog(null, "Determinado a encontrar paz interior e recobrar seus poderes, " + player.getName() + " decide meditar. "
         		+ "\nFecha os olhos, concentra-se e busca conexão com a energia ao seu redor.");
-        if (Math.random() < 0.1) {
+        if (Math.random() < 9) {
             JOptionPane.showMessageDialog(null, "Em meio à meditação, uma onda de energia revitalizante percorre seu corpo. "
             		+ "\nUma conexão mística é estabelecida, permitindo que você recupere seus níveis de experiência!");
             player.gainExperience(levelantes);

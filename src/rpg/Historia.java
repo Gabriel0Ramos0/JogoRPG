@@ -10,6 +10,7 @@ public class Historia {
 		player.marcarPassagemPorParteDaHistoria("IgnoraCave");
 		player.marcarPassagemPorParteDaHistoria("Caverna");
 		player.marcarPassagemPorParteDaHistoria("ForaCave");
+		Eventos.eventoUnicoComProbabilidade(player);
         JOptionPane.showMessageDialog(null, "Ao se aproximar das Montanhas Sombrias, " + player.getName() + " percebe uma sensação familiar, e continua seguindo a trilha."
                 + "\nA trilha íngreme leva a uma clareira onde destroços de uma estrutura desconhecida estão espalhados."
                 + "\nInvestigando os destroços, " + player.getName() + " encontra pistas que sugerem um ritual mágico interrompido.");
@@ -104,8 +105,17 @@ public class Historia {
 		}
 	    JOptionPane.showMessageDialog(null, "Pensando no que o mestre disse sobre as histórias passadas, "
 	    		+ player.getName() +" procura um meio de investigar mais a fundo sobre o ocorrido na montanha!");
-	    ContinuaHistoriaParte3(player);
-	    }
+	    JOptionPane.showMessageDialog(null, "Antes de seguir em frente, deseja perguntar se há algum trabalho recompesandor ao mestre?");
+	    String[] opcoes = {"Perguntar ao mestre", "Seguir investigando ( seguir para o final? )"};
+        int escolha = JOptionPane.showOptionDialog(null, "O que " + player.getName() + " deseja fazer?", "Escolha",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]);
+        if (escolha == 0) {
+        	 SideQuest.mestreQuest(player);
+        } else {
+        	player.marcarPassagemPorParteDaHistoria("BuscandoRespostas");
+        	ContinuaHistoriaParte3(player);
+        }
+	}
 	
 	public static void eventosCavernaDaPerdicao (Player player) {
 		JOptionPane.showMessageDialog(null, player.getName() + " escolhe explorar mais a Caverna das Luminescências."
@@ -284,9 +294,9 @@ public class Historia {
         if ("Mago Arcano".equals(player.getPlayerClass())) {
         	JOptionPane.showMessageDialog(null, "Ao equipar a armadura, " + player.getName() + " o brilho do seu globo se intensifica!"
         			+ "\nSeu Grimório reage ao poder da armadura e aprimora ainda mais seus efeitos!"
-        			+ "\n\nDefesa de 25 para + 30");
-        	player.setDefense(player.getDefense() + 5);
-        	player.setTempDefense(player.getTempDefense() + 5);
+        			+ "\n\nDefesa de 25 para + 35");
+        	player.setDefense(player.getDefense() + 10);
+        	player.setTempDefense(player.getTempDefense() + 10);
         } else {
         	JOptionPane.showMessageDialog(null, "Ao equipar a armadura, " + player.getName() + " se rente mais forte!"
                     + "\n\nDefesa + 25");
@@ -316,21 +326,17 @@ public class Historia {
 	    player.setHealth(player.getMaxHealth() - player.getMaxHealth() / 3);
 	    player.setDefense(player.getDefense() - player.getDefense() / 3);	    
 	    new Batalha(game, player, monstro);
-	    Historia.finalBatalhaFinal(false, player);
+	    finalBatalhaFinal(false, player);
 	}
 	
 	public static void finalBatalhaFinal(boolean vitoria, Player player) {
-	    if (player.isAlive() && vitoria) {
+	    if (vitoria) {
 	        JOptionPane.showMessageDialog(null, "Finalmente, com um golpe heroico, você derrota a Sombra Devoradora. "
 	        		+ "\nA escuridão se dissipa, revelando uma cena de tranquilidade. "
 	        		+ "\nVocê salvou o reino da iminente destruição. "
 	        		+ "\nO equilíbrio é restaurado, e sua jornada chega ao fim.");
 	        RPGGame.fimDaHistoria(player);
-	    } else {
-	        JOptionPane.showMessageDialog(null, "Infelizmente, você foi derrotado pela Sombra Devoradora. A escuridão consome o reino...");
-	        JOptionPane.showMessageDialog(null, "---GAME OVER---");
-	        jogarNovamente();
-	    }
+	    } 
 	}
 	
 	public static void EasterEgg(Player player) {

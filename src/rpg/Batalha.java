@@ -3,7 +3,6 @@ package rpg;
 import javax.swing.JOptionPane;
 
 public class Batalha extends Eventos {
-
 	private boolean tentouFugir = false;
 
     public Batalha(RPGGame game, Player player, Monstro monstro) {
@@ -68,6 +67,29 @@ public class Batalha extends Eventos {
                         } else if (!player.jaPassouPorParteDaHistoria("ForaCave")) {
                         	player.marcarPassagemPorParteDaHistoria("ForaCave");
                         	Historia.eventosDesastreTerrivel(player);
+                        } else if (!player.jaPassouPorParteDaHistoria("BuscandoRespostas")) {                        	
+                            if (!player.jaPassouPorParteDaHistoria("monstro2")) {
+                            	player.marcarPassagemPorParteDaHistoria("monstro2");
+                            	SideQuest.batalhasSide(player);
+                            	break;
+                            } else if (!player.jaPassouPorParteDaHistoria("monstro3")) {
+                            	player.marcarPassagemPorParteDaHistoria("monstro3");
+                            	SideQuest.batalhasSide(player);
+                            	break;
+                            } else if (!player.jaPassouPorParteDaHistoria("ganhou")){
+                            	player.marcarPassagemPorParteDaHistoria("ganhou");
+                            	SideQuest.continuaBusca(vitoria, player);
+                            	break;
+                            } else if (!player.jaPassouPorParteDaHistoria("miniboss2")){
+                            	player.marcarPassagemPorParteDaHistoria("miniboss2");
+                            	SideQuest.miniboss2(player);
+                            	break;
+                            } else if (!player.jaPassouPorParteDaHistoria("Recuperou")){
+                            	player.marcarPassagemPorParteDaHistoria("Recuperou");
+                            	player.marcarPassagemPorParteDaHistoria("BuscandoRespostas");
+                            	SideQuest.mestreQuestConclusao(player);
+                            	break;
+                            }
                         } else if (!player.jaPassouPorParteDaHistoria("Préluta")) {
                         	player.marcarPassagemPorParteDaHistoria("Préluta");
                         	Historia.destinoFinal(player);
@@ -111,6 +133,12 @@ public class Batalha extends Eventos {
                         JOptionPane.showMessageDialog(null, monstro.getNome() + " ataca você e causa " + monstroDamage +
                                 " de dano! \n(" + player.getName() + " perde " + monstroAttack + " de vida.)");
                     }
+                    if (player.getHealth() <=0){
+    	            	JOptionPane.showMessageDialog(null, player.getName() + " é derrotado pelo poder avassalador do " + monstro.getNome() +"."
+    	            			+ "\nA escuridão consome você enquanto desmaia na trilha.");
+    	            	JOptionPane.showMessageDialog(null, "---GAME OVER---");
+    	            	Historia.jogarNovamente();
+                    }
                     break;
 
                 case 1:
@@ -136,6 +164,7 @@ public class Batalha extends Eventos {
 
                 default:
                     JOptionPane.showMessageDialog(null, "Opção inválida. " + player.getName() + " hesita na batalha.");
+                    
             }
         }
     }
